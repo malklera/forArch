@@ -1,0 +1,22 @@
+ZSH
+	$ cp ~/.zshenv ~/documents/backup/
+	$ cp -r ~/.config/zsh/ ~/documents/backup/.config/
+Neovim
+	$ cp -r ~/.config/nvim/ ~/documents/backup/.config/
+Tmux
+	$ cp -r ~/.config/tmux/ ~/documents/backup/.config/
+	$ cp -r ~/.tmux/ ~/documents/backup/
+Custom layout
+	$ mkdir ~/documents/backup/layout/
+	$ cp /usr/share/X11/xkb/symbols/custom ~/documents/backup/layout/
+Kitty
+	$ cp ~/.config/kitty/ ~/documents/backup/.config/
+
+Calibre
+	Export to ~/documents/books/
+	Open calibre->Icon Calibre Library->Export
+
+
+Do this last
+Files backup
+	$ tar czf ~/backup.tar.gz ~/documents ~/pictures ~/study
