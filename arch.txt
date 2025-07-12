@@ -22,6 +22,7 @@ Installation
 -------
 
 After installation
+    All commands are run from home
     Upgrade
         $ pacman -Syu
     Better man page:
@@ -42,50 +43,54 @@ After installation
         $ git config --global user.name "malklera"
         $ git config --global user.email "malklerulo@gmail.com"
         $ git config --global init.defaultBranch main
+        Get ssh passphrase to clone my repositories
     Get backup configs
-        $ git clone https://github.com/malklera/
-
-
-
+        Try cloning using ssh and see if the key is used automatically
+        $ git clone git@github.com:malklera/forArch.git
+        If that do not work, use this
+        $ git clone https://github.com/malklera/forArch
     Shell
         $ sudo pacman -S zsh
+        $ zsh
+        Get the path to zsh to use below
         $ chsh -l
         To set zsh as the new default
         $ chsh -s /full/path/to/shell
-        Copy my backup configs to here
+        Copy from backup
+        $ cp forArch/.zshenv .
+        $ cp forArch/.config/zsh/ .config
     Terminal
         $ pacman -S ghostty
+        $ cp forArch/.config/ghostty .config
     AUR helper
         $ sudo pacman -Syu
         $ sudo pacman -S --needed base-devel
-        $ cd ~/Download
         $ git clone https://aur.archlinux.org/yay.git
-        $ cd yay
         $ makepkg -si
         The following commands come from here
         https://github.com/Jguer/yay
         $ yay -Y --gendb
         $ yay -Syu --devel
         $ yay -Y --devel --save
+        $ sudo rm -r yay
     Basics
         $ sudo pacman -S curl
         $ sudo pacman -S unzip
         $ sudo pacman -S wget
         $ sudo pacman -S tar
         $ sudo pacman -S flatpak
-        $ sudo pacman -S 
-        $ sudo pacman -S 
-        $ sudo pacman -S 
     Terminal system monitoring
         $ pacman -S btop
     File manager
-        $ pacman -S yazi
         GUI
         $ pacman -S thunar
     Terminal multiplexer
         $ sudo pacman -S tmux
-        $ mkdir ~/.config/tmux
-        $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        $ cp 
+
+
+
+
     Go
         https://go.dev/doc/install
         Download from there
