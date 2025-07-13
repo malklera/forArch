@@ -1,0 +1,29 @@
+- Office suit: LibreOffice writer and Calc
+	$ sudo pacman -S hunspell
+	$ sudo pacman -S hunspell-en_us hunspell-es_ar
+	$ sudo pacman -S libreoffice-still
+- Epub
+	$ sudo yay -S calibre-bin
+- Image viewer(check):
+	https://github.com/easymodo/qimgv
+	$ sudo yay -S qimgv-git
+	If i do not like that one, try the next one
+	https://flathub.org/apps/org.nomacs.ImageLounge
+- Video player
+	$ pacman -S mpv
+- Image editor
+	$ flatpak install --user https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+- PDF viewer
+	https://okular.kde.org
+- Calculator:
+	$ sudo pacman -S libqalculate
+- Bittorrent client
+	$ sudo pacman -S qBittorrent
+- Chromium
+	$ sudo pacman -S chromium
+- Antivirus (do not install the daemon)
+	$ sudo pacman -S clamav
+- Trashcan
+	Think about this, is a cli trash manager, when you rm you eliminate it permantely
+	this move it to the trash can
+	$ sudo pacman -S trash-cli

@@ -1,0 +1,43 @@
+Steps from hypr wiki, each of this may have requirements, install them first
+Install hyprland
+    $ sudo pacman -S hyprland
+    Change default terminal from kitty to ghostty
+    ~/.config/hypr/hyprland.conf
+    Change default text editor to nvim
+Systemd startup
+    $ sudo pacman -S uwsm libnewt
+    $ cp forArch/.zprofile .
+XDG Desktop Portal
+    $ sudo pacman -S xdg-desktop-portal-hyprland
+Audio server
+    $ sudo pacman -S pipewire wireplumber
+    $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    $ flatpak install flathub com.saivert.pwvucontrol
+Authentication daemon
+    $ sudo pacman -S hyprpolkitagent
+Qt wayand support
+    $ sudo pacman -S qt5-wayland qt6-wayland
+App launcher
+    $ sudo pacman -S rofi
+Clipboard manager
+    $ yay -S clipse
+Status bar
+    $ sudo pacman -S waybar
+    Do i need this font??
+    $ sudo pacman -S ttf-font-awesome
+Auto mounting for usb and external devices
+    $ sudo pacman -S udiskie
+Notification daemon
+    $ sudo pacman -S dunst
+    Others: mako, swaync, fnott
+
+---------
+
+After everything works, check the following.
+- Menu logout: wlogout
+- Color temeperature/gamma change: hyprsunset
+- idle management: hypridle
+- screen lock: hprlock
+- system info: hyprsysteminfo
+- cursor theme: hyprcursor
+- screenshot: $ yay -S hyprshot

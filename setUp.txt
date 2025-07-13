@@ -1,0 +1,294 @@
+After installation
+    All commands are run from home
+    Upgrade
+        $ pacman -Syu
+    Microcode
+        $ sudo pacman -S amd-ucode
+    Network manager
+        $ sudo pacman -S networkmanager
+        Do i need to do this?
+        $ systenctl enable NetworkManager.service
+        Or is this installed by archintall?
+    Better man page:
+        $ sudo pacman -S tldr
+    Font
+        $ sudo pacman -S ttf-jetbrains-mono-nerd
+        $ sudo pacman -S ttf-nerd-fonts-symbols
+        $ sudo pacman -S ttf-awesome
+    Set up SSH
+        $ sudo pacman -S openssh       
+        Generate key pair commenting who and when it was created
+        $ ssh-keygen -C "$(whoami)@$(uname -n)-$(date -I)"
+        Default file location to save key
+        Write the passphrase on a piece of paper, not on the pc, 64 characters
+        easy to remenber
+    Git
+        $ sudo pacman -S --needed git
+        $ git config --global user.name "malklera"
+        $ git config --global user.email "malklerulo@gmail.com"
+        $ git config --global init.defaultBranch main
+        Get ssh passphrase to clone my repositories
+    Get backup configs
+        Try cloning using ssh and see if the key is used automatically
+        $ git clone git@github.com:malklera/forArch.git
+        If that do not work, use this
+        $ git clone https://github.com/malklera/forArch
+        Or better, use my ssh key so i do not have to put my credentials for each push
+    Shell
+        $ sudo pacman -S zsh
+        Initial config
+        $ zsh
+        Get the path to zsh to use below
+        $ chsh -l
+        To set zsh as the new default
+        $ chsh -s /full/path/to/shell
+        Copy from backup
+        $ cp forArch/.zshenv .
+        $ cp -r forArch/.config/zsh/ .config
+    Terminal
+        $ pacman -S ghostty
+        $ cp -r forArch/.config/ghostty .config
+    AUR helper
+        $ sudo pacman -Syu
+        $ sudo pacman -S --needed base-devel
+        $ git clone https://aur.archlinux.org/yay.git
+        $ makepkg -si
+        The following commands come from here
+        https://github.com/Jguer/yay
+        $ yay -Y --gendb
+        $ yay -Syu --devel
+        $ yay -Y --devel --save
+        $ sudo rm -r yay
+    Basics
+        $ sudo pacman -S curl
+        $ sudo pacman -S unzip
+        $ sudo pacman -S wget
+        $ sudo pacman -S tar
+        $ sudo pacman -S flatpak
+    Terminal system monitoring
+        $ pacman -S btop
+    File manager
+        GUI
+        $ pacman -S thunar
+    Terminal multiplexer
+        $ sudo pacman -S tmux
+        $ cp -r forArch/.tmux/ .
+        $ cp -r forArch/.config/tmux/ .config/tmux/
+    Go
+        https://go.dev/doc/install
+        Download from there
+        $ rm -rf /usr/local/go
+        $ tar -C /usr/local -xzf nameDownloadedFile
+        $ export PATH=$PATH:/usr/local/go/bin
+    Information about disk
+        $ sudo pacman -S dysk
+    Audio server
+        $ pacman -S pipewire wireplumber
+        $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        $ flatpak install flathub com.saivert.pwvucontrol
+    Tar
+        $ yay -S peazip
+    Alternative to grep
+        $ pacman -S ripgrep
+    Alternative to find
+        $ pacman -S fd
+    Fuzzy finder:
+        $ sudo pacman -S fzf
+    Text editor
+        $ pacman -S nano
+        $ sudo pacman -S vim
+        $ sudo pacman -S neovim
+        $ sudo pacman -S npm
+    Browser
+        $ flatpak install flathub app.zen_browser.zen
+        Log in for sync
+        $ sudo pacman -S vivaldi
+        Log in for sync
+    Default applications
+        $ sudo pacman -S xdg-utils
+        $ sudo pacman -S perl-file-mimeinfo
+        Use the defaults ones, if i find a problem follow this to change it.
+        https://wiki.archlinux.org/title/Xdg-utils
+    Manage user directories
+        $ sudo pacman -S xdg-user-dirs
+        How to use
+        https://wiki.archlinux.org/title/XDG_user_directories
+
+    Check if wayland is installed
+        $ pacman -Qi wayland
+        If not, install with
+            $ sudo pacman -S --needed wayland
+
+----------
+
+Basics after installation
+- https://wiki.archlinux.org/title/Pacman/Rosetta
+Upgrade
+$ pacman -Syu
+Search for package
+$ pacman -Ss namePackage
+Install
+$ pacman -S namePackage
+Remove package and dependencies
+$ pacman -Rs namePackage
+
+Install amd grapic driver
+- https://wiki.archlinux.org/title/Pacman/Tips_and_tricks
+Install processor updates
+- https://wiki.archlinux.org/title/Microcode
+Security
+- https://wiki.archlinux.org/title/OpenSSH#Deny
+    /etc/ssh/sshd_config.d/20-deny_root.conf
+    PermitRootLogin no
+- https://wiki.archlinux.org/title/Limits.conf
+Limit amount of processes
+/etc/security/limits.conf
+
+----------
+ML4W
+
+grub
+xdg-desktop-portal-wlr
+efibootmgr
+networkmanager network-manager-applet 
+dialog 
+wpa_supplicant
+mtools
+dosfstools
+base-devel
+linux-headers
+avahi
+gvfs
+gvfs-smb
+nfs-utils
+inetutils
+dnsutils
+hplip
+alsa-utils
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+rsync
+reflector
+acpi
+acpi_call
+dnsmasq
+openbsd-netcat
+ipset
+firewalld
+sof-firmware
+nss-mdns
+acpid
+os-prober
+ntfs-3g
+exa
+bat
+htop
+ranger
+zip
+duf
+xorg
+xorg-xinit
+grub-btrfs
+xf86-video-amdgpu
+xf86-video-qxl
+brightnessctl
+pacman-contrib
+inxi
+base
+base-devel
+linux
+linux-firmware
+reflector
+rsync
+
+# Enable Services
+systemctl enable NetworkManager
+systemctl enable sshd
+systemctl enable avahi-daemon
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+systemctl enable firewalld
+systemctl enable acpid
+---- 
+
+HyDE
+# --------------------------------------------------- // System
+pipewire                                               # audio/video server
+pipewire-alsa                                          # pipewire alsa client
+pipewire-audio                                         # pipewire audio client
+pipewire-jack                                          # pipewire jack client
+pipewire-pulse                                         # pipewire pulseaudio client
+gst-plugin-pipewire                                    # pipewire gstreamer client
+wireplumber                                            # pipewire session manager
+pavucontrol                                            # pulseaudio volume control
+pamixer                                                # pulseaudio cli mixer
+networkmanager                                         # network manager
+network-manager-applet                                 # network manager system tray utility
+brightnessctl                                          # screen brightness control
+playerctl                                              # media controls
+udiskie                                                # manage removable media
+
+# --------------------------------------------------- // Display Manager
+qt5-quickcontrols                                      # for sddm theme ui elements
+qt5-quickcontrols2                                     # for sddm theme ui elements
+qt5-graphicaleffects                                   # for sddm theme effects
+
+# --------------------------------------------------- // Window Manager
+dunst                                                  # notification daemon
+swww                                                   # wallpaper
+hyprlock                                               # lock screen
+wlogout                                                # logout menu
+grim                                                   # screenshot tool
+slurp                                                  # region select for screenshot/screenshare
+satty                                                  # Modern Screenshot Annotation
+cliphist                                               # clipboard manager
+hyprsunset                                             # blue light filter
+
+# --------------------------------------------------- // Dependencies
+polkit-gnome                                           # authentication agent
+xdg-desktop-portal-hyprland                            # xdg desktop portal for hyprland
+xdg-desktop-portal-gtk                                 # file picker and dbus  integration
+xdg-user-dirs                                          # Manage user directories like ~/Desktop and ~/Music
+pacman-contrib                                         # for system update check
+parallel                                               # for parallel processing
+imagemagick                                            # for image processing
+qt5-imageformats                                       # for dolphin image thumbnails
+ffmpegthumbs                                           # for dolphin video thumbnails
+kde-cli-tools                                          # for dolphin file type defaults
+libnotify                                              # for notifications
+
+# --------------------------------------------------- // Theming
+nwg-look                                               # gtk configuration tool
+qt5ct                                                  # qt5 configuration tool
+qt6ct                                                  # qt6 configuration tool
+kvantum                                                # svg based qt6 theme engine
+kvantum-qt5                                            # svg based qt5 theme engine
+qt5-wayland                                            # wayland support in qt5
+qt6-wayland                                            # wayland support in qt6
+
+# --------------------------------------------------- // Applications
+ark                                                    # kde file archiver
+nwg-displays                                           # monitor management utility
+
+# --------------------------------------------------- // System
+# downgrade                                            # downgrade packages
+# trash-cli-git                                        # cli to manage trash files
+# libinput-gestures                                    # actions touchpad gestures using libinput
+# gestures                                             # gui for libinput-gestures
+wttrbar                                                # for weather
+python-requests|wttrbar                                # script dependency
+ddcui                                                  # GUI to control brightness for external monitors
+# hyprgui-bin                                          # GUI for hyprland configuration // might mess your userprefs but convenient // Just disappeared
+
+# --------------------------------------------------- // Misc
+xdg-desktop-portal-gtk                                 # xdg desktop portal using gtk
+wf-recorder                                          # Screen recorder for wlroots-based compositors such as sway
+# wl-screenrec                                         # High performance hardware accelerated wlroots screen recorder // NO support for NVIDIA
+
+# --------------------------------------------------- // Lockscreen
+#swaylock-effects-git                                   # swaylock with effects // very minimal lockscreen
+
+# --------------------------------------------------- // OSD
+swayosd-git                                             #A GTK based on screen display for keyboard shortcuts like caps-lock and volume

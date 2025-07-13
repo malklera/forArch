@@ -1,0 +1,20 @@
+Installation
+    Archinstall language: English
+    Keyboard layout: us
+    Mirrors: Brazil
+    Locale language: en_US
+    Locale encoding: UTF-8
+    Drive: 
+    Filesystem: btrfs, no compresion, no emcryption
+    Partitioning option: Best effort
+    Bootloader: Grub
+    Swap: zram
+    Hostname: arch
+    Password:
+    Administrator account:
+        User: malklera
+        Password:
+    Audio Server: Pipewire
+    Kernel: linux
+    Network: copy iso config
+    Timezone: GMT-03:00
