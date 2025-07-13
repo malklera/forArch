@@ -83,7 +83,8 @@ After installation
     Information about disk
         $ sudo pacman -S dysk
     Audio server
-        $ pacman -S pipewire wireplumber
+        $ pacman -S pipewire
+        $ pacman -S wireplumber
         $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         $ flatpak install flathub com.saivert.pwvucontrol
     Tar
@@ -97,22 +98,32 @@ After installation
     Text editor
         $ pacman -S nano
         $ sudo pacman -S vim
-        $ sudo pacman -S neovim
+        For neovim
         $ sudo pacman -S npm
+        $ sudo pacman -S neovim
+        Copy config
+        $ cp forArch/.config/nvim/ ~/.config/nvim/
+        Open nvim to install all packages and check that it works
+        $ nvim
     Browser
         $ flatpak install flathub app.zen_browser.zen
         Log in for sync
+        Import config of ublock Origin, darkreader, enhacer for youtube
         $ sudo pacman -S vivaldi
         Log in for sync
+        Import config of ublock Origin, darkreader, enhacer for youtube
     Default applications
         $ sudo pacman -S xdg-utils
         $ sudo pacman -S perl-file-mimeinfo
+        Open thunar, maybe it will populate it for me, maybe this is a requirement
+        for thunar
         Use the defaults ones, if i find a problem follow this to change it.
         https://wiki.archlinux.org/title/Xdg-utils
     Manage user directories
         $ sudo pacman -S xdg-user-dirs
         How to use
         https://wiki.archlinux.org/title/XDG_user_directories
+        Add study to my directories, get ride of music and public
 
     Check if wayland is installed
         $ pacman -Qi wayland
@@ -143,152 +154,3 @@ Security
 - https://wiki.archlinux.org/title/Limits.conf
 Limit amount of processes
 /etc/security/limits.conf
-
-----------
-ML4W
-
-grub
-xdg-desktop-portal-wlr
-efibootmgr
-networkmanager network-manager-applet 
-dialog 
-wpa_supplicant
-mtools
-dosfstools
-base-devel
-linux-headers
-avahi
-gvfs
-gvfs-smb
-nfs-utils
-inetutils
-dnsutils
-hplip
-alsa-utils
-pipewire
-pipewire-alsa
-pipewire-pulse
-pipewire-jack
-rsync
-reflector
-acpi
-acpi_call
-dnsmasq
-openbsd-netcat
-ipset
-firewalld
-sof-firmware
-nss-mdns
-acpid
-os-prober
-ntfs-3g
-exa
-bat
-htop
-ranger
-zip
-duf
-xorg
-xorg-xinit
-grub-btrfs
-xf86-video-amdgpu
-xf86-video-qxl
-brightnessctl
-pacman-contrib
-inxi
-base
-base-devel
-linux
-linux-firmware
-reflector
-rsync
-
-# Enable Services
-systemctl enable NetworkManager
-systemctl enable sshd
-systemctl enable avahi-daemon
-systemctl enable reflector.timer
-systemctl enable fstrim.timer
-systemctl enable firewalld
-systemctl enable acpid
----- 
-
-HyDE
-# --------------------------------------------------- // System
-pipewire                                               # audio/video server
-pipewire-alsa                                          # pipewire alsa client
-pipewire-audio                                         # pipewire audio client
-pipewire-jack                                          # pipewire jack client
-pipewire-pulse                                         # pipewire pulseaudio client
-gst-plugin-pipewire                                    # pipewire gstreamer client
-wireplumber                                            # pipewire session manager
-pavucontrol                                            # pulseaudio volume control
-pamixer                                                # pulseaudio cli mixer
-networkmanager                                         # network manager
-network-manager-applet                                 # network manager system tray utility
-brightnessctl                                          # screen brightness control
-playerctl                                              # media controls
-udiskie                                                # manage removable media
-
-# --------------------------------------------------- // Display Manager
-qt5-quickcontrols                                      # for sddm theme ui elements
-qt5-quickcontrols2                                     # for sddm theme ui elements
-qt5-graphicaleffects                                   # for sddm theme effects
-
-# --------------------------------------------------- // Window Manager
-dunst                                                  # notification daemon
-swww                                                   # wallpaper
-hyprlock                                               # lock screen
-wlogout                                                # logout menu
-grim                                                   # screenshot tool
-slurp                                                  # region select for screenshot/screenshare
-satty                                                  # Modern Screenshot Annotation
-cliphist                                               # clipboard manager
-hyprsunset                                             # blue light filter
-
-# --------------------------------------------------- // Dependencies
-polkit-gnome                                           # authentication agent
-xdg-desktop-portal-hyprland                            # xdg desktop portal for hyprland
-xdg-desktop-portal-gtk                                 # file picker and dbus  integration
-xdg-user-dirs                                          # Manage user directories like ~/Desktop and ~/Music
-pacman-contrib                                         # for system update check
-parallel                                               # for parallel processing
-imagemagick                                            # for image processing
-qt5-imageformats                                       # for dolphin image thumbnails
-ffmpegthumbs                                           # for dolphin video thumbnails
-kde-cli-tools                                          # for dolphin file type defaults
-libnotify                                              # for notifications
-
-# --------------------------------------------------- // Theming
-nwg-look                                               # gtk configuration tool
-qt5ct                                                  # qt5 configuration tool
-qt6ct                                                  # qt6 configuration tool
-kvantum                                                # svg based qt6 theme engine
-kvantum-qt5                                            # svg based qt5 theme engine
-qt5-wayland                                            # wayland support in qt5
-qt6-wayland                                            # wayland support in qt6
-
-# --------------------------------------------------- // Applications
-ark                                                    # kde file archiver
-nwg-displays                                           # monitor management utility
-
-# --------------------------------------------------- // System
-# downgrade                                            # downgrade packages
-# trash-cli-git                                        # cli to manage trash files
-# libinput-gestures                                    # actions touchpad gestures using libinput
-# gestures                                             # gui for libinput-gestures
-wttrbar                                                # for weather
-python-requests|wttrbar                                # script dependency
-ddcui                                                  # GUI to control brightness for external monitors
-# hyprgui-bin                                          # GUI for hyprland configuration // might mess your userprefs but convenient // Just disappeared
-
-# --------------------------------------------------- // Misc
-xdg-desktop-portal-gtk                                 # xdg desktop portal using gtk
-wf-recorder                                          # Screen recorder for wlroots-based compositors such as sway
-# wl-screenrec                                         # High performance hardware accelerated wlroots screen recorder // NO support for NVIDIA
-
-# --------------------------------------------------- // Lockscreen
-#swaylock-effects-git                                   # swaylock with effects // very minimal lockscreen
-
-# --------------------------------------------------- // OSD
-swayosd-git                                             #A GTK based on screen display for keyboard shortcuts like caps-lock and volume

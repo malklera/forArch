@@ -2,8 +2,9 @@ Steps from hypr wiki, each of this may have requirements, install them first
 Install hyprland
     $ sudo pacman -S hyprland
     Change default terminal from kitty to ghostty
-    ~/.config/hypr/hyprland.conf
-    Change default text editor to nvim
+    $ nvim ~/.config/hypr/hyprland.conf
+    Search for "$terminal = kitty"
+    Set up "$terminal = ghostty"
 Systemd startup
     $ sudo pacman -S uwsm libnewt
     $ cp forArch/.zprofile .

@@ -23,6 +23,8 @@
 	$ sudo pacman -S chromium
 - Antivirus (do not install the daemon)
 	$ sudo pacman -S clamav
+- Email manager
+	$ sudo pacman -S thunderbird
 - Trashcan
 	Think about this, is a cli trash manager, when you rm you eliminate it permantely
 	this move it to the trash can
