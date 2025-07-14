@@ -1,134 +1,142 @@
 After installation
-    All commands are run from home
-    Upgrade
-        $ pacman -Syu
-    Microcode
-        $ sudo pacman -S amd-ucode
-    Network manager
-        $ sudo pacman -S networkmanager
-        Do i need to do this?
-        $ systenctl enable NetworkManager.service
-        Or is this installed by archintall?
-    Better man page:
-        $ sudo pacman -S tldr
-    Font
-        $ sudo pacman -S ttf-jetbrains-mono-nerd
-        $ sudo pacman -S ttf-nerd-fonts-symbols
-        $ sudo pacman -S ttf-awesome
-    Set up SSH
-        $ sudo pacman -S openssh       
-        Generate key pair commenting who and when it was created
-        $ ssh-keygen -C "$(whoami)@$(uname -n)-$(date -I)"
-        Default file location to save key
-        Write the passphrase on a piece of paper, not on the pc, 64 characters
-        easy to remenber
-    Git
-        $ sudo pacman -S --needed git
-        $ git config --global user.name "malklera"
-        $ git config --global user.email "malklerulo@gmail.com"
-        $ git config --global init.defaultBranch main
-        Get ssh passphrase to clone my repositories
-    Get backup configs
-        Try cloning using ssh and see if the key is used automatically
-        $ git clone git@github.com:malklera/forArch.git
-        If that do not work, use this
-        $ git clone https://github.com/malklera/forArch
-        Or better, use my ssh key so i do not have to put my credentials for each push
-    Shell
-        $ sudo pacman -S zsh
-        Initial config
-        $ zsh
-        Get the path to zsh to use below
-        $ chsh -l
-        To set zsh as the new default
-        $ chsh -s /full/path/to/shell
-        Copy from backup
-        $ cp forArch/.zshenv .
-        $ cp -r forArch/.config/zsh/ .config
-    Terminal
-        $ pacman -S ghostty
-        $ cp -r forArch/.config/ghostty .config
-    AUR helper
-        $ sudo pacman -Syu
-        $ sudo pacman -S --needed base-devel
-        $ git clone https://aur.archlinux.org/yay.git
-        $ makepkg -si
-        The following commands come from here
-        https://github.com/Jguer/yay
-        $ yay -Y --gendb
-        $ yay -Syu --devel
-        $ yay -Y --devel --save
-        $ sudo rm -r yay
-    Basics
-        $ sudo pacman -S curl
-        $ sudo pacman -S unzip
-        $ sudo pacman -S wget
-        $ sudo pacman -S tar
-        $ sudo pacman -S flatpak
-    Terminal system monitoring
-        $ pacman -S btop
-    File manager
-        GUI
-        $ pacman -S thunar
-    Terminal multiplexer
-        $ sudo pacman -S tmux
-        $ cp -r forArch/.tmux/ .
-        $ cp -r forArch/.config/tmux/ .config/tmux/
-    Go
-        https://go.dev/doc/install
-        Download from there
-        $ rm -rf /usr/local/go
-        $ tar -C /usr/local -xzf nameDownloadedFile
-        $ export PATH=$PATH:/usr/local/go/bin
-    Information about disk
-        $ sudo pacman -S dysk
-    Audio server
-        $ pacman -S pipewire
-        $ pacman -S wireplumber
-        $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-        $ flatpak install flathub com.saivert.pwvucontrol
-    Tar
-        $ yay -S peazip
-    Alternative to grep
-        $ pacman -S ripgrep
-    Alternative to find
-        $ pacman -S fd
-    Fuzzy finder:
-        $ sudo pacman -S fzf
-    Text editor
-        $ pacman -S nano
-        $ sudo pacman -S vim
-        For neovim
-        $ sudo pacman -S npm
-        $ sudo pacman -S neovim
-        Copy config
-        $ cp forArch/.config/nvim/ ~/.config/nvim/
-        Open nvim to install all packages and check that it works
-        $ nvim
-    Browser
-        $ flatpak install flathub app.zen_browser.zen
-        Log in for sync
-        Import config of ublock Origin, darkreader, enhacer for youtube
-        $ sudo pacman -S vivaldi
-        Log in for sync
-        Import config of ublock Origin, darkreader, enhacer for youtube
-    Default applications
-        $ sudo pacman -S xdg-utils
-        $ sudo pacman -S perl-file-mimeinfo
-        Open thunar, maybe it will populate it for me, maybe this is a requirement
-        for thunar
-        Use the defaults ones, if i find a problem follow this to change it.
-        https://wiki.archlinux.org/title/Xdg-utils
-    Manage user directories
-        $ sudo pacman -S xdg-user-dirs
-        How to use
-        https://wiki.archlinux.org/title/XDG_user_directories
-        Add study to my directories, get ride of music and public
+All commands are run from home
+Upgrade
+    $ pacman -Syu
+Basics
+    $ sudo pacman -S --needed curl
+    $ sudo pacman -S --needed wget
+    $ sudo pacman -S --needed man
+    $ sudo pacman -S --needed unzip
+    $ sudo pacman -S --needed wget
+    $ sudo pacman -S --needed tar
+    $ sudo pacman -S --needed flatpak
+    $ sudo pacman -S --needed sqlite
+Microcode
+    $ sudo pacman -S --needed amd-ucode
+Network manager
+    $ sudo pacman -S --needed networkmanager
+    $ systenctl enable NetworkManager.service
+Better man page:
+    $ sudo pacman -S --needed tldr
+Font
+    $ sudo pacman -S ttf-jetbrains-mono-nerd
+    $ sudo pacman -S ttf-nerd-fonts-symbols
+    $ sudo pacman -S ttf-awesome
+Set up SSH
+    $ sudo pacman -S --needed openssh       
+    Generate key pair commenting who and when it was created
+    $ ssh-keygen -C "$(whoami)@$(uname -n)-$(date -I)"
+    Default file location to save key
+    Write the passphrase on a piece of paper, not on the pc, 64 characters
+    easy to remenber
+Git
+    $ sudo pacman -S --needed git
+    $ git config --global user.name "malklera"
+    $ git config --global user.email "malklerulo@gmail.com"
+    $ git config --global init.defaultBranch main
+    Get ssh passphrase to clone my repositories
+    $ pacman -S --needed github-cli
+Get backup configs
+    Try cloning using ssh and see if the key is used automatically
+    $ git clone git@github.com:malklera/forArch.git
+    Or manually copy my ssh passphrase and insert on the comand below
+    $ git clone https://username:<sshKey>@github.com/malklera/forArch.git
+    If that do not work, use this
+    $ git clone https://github.com/malklera/forArch
+Shell
+    $ sudo pacman -S --needed zsh
+    Initial config
+    $ zsh
+    Get the path to zsh to use below
+    $ chsh -l
+    To set zsh as the new default
+    $ chsh -s /full/path/to/shell
+    Copy from backup
+    $ cp forArch/.zshenv .
+    $ cp -r forArch/.config/zsh/ .config
+Terminal
+    $ pacman -S --needed ghostty
+    $ cp -r forArch/.config/ghostty .config
+AUR helper
+    $ sudo pacman -Syu
+    $ sudo pacman -S --needed base-devel
+    $ git clone https://aur.archlinux.org/yay.git
+    $ makepkg -si
+    The following commands come from here
+    https://github.com/Jguer/yay
+    $ yay -Y --gendb
+    $ yay -Syu --devel
+    $ yay -Y --devel --save
+    $ sudo rm -r yay
+Terminal system monitoring
+    $ pacman -S --needed btop
 
-    Check if wayland is installed
-        $ pacman -Qi wayland
-        If not, install with
-            $ sudo pacman -S --needed wayland
+
+
+File manager
+    GUI
+    $ pacman -S --needed thunar
+Terminal multiplexer
+    $ sudo pacman -S --needed tmux
+    $ cp -r forArch/.tmux/ .
+    $ cp -r forArch/.config/tmux/ .config/tmux/
+Go
+    https://go.dev/doc/install
+    Download from there
+    $ rm -rf /usr/local/go
+    $ tar -C /usr/local -xzf nameDownloadedFile
+    $ export PATH=$PATH:/usr/local/go/bin
+Information about disk
+    $ sudo pacman -S dysk
+Audio server
+    $ pacman -S pipewire
+    $ pacman -S wireplumber
+    $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    $ flatpak install flathub com.saivert.pwvucontrol
+Tar
+    $ yay -S peazip
+Alternative to grep
+    $ pacman -S ripgrep
+Alternative to find
+    $ pacman -S fd
+Fuzzy finder:
+    $ sudo pacman -S fzf
+Text editor
+    $ pacman -S nano
+    $ sudo pacman -S vim
+    For neovim
+    $ sudo pacman -S npm
+    $ sudo pacman -S --needed neovim
+    $ sudo pacman -S --needed luarocks
+    $ sudo pacman -S --needed tree-sitter-cli
+    Copy config
+    $ cp forArch/.config/nvim/ ~/.config/nvim/
+    Open nvim to install all packages and check that it works
+    $ nvim
+Browser
+    $ flatpak install flathub app.zen_browser.zen
+    Log in for sync
+    Import config of ublock Origin, darkreader, enhacer for youtube
+    $ sudo pacman -S vivaldi
+    Log in for sync
+    Import config of ublock Origin, darkreader, enhacer for youtube
+Default applications
+    $ sudo pacman -S xdg-utils
+    $ sudo pacman -S perl-file-mimeinfo
+    Open thunar, maybe it will populate it for me, maybe this is a requirement
+    for thunar
+    Use the defaults ones, if i find a problem follow this to change it.
+    https://wiki.archlinux.org/title/Xdg-utils
+Manage user directories
+    $ sudo pacman -S xdg-user-dirs
+    How to use
+    https://wiki.archlinux.org/title/XDG_user_directories
+    Add study to my directories, get ride of music and public
+
+Check if wayland is installed
+    $ pacman -Qi wayland
+    If not, install with
+        $ sudo pacman -S --needed wayland
 
 ----------
 
