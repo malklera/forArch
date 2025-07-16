@@ -1,22 +1,25 @@
 ZSH
-	$ cp ~/.zshenv ~/documents/backup/
-	$ cp -r ~/.config/zsh/ ~/documents/backup/.config/
+	$ cp ~/.zshenv ~/documents/forArch/
+	$ cp -r ~/.config/zsh/ ~/documents/forArch/.config/
 Neovim
-	$ cp -r ~/.config/nvim/ ~/documents/backup/.config/
+	$ cp -r ~/.config/nvim/ ~/documents/forArch/.config/
 Tmux
-	$ cp -r ~/.config/tmux/ ~/documents/backup/.config/
-	$ cp -r ~/.tmux/ ~/documents/backup/
+	$ cp -r ~/.tmux/ ~/documents/forArch/
+	$ cp -r ~/.config/tmux/ ~/documents/forArch/.config/
 Custom layout
-	$ mkdir ~/documents/backup/layout/
-	$ cp /usr/share/X11/xkb/symbols/custom ~/documents/backup/layout/
-Kitty
-	$ cp ~/.config/kitty/ ~/documents/backup/.config/
-
+	$ cp /usr/share/X11/xkb/symbols/custom ~/documents/forArch/keyboardLayout/
+Ghostty
+	$ cp -r ~/.config/ghostty/ ~/documents/forArch/.config
+Zen
+	Run sync
+	Export configs of uBlock Origin, DarkReader, enhancer for youtube to
+	~/documents/zenBackup
+Vivaldi
+	Run sync
+	Export configs of uBlock Origin, DarkReader, enhancer for youtube to
+	~/documents/vivaldiBackup
 Calibre
 	Export to ~/documents/books/
 	Open calibre->Icon Calibre Library->Export
-
-
-Do this last
 Files backup
 	$ tar czf ~/backup.tar.gz ~/documents ~/pictures ~/study

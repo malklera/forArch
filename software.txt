@@ -13,7 +13,11 @@
 	$ pacman -S --needed mpv
 - Image editor
 	$ flatpak install --user https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+- Open source corel
+	$ sudo pacman -S --needed inkscape
 - PDF viewer
+	Use the default browser to open pdf documents
+	This have a lot of dependencies
 	https://okular.kde.org
 - Calculator:
 	$ sudo pacman -S --needed libqalculate

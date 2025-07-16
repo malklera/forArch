@@ -15,28 +15,33 @@ Monitor
     Change default monitor to
     monitor=,1920x1080,auto,1
 Systemd startup
-    $ sudo pacman -S uwsm libnewt
+    $ sudo pacman -S --needed uwsm libnewt
     $ cp forArch/.zprofile .
 XDG Desktop Portal
-    $ sudo pacman -S xdg-desktop-portal-hyprland
+    $ sudo pacman -S --needed xdg-desktop-portal-hyprland
 Audio server
-    $ sudo pacman -S pipewire wireplumber
+    $ sudo pacman -S --needed pipewire wireplumber
     $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     $ flatpak install flathub com.saivert.pwvucontrol
 Authentication daemon
     $ sudo pacman -S hyprpolkitagent
 Qt wayand support
-    $ sudo pacman -S qt5-wayland qt6-wayland
+    $ sudo pacman -S --needed qt5-wayland qt6-wayland
 App launcher
-    $ sudo pacman -S rofi
+    $ sudo pacman -S --needed rofi
+    $ cp -r forArch/.config/rofi/ .config/
+    $ cp forArch/rofi/themes/t4-s4.rasi /usr/share/rofi/themes/
+    $ cp forArch/rofi/themes/tokyoNight.rasi /usr/share/rofi/themes/
+    To change the theme modify .config/rofi/config.rasi
 Clipboard manager
-    $ yay -S clipse
+    Check that installs wl-clipboard
+    $ yay -S --needed clipse
 Status bar
-    $ sudo pacman -S waybar
+    $ sudo pacman -S --needed waybar
     Do i need this font??
     $ sudo pacman -S ttf-font-awesome
 Auto mounting for usb and external devices
-    $ sudo pacman -S udiskie
+    $ sudo pacman -S --needed udiskie
 Notification daemon
     $ sudo pacman -S dunst
     Others: mako, swaync, fnott

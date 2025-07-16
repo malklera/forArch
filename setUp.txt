@@ -70,16 +70,14 @@ AUR helper
     $ sudo rm -r yay
 Terminal system monitoring
     $ pacman -S --needed btop
-
-
-
+    $ cp -r forArch/.config/btop/ .config/
 File manager
     GUI
     $ pacman -S --needed thunar
 Terminal multiplexer
     $ sudo pacman -S --needed tmux
     $ cp -r forArch/.tmux/ .
-    $ cp -r forArch/.config/tmux/ .config/tmux/
+    $ cp -r forArch/.config/tmux/ .config/
 Go
     https://go.dev/doc/install
     Download from there
@@ -87,52 +85,51 @@ Go
     $ tar -C /usr/local -xzf nameDownloadedFile
     $ export PATH=$PATH:/usr/local/go/bin
 Information about disk
-    $ sudo pacman -S dysk
+    $ sudo pacman -S --needed dysk
 Audio server
-    $ pacman -S pipewire
-    $ pacman -S wireplumber
+    $ pacman -S --needed pipewire
+    $ pacman -S --needed wireplumber
     $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     $ flatpak install flathub com.saivert.pwvucontrol
 Tar
-    $ yay -S peazip
+    $ yay -S --needed peazip
 Alternative to grep
-    $ pacman -S ripgrep
+    $ pacman -S --needed ripgrep
 Alternative to find
-    $ pacman -S fd
+    $ pacman -S --needed fd
 Fuzzy finder:
-    $ sudo pacman -S fzf
+    $ sudo pacman -S --needed fzf
 Text editor
-    $ pacman -S nano
-    $ sudo pacman -S vim
+    $ pacman -S --needed nano
+    $ sudo pacman -S --needed vim
     For neovim
-    $ sudo pacman -S npm
+    $ sudo pacman -S --needed npm
     $ sudo pacman -S --needed neovim
     $ sudo pacman -S --needed luarocks
     $ sudo pacman -S --needed tree-sitter-cli
     Copy config
-    $ cp forArch/.config/nvim/ ~/.config/nvim/
+    $ cp -r forArch/.config/nvim/ ~/.config/
     Open nvim to install all packages and check that it works
     $ nvim
 Browser
     $ flatpak install flathub app.zen_browser.zen
     Log in for sync
     Import config of ublock Origin, darkreader, enhacer for youtube
-    $ sudo pacman -S vivaldi
+    $ sudo pacman -S --needed vivaldi
     Log in for sync
     Import config of ublock Origin, darkreader, enhacer for youtube
 Default applications
-    $ sudo pacman -S xdg-utils
-    $ sudo pacman -S perl-file-mimeinfo
+    $ sudo pacman -S --needed xdg-utils
+    $ sudo pacman -S --needed perl-file-mimeinfo
     Open thunar, maybe it will populate it for me, maybe this is a requirement
     for thunar
     Use the defaults ones, if i find a problem follow this to change it.
     https://wiki.archlinux.org/title/Xdg-utils
 Manage user directories
-    $ sudo pacman -S xdg-user-dirs
+    $ sudo pacman -S --needed xdg-user-dirs
     How to use
     https://wiki.archlinux.org/title/XDG_user_directories
     Add study to my directories, get ride of music and public
-
 Check if wayland is installed
     $ pacman -Qi wayland
     If not, install with
