@@ -5,8 +5,8 @@ Installation
     Locale language: en_US
     Locale encoding: UTF-8
     Drive: 
-    Filesystem: btrfs, no compresion, no emcryption
-    Partitioning option: Best effort
+    Filesystem: btrfs, no compresion, no encryption
+    Partitioning option: choose the partition from the nvme, best effort
     Bootloader: Grub
     Swap: zram
     Hostname: arch

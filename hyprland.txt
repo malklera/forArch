@@ -1,4 +1,5 @@
 Steps from hypr wiki, each of this may have requirements, install them first
+After install copy the config an item at a time from my forArch config
 Install hyprland
     $ sudo pacman -S hyprland
     Change default terminal from kitty to ghostty
