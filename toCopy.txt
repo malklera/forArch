@@ -1,11 +1,17 @@
 ZSH
 	$ cp ~/.zshenv ~/documents/forArch/
-	$ cp -r ~/.config/zsh/ ~/documents/forArch/.config/
+	$ cp ~/.config/zsh/aliases ~/documents/forArch/.config/
+	$ cp ~/.config/zsh/.dircolors ~/documents/forArch/.config/
+	$ cp ~/.config/zsh/.zcompdump ~/documents/forArch/.config/
+	$ cp ~/.config/zsh/.zshrc ~/documents/forArch/.config/
 Neovim
 	$ cp -r ~/.config/nvim/ ~/documents/forArch/.config/
 Tmux
-	$ cp -r ~/.tmux/ ~/documents/forArch/
-	$ cp -r ~/.config/tmux/ ~/documents/forArch/.config/
+	$ mkdir ~/documents/forArch/.tmux/
+	$ cp ~/.tmux/tmux-close.sh ~/documents/forArch/.tmux/
+	$ cp ~/.tmux/tmux-start.sh ~/documents/forArch/
+	$ mkdir ~/documents/forArch/.config/tmux/
+	$ cp ~/.config/tmux/tmux.conf ~/documents/forArch/.config/tmux/
 Custom layout
 	$ cp /usr/share/X11/xkb/symbols/custom ~/documents/forArch/keyboardLayout/
 Ghostty
