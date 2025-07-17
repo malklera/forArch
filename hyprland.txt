@@ -49,10 +49,15 @@ Notification daemon
 Logout menu
     $ yay -S wlogout
     $ cp -r forArch/.config/wlogout/ ~/.config/
-
+Wallpaper
+    $ sudo pacman -S hyprpaper
+    Choose the wallpaper and copy the file path to use on my hyprland.conf
+    preload = /home/me/amongus.png
+    wallpaper = , /home/me/amongus.png
 ---------
 
 After everything works, check the following.
+
 - Color temeperature/gamma change: hyprsunset
 - idle management: hypridle
 - system info: hyprsysteminfo
