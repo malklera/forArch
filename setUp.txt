@@ -1,23 +1,13 @@
 After installation
 All commands are run from home
-Upgrade
-    $ sudo pacman -Syu
 Basics
-    $ sudo pacman -S --needed curl
-    $ sudo pacman -S --needed wget
     $ sudo pacman -S --needed man
-    $ sudo pacman -S --needed unzip
-    $ sudo pacman -S --needed wget
     $ sudo pacman -S --needed flatpak
-    $ sudo pacman -S --needed makepkg
-    $ sudo pacman -S --needed sqlite
 Microcode
     $ sudo pacman -S --needed amd-ucode
 Network manager
     $ sudo pacman -S --needed networkmanager
     $ systenctl enable NetworkManager.service
-Better man page:
-    $ sudo pacman -S --needed tldr
 Font
     $ sudo pacman -S ttf-jetbrains-mono-nerd
     $ sudo pacman -S ttf-nerd-fonts-symbols
@@ -52,14 +42,12 @@ Shell
     $ cp forArch/.zshenv .
     $ cp -r forArch/.config/zsh/ .config/
     $ source .config/zsh/.zshrc
+Change keyboard layout
+    $ cp forArch/keyboardLayout/custom /usr/share/X11/xkb/symbols/
+    $ sudo localectl set-keymap --no-convert custom
 Go
-    https://go.dev/doc/install
-    Download from there
-    $ rm -rf /usr/local/go
-    $ tar -C /usr/local -xzf nameDownloadedFile
-    $ export PATH=$PATH:/usr/local/go/bin
+    $ sudo pacman -S --needed go
 AUR helper
-    $ sudo pacman -Syu
     $ sudo pacman -S --needed base-devel
     $ git clone https://aur.archlinux.org/yay.git
     $ cd yay
@@ -71,25 +59,10 @@ AUR helper
     $ yay -Syu --devel
     $ yay -Y --devel --save
     $ sudo rm -r yay
-Terminal system monitoring
-    $ sudo pacman -S --needed btop
-    $ cp -r forArch/.config/btop/ .config/
-File manager
-    GUI
-    $ sudo pacman -S --needed thunar
 Terminal
     Can not use on tty
     $ sudo pacman -S --needed ghostty
     $ cp -r forArch/.config/ghostty .config/
-Terminal multiplexer
-    $ sudo pacman -S --needed tmux
-    $ cp -r forArch/.tmux/ .
-    $ cp -r forArch/.config/tmux/ .config/
-Information about disk
-    $ sudo pacman -S --needed dysk
-Audio server
-    $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    $ flatpak install flathub com.saivert.pwvucontrol
 Alternative to grep
     $ sudo pacman -S --needed ripgrep
 Alternative to find
@@ -97,23 +70,15 @@ Alternative to find
 Fuzzy finder:
     $ sudo pacman -S --needed fzf
 Text editor
-    $ sudo pacman -S --needed nano
     $ sudo pacman -S --needed vim
     For neovim
     $ sudo pacman -S --needed npm
-    $ sudo pacman -S --needed neovim
     $ sudo pacman -S --needed luarocks
+    $ sudo pacman -S --needed neovim
     $ sudo pacman -S --needed tree-sitter-cli
     Copy config
     $ cp -r forArch/.config/nvim/ .config/
     Wait to open for the first time for when i am inside hyperland
-Browser
-    $ flatpak install flathub app.zen_browser.zen
-    Wait till i am inside hyprland to log in and get my configs
-    Import config of ublock Origin, darkreader, enhacer for youtube
-    $ sudo pacman -S --needed vivaldi
-    Wait till i am inside hyprland to log in and get my configs
-    Import config of ublock Origin, darkreader, enhacer for youtube
 Default applications
     $ sudo pacman -S --needed perl-file-mimeinfo
     Once inside of hyperland i can try opening thunar and see if it populate it
@@ -129,6 +94,36 @@ Check if wayland is installed
     $ pacman -Qi wayland
     If not, install with
         $ sudo pacman -S --needed wayland
+-----
+Go to hyprland.txt
+-----
+Basics
+    $ sudo pacman -S --needed curl
+    $ sudo pacman -S --needed wget
+    $ sudo pacman -S --needed unzip
+    $ sudo pacman -S --needed tldr
+Terminal system monitoring
+    $ sudo pacman -S --needed btop
+    $ cp -r forArch/.config/btop/ .config/
+File manager
+    GUI
+    $ sudo pacman -S --needed thunar
+Terminal multiplexer
+    $ sudo pacman -S --needed tmux
+    $ cp -r forArch/.tmux/ .
+    $ cp -r forArch/.config/tmux/ .config/
+Information about disk
+    $ sudo pacman -S --needed dysk
+Browser
+    $ flatpak install flathub app.zen_browser.zen
+    Wait till i am inside hyprland to log in and get my configs
+    Import config of ublock Origin, darkreader, enhacer for youtube
+    $ sudo pacman -S --needed vivaldi
+    Wait till i am inside hyprland to log in and get my configs
+    Import config of ublock Origin, darkreader, enhacer for youtube
+------
+Go to hyprland
+-----
 
 ----------
 
