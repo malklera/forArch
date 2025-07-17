@@ -1,15 +1,16 @@
 ZSH
 	$ cp ~/.zshenv ~/documents/forArch/
-	$ cp ~/.config/zsh/aliases ~/documents/forArch/.config/
-	$ cp ~/.config/zsh/.dircolors ~/documents/forArch/.config/
-	$ cp ~/.config/zsh/.zcompdump ~/documents/forArch/.config/
-	$ cp ~/.config/zsh/.zshrc ~/documents/forArch/.config/
+	$ mkdir ~/documents/forArch/.config/zsh/
+	$ cp ~/.config/zsh/aliases ~/documents/forArch/.config/zsh
+	$ cp ~/.config/zsh/.dircolors ~/documents/forArch/.config/zsh
+	$ cp ~/.config/zsh/.zcompdump ~/documents/forArch/.config/zsh
+	$ cp ~/.config/zsh/.zshrc ~/documents/forArch/.config/zsh
 Neovim
 	$ cp -r ~/.config/nvim/ ~/documents/forArch/.config/
 Tmux
 	$ mkdir ~/documents/forArch/.tmux/
 	$ cp ~/.tmux/tmux-close.sh ~/documents/forArch/.tmux/
-	$ cp ~/.tmux/tmux-start.sh ~/documents/forArch/
+	$ cp ~/.tmux/tmux-start.sh ~/documents/forArch/.tmux/
 	$ mkdir ~/documents/forArch/.config/tmux/
 	$ cp ~/.config/tmux/tmux.conf ~/documents/forArch/.config/tmux/
 Custom layout
