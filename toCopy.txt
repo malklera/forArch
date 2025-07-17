@@ -16,7 +16,9 @@ Tmux
 Custom layout
 	$ cp /usr/share/X11/xkb/symbols/custom ~/documents/forArch/keyboardLayout/
 Ghostty
-	$ cp -r ~/.config/ghostty/ ~/documents/forArch/.config
+	$ cp -r ~/.config/ghostty/ ~/documents/forArch/.config/
+Btop
+	$ cp -r ~/.config/btop/ ~/documents/forArch/.config/
 Zen
 	Run sync
 	Export configs of uBlock Origin, DarkReader, enhancer for youtube to

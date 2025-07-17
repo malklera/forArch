@@ -1,8 +1,8 @@
 Installation
     Archinstall language: English
-    Keyboard layout: us
+    Keyboard layout: es
     Mirrors: Brazil
-    Locale language: en_US
+    Locale language: es_AR
     Locale encoding: UTF-8
     Drive: 
     Filesystem: btrfs, no compresion, no encryption

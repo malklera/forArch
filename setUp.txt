@@ -9,6 +9,7 @@ Basics
     $ sudo pacman -S --needed unzip
     $ sudo pacman -S --needed wget
     $ sudo pacman -S --needed flatpak
+    $ sudo pacman -S --needed makepkg
     $ sudo pacman -S --needed sqlite
 Microcode
     $ sudo pacman -S --needed amd-ucode
@@ -43,8 +44,6 @@ Get backup configs
     $ git clone https://github.com/malklera/forArch
 Shell
     $ sudo pacman -S --needed zsh
-    Initial config
-    $ zsh
     Get the path to zsh to use below
     $ chsh -l
     To set zsh as the new default
@@ -52,16 +51,22 @@ Shell
     Copy from backup
     $ cp forArch/.zshenv .
     $ cp -r forArch/.config/zsh/ .config/
-Terminal
-    $ sudo pacman -S --needed ghostty
-    $ cp -r forArch/.config/ghostty .config/
+    $ source .config/zsh/.zshrc
+Go
+    https://go.dev/doc/install
+    Download from there
+    $ rm -rf /usr/local/go
+    $ tar -C /usr/local -xzf nameDownloadedFile
+    $ export PATH=$PATH:/usr/local/go/bin
 AUR helper
     $ sudo pacman -Syu
     $ sudo pacman -S --needed base-devel
     $ git clone https://aur.archlinux.org/yay.git
+    $ cd yay
     $ makepkg -si
     The following commands come from here
     https://github.com/Jguer/yay
+    $ cd ..
     $ yay -Y --gendb
     $ yay -Syu --devel
     $ yay -Y --devel --save
@@ -72,25 +77,19 @@ Terminal system monitoring
 File manager
     GUI
     $ sudo pacman -S --needed thunar
+Terminal
+    Can not use on tty
+    $ sudo pacman -S --needed ghostty
+    $ cp -r forArch/.config/ghostty .config/
 Terminal multiplexer
     $ sudo pacman -S --needed tmux
     $ cp -r forArch/.tmux/ .
     $ cp -r forArch/.config/tmux/ .config/
-Go
-    https://go.dev/doc/install
-    Download from there
-    $ rm -rf /usr/local/go
-    $ tar -C /usr/local -xzf nameDownloadedFile
-    $ export PATH=$PATH:/usr/local/go/bin
 Information about disk
     $ sudo pacman -S --needed dysk
 Audio server
-    $ sudo pacman -S --needed pipewire
-    $ sudo pacman -S --needed wireplumber
     $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     $ flatpak install flathub com.saivert.pwvucontrol
-Tar
-    $ yay -S --needed peazip
 Alternative to grep
     $ sudo pacman -S --needed ripgrep
 Alternative to find
@@ -106,21 +105,19 @@ Text editor
     $ sudo pacman -S --needed luarocks
     $ sudo pacman -S --needed tree-sitter-cli
     Copy config
-    $ cp -r forArch/.config/nvim/ ~/.config/
-    Open nvim to install all packages and check that it works
-    $ nvim
+    $ cp -r forArch/.config/nvim/ .config/
+    Wait to open for the first time for when i am inside hyperland
 Browser
     $ flatpak install flathub app.zen_browser.zen
-    Log in for sync
+    Wait till i am inside hyprland to log in and get my configs
     Import config of ublock Origin, darkreader, enhacer for youtube
     $ sudo pacman -S --needed vivaldi
-    Log in for sync
+    Wait till i am inside hyprland to log in and get my configs
     Import config of ublock Origin, darkreader, enhacer for youtube
 Default applications
-    $ sudo pacman -S --needed xdg-utils
     $ sudo pacman -S --needed perl-file-mimeinfo
-    Open thunar, maybe it will populate it for me, maybe this is a requirement
-    for thunar
+    Once inside of hyperland i can try opening thunar and see if it populate it
+    for me, otherwise i have to do it myself manually
     Use the defaults ones, if i find a problem follow this to change it.
     https://wiki.archlinux.org/title/Xdg-utils
 Manage user directories
