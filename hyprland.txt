@@ -34,25 +34,27 @@ App launcher
     $ cp forArch/rofi/themes/tokyoNight.rasi /usr/share/rofi/themes/
     To change the theme modify .config/rofi/config.rasi
 Clipboard manager
-    Check that installs wl-clipboard
-    $ yay -S --needed clipse
+    $ sudo pacman -S --needed wl-clip-persist
 Status bar
     $ sudo pacman -S --needed waybar
-    Do i need this font??
-    $ sudo pacman -S ttf-font-awesome
 Auto mounting for usb and external devices
     $ sudo pacman -S --needed udiskie
 Notification daemon
-    $ sudo pacman -S dunst
+    $ sudo pacman -S --needed dunst
+    $ mkdir ~/.config/dunst/
+    $ cp /etc/dunst/dunstrc ~/.config/dunst/dunstrc
+    Leave defaul for now, then follow this guide
+    https://smarttech101.com/how-to-configure-dunst-notifications-in-linux-with-images
     Others: mako, swaync, fnott
+Logout menu
+    $ yay -S wlogout
+    $ cp -r forArch/.config/wlogout/ ~/.config/
 
 ---------
 
 After everything works, check the following.
-- Menu logout: wlogout
 - Color temeperature/gamma change: hyprsunset
 - idle management: hypridle
-- screen lock: hprlock
 - system info: hyprsysteminfo
 - cursor theme: hyprcursor
 - screenshot: $ yay -S hyprshot
