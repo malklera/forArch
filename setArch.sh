@@ -274,6 +274,6 @@ fi
 log_success "Arch Linux setup script completed!"
 
 # Download and execute setHypr.sh
-curl -o 
+sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/setHypr.sh/" "$HOME_DIR/" || log_error "Failed to copy setHypr.sh."
 chmod +x setHypr.sh
 ./setHypr.sh

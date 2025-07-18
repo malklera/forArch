@@ -1,25 +1,47 @@
 # forArch
 Steps to copy configs from debian 12 and set up arch+hyprland
 
-Things on the main directory of the repo go to the home directory of arch
-
-Follow this steps, leave the extras for after everything works
 Install curl
 $ sudo pacman -S --needed --noconfirm curl
 Download setArch.sh script
-$ curl -o setArch.sh 
+$ curl -o setArch.sh https://raw.githubusercontent.com/malklera/forArch/refs/heads/main/setArch.sh
 Make the file executable
 $ chmod +x setArch.sh
 Run the script
-$ ./setArch.sh
-- installOptions
-- setUp
-Install some basics then go to install hyprland first part, then come back here
-Copy backup configs
-- hyprland
-Install each item and make sure it works before moving foward
-Ensure i can log in and log out as i want first
-- software
+$ sudo ./setArch.sh
+
+Once everything finished, reboot
+
+If i have a working system do.
+Open nvim for the first time to install all plugins
+$ nvim
+
+Open both browsers and log in for sync
+
+See if thunar populate the default files, otherwise check to do manually
+$ thunar
+https://wiki.archlinux.org/title/Xdg-utils
+
+Modify the xdg-user-dirs
+$ nvim .config/user-dirs.dirs
+Leave
+    Documents
+    Downloads
+    Pictures
+    Videos
+Point all others to
+"$HOME/"
+
+$ git config --global user.email "myEmail"
+
+$ gh auth
+
+Copy files backup from debian if i can, otherwise from drive
+
+Create my custom IDE using tmux+neovim
+
+
+Install software after i have a functional system
 
 ---
 Check out udiskie how and if i should do something besides installing
@@ -45,4 +67,3 @@ see a video and have a terminal below
 - Do i set up default places for each application? or remember when it was closed?
 - custom ide on workspace 1
 - zen browser on workspace 2
----
