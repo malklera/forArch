@@ -1,8 +1,9 @@
+Run setUp.sh
+Set up Git
+    $ git config --global user.email "myEmail"
+Set up github cli
 After installation
 All commands are run from home
-Basics
-    $ sudo pacman -S --needed man
-    $ sudo pacman -S --needed flatpak
 Microcode
     $ sudo pacman -S --needed amd-ucode
 Network manager
@@ -21,16 +22,10 @@ Set up SSH
 Git
     $ sudo pacman -S --needed git
     $ git config --global user.name "malklera"
-    $ git config --global user.email "malklerulo@gmail.com"
     $ git config --global init.defaultBranch main
     Get ssh passphrase to clone my repositories
     $ sudo pacman -S --needed github-cli
 Get backup configs
-    Try cloning using ssh and see if the key is used automatically
-    $ git clone git@github.com:malklera/forArch.git
-    Or manually copy my ssh passphrase and insert on the comand below
-    $ git clone https://username:<sshKey>@github.com/malklera/forArch.git
-    If that do not work, use this
     $ git clone https://github.com/malklera/forArch
 Shell
     $ sudo pacman -S --needed zsh
@@ -43,7 +38,7 @@ Shell
     $ cp -r forArch/.config/zsh/ .config/
     $ source .config/zsh/.zshrc
 Change keyboard layout
-    $ cp forArch/keyboardLayout/custom /usr/share/X11/xkb/symbols/
+    $ cp forArch/assets/keyboardLayout/custom /usr/share/X11/xkb/symbols/
     $ sudo localectl set-keymap --no-convert custom
 Go
     $ sudo pacman -S --needed go
@@ -98,6 +93,7 @@ Check if wayland is installed
 Go to hyprland.txt
 -----
 Basics
+    $ sudo pacman -S --needed man
     $ sudo pacman -S --needed curl
     $ sudo pacman -S --needed wget
     $ sudo pacman -S --needed unzip
@@ -114,6 +110,8 @@ Terminal multiplexer
     $ cp -r forArch/.config/tmux/ .config/
 Information about disk
     $ sudo pacman -S --needed dysk
+Flatpak
+    $ sudo pacman -S --needed flatpak
 Browser
     $ flatpak install flathub app.zen_browser.zen
     Wait till i am inside hyprland to log in and get my configs
