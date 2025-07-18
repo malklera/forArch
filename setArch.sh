@@ -1,13 +1,6 @@
 #!/bin/bash
 
-# This script automates the installation and configuration of various tools
-# and settings for an Arch Linux setup, based on the provided steps.
-#
-# IMPORTANT:
-# - Run this script as root: sudo ./setArch.sh
-# - Ensure you have an active internet connection.
-# - Some steps require manual input (e.g., SSH key passphrase).
-# - This script assumes you are running it from your home directory.
+# This script assumes you are running it from your home directory.
 
 #  Configuration Variables 
 GIT_USERNAME="malklera"
@@ -78,7 +71,7 @@ pacman -S --needed --noconfirm git || log_error "Failed to install git."
 sudo -u "$ORIGINAL_USER" git config --global user.name "$GIT_USERNAME"
 sudo -u "$ORIGINAL_USER" git config --global init.defaultBranch main
 
-log_info "Installing github-cli for SSH passphrase management (if needed)..."
+log_info "Installing github-cli..."
 pacman -S --needed --noconfirm github-cli || log_error "Failed to install github-cli."
 
 # Get backup configs (forArch repository)
@@ -89,14 +82,11 @@ else
     log_error "Failed to clone 'forArch' repository using any method. Please clone it manually into $HOME_DIR/forArch."
 fi
 
-# Shell (Zsh)
+# Shell Zsh
 log_info "Installing Zsh and copying configurations..."
 pacman -S --needed --noconfirm zsh || log_error "Failed to install zsh."
 
-# Ensure the .config directory exists for the original user
-sudo -u "$ORIGINAL_USER" mkdir -p "$HOME_DIR/.config"
-
-# Copy Zsh configurations from the cloned 'forArch' repo to the original user's home
+# Copy Zsh configurations backup
 if [ -d "$HOME_DIR/forArch/.config/zsh" ]; then
     sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.zshenv" "$HOME_DIR/" || log_error "Failed to copy .zshenv."
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/zsh/" "$HOME_DIR/.config/" || log_error "Failed to copy zsh config directory."
@@ -134,7 +124,6 @@ pacman -S --needed --noconfirm go || log_error "Failed to install Go."
 log_info "Setting up Yay (AUR helper)..."
 pacman -S --needed --noconfirm base-devel || log_error "Failed to install base-devel (required for yay)."
 
-# Perform yay installation steps as the original user
 if [ -d "$HOME_DIR/yay" ]; then
     log_warning "Yay directory already exists in $HOME_DIR. Removing it to perform a clean install."
     sudo rm -rf "$HOME_DIR/yay"
@@ -143,7 +132,7 @@ fi
 sudo -u "$ORIGINAL_USER" git clone https://aur.archlinux.org/yay.git "$HOME_DIR/yay" || log_error "Failed to clone yay repository."
 cd "$HOME_DIR/yay" || log_error "Failed to change directory to $HOME_DIR/yay."
 sudo -u "$ORIGINAL_USER" makepkg -si --noconfirm || log_error "Failed to install yay."
-cd - || log_error "Failed to change back from yay directory." # Go back to previous directory
+cd - || log_error "Failed to change back from yay directory."
 
 log_info "Running yay post-installation commands as $ORIGINAL_USER..."
 sudo -u "$ORIGINAL_USER" yay -Y --gendb || log_error "Failed to run yay --gendb."
@@ -154,7 +143,7 @@ log_info "Cleaning up yay build directory..."
 sudo rm -r "$HOME_DIR/yay" || log_error "Failed to remove yay build directory."
 log_success "Yay installed and configured."
 
-# Terminal (Ghostty)
+# Terminal Ghostty
 log_info "Installing Ghostty terminal and copying configurations..."
 pacman -S --needed --noconfirm ghostty || log_error "Failed to install ghostty."
 
@@ -166,19 +155,19 @@ else
 fi
 log_info "Note: Ghostty cannot be used directly on TTY."
 
-# Alternative to grep (ripgrep)
+# Alternative to grep
 log_info "Installing ripgrep..."
 pacman -S --needed --noconfirm ripgrep || log_error "Failed to install ripgrep."
 
-# Alternative to find (fd)
+# Alternative to find
 log_info "Installing fd (find alternative)..."
 pacman -S --needed --noconfirm fd || log_error "Failed to install fd."
 
-# Fuzzy finder (fzf)
+# Fuzzy finder
 log_info "Installing fzf..."
 pacman -S --needed --noconfirm fzf || log_error "Failed to install fzf."
 
-# Text editor (Vim/Neovim)
+# Text editors
 log_info "Installing Vim and Neovim dependencies..."
 pacman -S --needed --noconfirm vim || log_error "Failed to install vim."
 
@@ -211,7 +200,7 @@ pacman -S --needed --noconfirm tldr || log_error "Failed to install tldr"
 pacman -S --needed --noconfirm wget || log_error "Failed to install wget"
 pacman -S --needed --noconfirm unzip || log_error "Failed to install unzip"
 
-# Terminal system monitoring (btop)
+# Terminal system monitoring
 log_info "Installing btop and copying configurations..."
 pacman -S --needed --noconfirm btop || log_error "Failed to install btop."
 
@@ -244,7 +233,7 @@ else
     log_error "$HOME_DIR/forArch/.config/tmux not found. tmux configs not copied."
 fi
 
-# Information about disk (dysk)
+# Information about disk
 log_info "Installing dysk (disk information utility)..."
 pacman -S --needed --noconfirm dysk || log_error "Failed to install dysk."
 
@@ -252,9 +241,9 @@ pacman -S --needed --noconfirm dysk || log_error "Failed to install dysk."
 log_info "Installing Flatpak..."
 pacman -S --needed --noconfirm flatpak || log_error "Failed to install flatpak."
 
-# Browser (Zen Browser via Flatpak, Vivaldi via pacman)
+# Browsers
 log_info "Installing Zen Browser via Flatpak..."
-# Ensure Flatpak remote is added if not already (flathub)
+# Ensure Flatpak remote is added if not already
 sudo -u "$ORIGINAL_USER" flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || log_warning "Failed to add Flathub remote. Flatpak installations might fail."
 sudo -u "$ORIGINAL_USER" flatpak install flathub app.zen_browser.zen -y || log_error "Failed to install Zen Browser via Flatpak."
 
@@ -273,7 +262,8 @@ fi
 
 log_success "Arch Linux setup script completed!"
 
-# Download and execute setHypr.sh
+# Copy and execute setHypr.sh
 sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/setHypr.sh/" "$HOME_DIR/" || log_error "Failed to copy setHypr.sh."
 chmod +x setHypr.sh
 ./setHypr.sh
+sudo -u "$ORIGINAL_USER" rm setHypr.sh

@@ -1,13 +1,7 @@
 #!/bin/bash
 
-# This script automates the installation and configuration of Hyprland
-# and various related tools for an Arch Linux setup.
-#
-# IMPORTANT:
-# - Run this script as root: sudo ./setHypr.sh
-# - Ensure you have an active internet connection.
-# - This script assumes the 'forArch' repository is cloned in your home directory.
-# - It is recommended to run this script *after* the initial Arch setup script (setArch.sh).
+# This script assumes the 'forArch' repository is cloned in your home directory.
+# It is called by setArch.sh
 
 # Helper Functions for Logging
 log_info() {
@@ -70,7 +64,6 @@ log_info "Installing Waybar (status bar)..."
 pacman -S --needed --noconfirm waybar || log_error "Failed to install waybar."
 
 log_info "Copying Waybar configurations..."
-sudo -u "$ORIGINAL_USER" mkdir -p "$HOME_DIR/.config" # Ensure .config exists
 if [ -d "$HOME_DIR/forArch/.config/waybar" ]; then
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/waybar" "$HOME_DIR/.config/" || log_error "Failed to copy waybar config directory."
     log_success "Waybar configurations copied for $ORIGINAL_USER."
@@ -80,7 +73,6 @@ fi
 
 # Logout menu (wlogout)
 log_info "Installing wlogout (logout menu) via Yay..."
-# Assuming yay is already installed from the previous script
 sudo -u "$ORIGINAL_USER" yay -S --noconfirm wlogout || log_error "Failed to install wlogout via Yay."
 
 log_info "Copying wlogout configurations..."
@@ -97,8 +89,6 @@ pacman -S --needed --noconfirm xdg-desktop-portal-hyprland || log_error "Failed 
 
 # Audio server (pwvucontrol via Flatpak)
 log_info "Installing pwvucontrol (audio server control) via Flatpak..."
-# Ensure Flatpak remote is added if not already (flathub)
-sudo -u "$ORIGINAL_USER" flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || log_warning "Failed to add Flathub remote. Flatpak installations might fail."
 sudo -u "$ORIGINAL_USER" flatpak install flathub com.saivert.pwvucontrol -y || log_error "Failed to install pwvucontrol via Flatpak."
 
 # Authentication daemon
@@ -141,7 +131,6 @@ pacman -S --needed --noconfirm udiskie || log_error "Failed to install udiskie."
 log_info "Installing Dunst (notification daemon) and copying configurations..."
 pacman -S --needed --noconfirm dunst || log_error "Failed to install dunst."
 
-sudo -u "$ORIGINAL_USER" mkdir -p "$HOME_DIR/.config/dunst/" || log_error "Failed to create ~/.config/dunst directory."
 # Copy default dunstrc from /etc to user's config
 sudo -u "$ORIGINAL_USER" cp /etc/dunst/dunstrc "$HOME_DIR/.config/dunst/dunstrc" || log_error "Failed to copy dunstrc to user config."
 log_success "Dunst configurations copied for $ORIGINAL_USER."
@@ -166,4 +155,5 @@ if [ -d "$HOME_DIR/forArch/.config/hypr" ]; then
 else
     log_error "$HOME_DIR/forArch/.config/hypr not found. Hyprland configs not copied."
 fi
+
 log_success "Hyprland setup script completed!"

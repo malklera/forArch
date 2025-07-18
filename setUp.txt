@@ -1,9 +1,11 @@
-Run setUp.sh
-Set up Git
-    $ git config --global user.email "myEmail"
-Set up github cli
 After installation
 All commands are run from home
+Basics
+    $ sudo pacman -S --needed man
+    $ sudo pacman -S --needed curl
+    $ sudo pacman -S --needed wget
+    $ sudo pacman -S --needed unzip
+    $ sudo pacman -S --needed tldr
 Microcode
     $ sudo pacman -S --needed amd-ucode
 Network manager
@@ -66,7 +68,6 @@ Fuzzy finder:
     $ sudo pacman -S --needed fzf
 Text editor
     $ sudo pacman -S --needed vim
-    For neovim
     $ sudo pacman -S --needed npm
     $ sudo pacman -S --needed luarocks
     $ sudo pacman -S --needed neovim
@@ -84,20 +85,10 @@ Manage user directories
     $ sudo pacman -S --needed xdg-user-dirs
     How to use
     https://wiki.archlinux.org/title/XDG_user_directories
-    Add study to my directories, get ride of music and public
 Check if wayland is installed
     $ pacman -Qi wayland
     If not, install with
         $ sudo pacman -S --needed wayland
------
-Go to hyprland.txt
------
-Basics
-    $ sudo pacman -S --needed man
-    $ sudo pacman -S --needed curl
-    $ sudo pacman -S --needed wget
-    $ sudo pacman -S --needed unzip
-    $ sudo pacman -S --needed tldr
 Terminal system monitoring
     $ sudo pacman -S --needed btop
     $ cp -r forArch/.config/btop/ .config/
@@ -119,22 +110,8 @@ Browser
     $ sudo pacman -S --needed vivaldi
     Wait till i am inside hyprland to log in and get my configs
     Import config of ublock Origin, darkreader, enhacer for youtube
-------
-Go to hyprland
------
 
 ----------
-
-Basics after installation
-- https://wiki.archlinux.org/title/Pacman/Rosetta
-Upgrade
-$ sudo pacman -Syu
-Search for package
-$ pacman -Ss namePackage
-Install
-$ sudo pacman -S namePackage
-Remove package and dependencies
-$ sudo pacman -Rs namePackage
 
 Install amd grapic driver
 - https://wiki.archlinux.org/title/AMDGPU
