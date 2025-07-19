@@ -70,6 +70,9 @@ Copy files backup from debian if i can, otherwise from drive
 Create my custom IDE using tmux+neovim
 
 
+Check .zshrc the last two lines are commented, deal with that.
+
+
 Install software after i have a functional system
 
 ---

@@ -1,11 +1,11 @@
 Installation
     Archinstall language: English
     Keyboard layout: es
-    Mirrors: Brazil
     Locale language: es_AR
     Locale encoding: UTF-8
+    Mirrors: Brazil
     Drive: 
-    Filesystem: btrfs, no compresion, no encryption
+    Filesystem: btrfs, no subvolumes, use compression, no encryption
     Partitioning option: choose the partition from the nvme, best effort
     Bootloader: Grub
     Swap: zram
