@@ -132,6 +132,7 @@ log_info "Installing Dunst (notification daemon) and copying configurations..."
 pacman -S --needed --noconfirm dunst || log_error "Failed to install dunst."
 
 # Copy default dunstrc from /etc to user's config
+mkdir $HOME_DIR/.config/dunst/
 sudo -u "$ORIGINAL_USER" cp /etc/dunst/dunstrc "$HOME_DIR/.config/dunst/dunstrc" || log_error "Failed to copy dunstrc to user config."
 log_success "Dunst configurations copied for $ORIGINAL_USER."
 

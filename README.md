@@ -84,6 +84,7 @@ I not think i will really use this, see how i can hide this, or make it so i
 call this from rofi and/terminal, then i will need a way of opening a terminal
 with clicking with the mouse, this for when i ruin my layout
 
+TODO: Make my new layout for arch
 ---
 Windows
 Change the behaivor of the dwindle layout, make it so i have 4 windows, i do not

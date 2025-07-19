@@ -90,7 +90,7 @@ pacman -S --needed --noconfirm zsh || log_error "Failed to install zsh."
 if [ -d "$HOME_DIR/forArch/.config/zsh" ]; then
     sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.zshenv" "$HOME_DIR/" || log_error "Failed to copy .zshenv."
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/zsh/" "$HOME_DIR/.config/" || log_error "Failed to copy zsh config directory."
-    log_success "Zsh configurations copied for $ORIGUAL_USER."
+    log_success "Zsh configurations copied for $ORIGINAL_USER."
 
     # Automatically set Zsh as the default shell for the original user
     ZSH_PATH=$(which zsh)
@@ -107,6 +107,7 @@ else
 fi
 
 # Change keyboard layout
+# TODO: this do not work, arch use another system
 log_info "Copying custom keyboard layout and setting it..."
 if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
     cp "$HOME_DIR/forArch/assets/keyboardLayout/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
@@ -263,7 +264,7 @@ fi
 log_success "Arch Linux setup script completed!"
 
 # Copy and execute setHypr.sh
-sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/setHypr.sh/" "$HOME_DIR/" || log_error "Failed to copy setHypr.sh."
+sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/setHypr.sh" "$HOME_DIR/" || log_error "Failed to copy setHypr.sh."
 chmod +x setHypr.sh
 ./setHypr.sh
 sudo -u "$ORIGINAL_USER" rm setHypr.sh
