@@ -31,7 +31,7 @@
     "wireplumber": {
         "format": "{volume}% {icon}",
         "format-muted": "󰖁",
-        "on-click": "pwvucontrol",
+        "on-click": "flatpak run com.saivert.pwvucontrol",
         "format-icons": [
             "",
             "",
@@ -46,10 +46,10 @@
     },
     "clock": {
         "format": "{:%A, %d-%m | %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "tooltip-format": "<tt><small>{calendar}</small></tt>"
     },
     "custom/power": {
-        "format": "⏻ ",
+        "format": "⏻",
         "tooltip": false,
         "on-click": "wlogout"
     }

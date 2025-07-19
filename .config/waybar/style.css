@@ -10,14 +10,18 @@ window#waybar {
 
 #workspaces {
 	background-color: #24283b;
-	margin: 5px;
-	margin-left: 10px;
+
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+
 	border-radius: 5px;
 }
 
 #workspaces button {
-    padding: 0 5px;
     color: #c0caf5;
+    padding: 0 5px;
 }
 
 #workspaces button:hover {
@@ -32,9 +36,25 @@ window#waybar {
     border-radius: 5px;
 }
 
-#clock, #network, #wireplumber, #custom-power, #hyprland-window {
+#clock, #network, #wireplumber, #custom-power, #window {
     color: #b7b7b7;
 	background-color: #24283b;
 	padding: 5px 10px;
-	margin: 5px 0px;
+
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+
+	border-radius: 5px;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
+
+tooltip {
+    color: #b7b7b7;
+	background-color: #24283b;
+    opacity: 1;
 }

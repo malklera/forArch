@@ -24,4 +24,4 @@ alias btop="btop -p 1"
 alias mv="mv -i"
 alias cp="cp -i"
 alias sqlite='sqlite3 -init <(echo ".mode box")'
-alias yazi="flatpak run io.github.sxyazi.yazi"
+alias pwvucontrol="flatpak run com.saivert.pwvucontrol"
