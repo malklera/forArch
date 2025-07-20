@@ -18,7 +18,7 @@ $ chmod +x setArch.sh
 
 Run the script
 
-$ sudo ./setArch.sh
+$ sudo ./setArch.sh | tee setup_log.tx
 
 
 Once everything finished, reboot

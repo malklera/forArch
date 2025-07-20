@@ -46,6 +46,7 @@ pacman -S --needed --noconfirm amd-ucode || log_error "Failed to install amd-uco
 # Network Manager
 log_info "Installing and enabling NetworkManager..."
 pacman -S --needed --noconfirm networkmanager || log_error "Failed to install networkmanager."
+pacman -S --needed --noconfirm network-manager-applet || log_error "Failed to install network-manager-applet."
 systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
 
 # Fonts
@@ -107,15 +108,13 @@ else
 fi
 
 # Change keyboard layout
-# TODO: this do not work, arch use another system
-# log_info "Copying custom keyboard layout and setting it..."
-# if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
-#     cp "$HOME_DIR/forArch/assets/keyboardLayout/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
-#     sudo localectl set-keymap --no-convert custom || log_error "Failed to set custom keyboard layout."
-#     log_success "Custom keyboard layout copied and set."
-# else
-#     log_error "$HOME_DIR/forArch/assets/keyboardLayout/custom not found. Keyboard layout not changed."
-# fi
+log_info "Copying custom keyboard layout and setting it..."
+if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
+    cp "$HOME_DIR/forArch/assets/keyboardLayout/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
+    log_success "Custom keyboard layout copied."
+else
+    log_error "$HOME_DIR/forArch/assets/keyboardLayout/custom not found. Keyboard layout not changed."
+fi
 
 # Go
 log_info "Installing Go..."

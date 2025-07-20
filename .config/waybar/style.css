@@ -36,7 +36,7 @@ window#waybar {
     border-radius: 5px;
 }
 
-#clock, #network, #wireplumber, #custom-power, #window {
+#clock, #network, #wireplumber, #custom-power, #window, #tray {
     color: #b7b7b7;
 	background-color: #24283b;
 	padding: 5px 10px;

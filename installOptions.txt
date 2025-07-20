@@ -1,7 +1,7 @@
 Installation
     Archinstall language: English
     Keyboard layout: es
-    Locale language: es_AR
+    Locale language: us
     Locale encoding: UTF-8
     Mirrors: Brazil
     Drive: 
