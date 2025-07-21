@@ -7,14 +7,15 @@ return {
             local cur = vim.fn.line(".")
             local total = vim.fn.line("$")
             local col = vim.fn.charcol(".")
-            --           return string.format("%d|%d/%d", col, cur, total)
             return string.format("%d/%d|%02d", cur, total, col)
         end
 
         require("lualine").setup({
             options = {
-                -- theme = "catppuccin",
+                theme = "tokyonight",
                 icons_enabled = true,
+                component_separators = { left = "", right = ""},
+                section_separators = { left = "", right = ""},
             },
             sections = {
                 lualine_a = {
@@ -28,7 +29,7 @@ return {
                 lualine_c = {
                     {
                         "filename",
-                        path = 2,
+                        path = 3,
                     },
                 },
                 lualine_x = {
