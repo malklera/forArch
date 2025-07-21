@@ -90,8 +90,3 @@ export NVM_DIR="/opt/.nvm"
 
 # add mason installed tools to the path
 export PATH="/home/malklera/.config/local/share/nvim/mason/bin:$PATH"
-
-
-# Set up fzf key bindings and fuzzy completion
-# source /usr/share/doc/fzf/examples/key-bindings.zsh
-# source /usr/share/doc/fzf/examples/completion.zsh

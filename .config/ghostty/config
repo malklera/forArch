@@ -6,7 +6,10 @@ font-family = JetBrains Mono
 window-padding-x = 0
 window-padding-y = 0
 # Theme
-theme = tokyonight_night
+# official ghostty theme
+# theme = tokyonight_night
+# theme made by folke
+theme = "/home/malklera/.config/ghostty/tokyonight_night"
 
 window-decoration = none
 
