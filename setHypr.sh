@@ -87,9 +87,9 @@ fi
 log_info "Installing xdg-desktop-portal-hyprland..."
 pacman -S --needed --noconfirm xdg-desktop-portal-hyprland || log_error "Failed to install xdg-desktop-portal-hyprland."
 
-# Audio server (pwvucontrol via Flatpak)
-log_info "Installing pwvucontrol (audio server control) via Flatpak..."
-sudo -u "$ORIGINAL_USER" flatpak install flathub com.saivert.pwvucontrol -y || log_error "Failed to install pwvucontrol via Flatpak."
+# Audio server (pwvucontrol via yay)
+log_info "Installing pwvucontrol (audio server control) via yay..."
+sudo -u "$ORIGINAL_USER" yay -S --noconfirm pwvucontrol || log_error "Failed to install pwvucontrol via Yay."
 
 # Authentication daemon
 log_info "Installing hyprpolkitagent (authentication daemon)..."

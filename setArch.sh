@@ -237,15 +237,10 @@ fi
 log_info "Installing dysk (disk information utility)..."
 pacman -S --needed --noconfirm dysk || log_error "Failed to install dysk."
 
-# Flatpak
-log_info "Installing Flatpak..."
-pacman -S --needed --noconfirm flatpak || log_error "Failed to install flatpak."
-
 # Browsers
-log_info "Installing Zen Browser via Flatpak..."
-# Ensure Flatpak remote is added if not already
-sudo -u "$ORIGINAL_USER" flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || log_warning "Failed to add Flathub remote. Flatpak installations might fail."
-sudo -u "$ORIGINAL_USER" flatpak install flathub app.zen_browser.zen -y || log_error "Failed to install Zen Browser via Flatpak."
+log_info "Installing Zen Browser..."
+# Download from aur
+sudo -u "$ORIGINAL_USER" yay -S --noconfirm zen-browser-bin || log_error "Failed to install zen via Yay."
 
 log_info "Installing Vivaldi browser..."
 pacman -S --needed --noconfirm vivaldi || log_error "Failed to install vivaldi."
