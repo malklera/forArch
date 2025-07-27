@@ -6,12 +6,6 @@ Installation
     Mirrors: Brazil
     Drive: 
     Filesystem: btrfs, no subvolumes, use compression, no encryption
-    Partitioning option: Partition my nvme where i have debian, choose the new
-    partition from the nvme, best effort
-    Partition size:
-        Total: 455884.8 MB, 445.2 GB
-        Debian: 153600 MB, 150 GB
-        Arch: 302284.8 MB, 295.2 GB
     Bootloader: Grub
     Swap: zram
     Hostname: arch
