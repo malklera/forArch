@@ -80,6 +80,7 @@ fi
 # Copy bash backup files
 if [ -d "$HOME_DIR/forArch/.bashrc" ]; then
     sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrrc."
+    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bash_profile" "$HOME_DIR/" || log_error "Failed to copy .bash_profile."
     log_success "Bash configurations copied for $ORIGINAL_USER."
 else
     log_error "$HOME_DIR/forArch/.bashrc not found. Bash configs not copied."

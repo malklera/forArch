@@ -20,7 +20,6 @@ export EDITOR="nvim"
 # History configuration for Bash
 export HISTFILE="$HOME/.bash_history" # Default Bash history file
 shopt -s histappend                   # Append to history file, don't overwrite
-export PROMPT_COMMAND="history -a"    # Save history after each command
 
 
 # add mason installed tools to the path, because i may want then for use from
