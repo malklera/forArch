@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -65,28 +61,37 @@ git_info() {
   ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 && return
 
   # Git branch/tag, or name-rev if on detached head
-  local GIT_LOCATION=$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)
-  GIT_LOCATION=${GIT_LOCATION#(refs/heads/|tags/)} # Remove prefixes
+  # Bash equivalent for removing prefixes
+  local GIT_LOCATION=$(git symbolic-ref -q HEAD 2>/dev/null || git name-rev --name-only --no-undefined --always HEAD 2>/dev/null)
+  # Remove "refs/heads/" or "tags/" prefix using Bash's extended pattern matching
+  # This pattern matches either "refs/heads/" OR "tags/" at the beginning of the string.
+  GIT_LOCATION="${GIT_LOCATION##refs/heads/}"
+  GIT_LOCATION="${GIT_LOCATION##tags/}"
 
   # ANSI color codes for Bash
-  local RED='\e[31m'
-  local CYAN='\e[36m'
-  local MAGENTA='\e[35m'
-  local YELLOW='\e[33m'
-  local GREEN='\e[32m'
-  local WHITE='\e[38;5;15m' # Your original '15m' color
-  local RESET='\e[0m'
-
-  local AHEAD="${RED}⇡NUM${RESET}"
-  local BEHIND="${CYAN}⇣NUM${RESET}"
+  # These are correctly defined for Bash in your original function.
+  local RED=$'\e[31m'
+  local CYAN=$'\e[36m'
+  local MAGENTA=$'\e[35m'
+  local YELLOW=$'\e[33m'
+  local GREEN=$'\e[32m'
+  local WHITE=$'\e[38;5;15m'
+  local RESET=$'\e[0m'
+# 
+# 
+# 󰜷󰜮
+  local AHEAD="${RED}NUM${RESET}"
+  local BEHIND="${CYAN}NUM${RESET}"
   local MERGING="${MAGENTA}⚡︎${RESET}"
   local UNTRACKED="${RED}●${RESET}"
   local MODIFIED="${YELLOW}●${RESET}"
   local STAGED="${GREEN}●${RESET}"
 
+  # Initialize arrays for Bash
   local DIVERGENCES=()
   local FLAGS=()
 
+  # Note: 2> /dev/null is often better for suppressing stderr from commands like git log
   local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
   if [ "$NUM_AHEAD" -gt 0 ]; then
     DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
@@ -98,7 +103,8 @@ git_info() {
   fi
 
   local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  if [ -n "$GIT_DIR" ] && test -r "$GIT_DIR"/MERGE_HEAD; then
+  # Use double brackets [[ for string comparisons in Bash for robustness
+  if [[ -n "$GIT_DIR" ]] && test -r "$GIT_DIR/MERGE_HEAD"; then
     FLAGS+=( "$MERGING" )
   fi
 
@@ -115,11 +121,21 @@ git_info() {
   fi
 
   local GIT_INFO=()
-  GIT_INFO+=( "${WHITE}±" )
+  # GIT_INFO+=( "${WHITE}git" )
+  # Check if GIT_STATUS is set and non-empty (assuming it's an external variable from somewhere else)
+  # If GIT_STATUS is intended to be internal to this function, it should be set here.
+  # Otherwise, this line is fine to include it if it exists.
   [ -n "$GIT_STATUS" ] && GIT_INFO+=( "$GIT_STATUS" )
+
+  # Append array elements (Bash joins with space by default)
   [[ ${#DIVERGENCES[@]} -ne 0 ]] && GIT_INFO+=( "${DIVERGENCES[@]}" )
   [[ ${#FLAGS[@]} -ne 0 ]] && GIT_INFO+=( "${FLAGS[@]}" )
+
   GIT_INFO+=( "$GIT_LOCATION${RESET}" )
+
+  # Use printf to avoid trailing newline and better control spacing if needed,
+  # but echo "${GIT_INFO[@]}" is fine if spaces are desired separators.
+  # For joining with single spaces, echo "${GIT_INFO[*]}" or echo "${GIT_INFO[@]}" works.
   echo "${GIT_INFO[@]}"
 }
 
@@ -131,4 +147,4 @@ PROMPT_COLOR_BLUE='\[\e[34m\]'
 PROMPT_COLOR_WHITE='\[\e[38;5;15m\]'
 PROMPT_COLOR_RESET='\[\e[0m\]'
 
-PS1="${PROMPT_COLOR_MAGENTA}\w/${PROMPT_COLOR_RESET} $(git_info)\n${PROMPT_COLOR_BLUE}\$ ${PROMPT_COLOR_RESET}"
+PS1="${PROMPT_COLOR_MAGENTA}\w/${PROMPT_COLOR_RESET} \$(git_info)\n${PROMPT_COLOR_BLUE}\$ ${PROMPT_COLOR_RESET}"
