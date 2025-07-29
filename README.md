@@ -22,11 +22,6 @@ Once everything finished, reboot
 
 If i have a working system do.
 
-Set Zsh as the default shell
-
-    $ which zsh
-    $ sudo chsh -s zsh-path-from-above
-
 
 Open nvim for the first time to install all plugins
 
@@ -49,7 +44,7 @@ Add my email to git
 
 Set up github account
 
-    $ gh auth
+    $ gh auth login
 
 Generate SSH key pair
 Write the passphrase on a piece of paper, not on the PC. Aim for 64 characters,

@@ -77,17 +77,12 @@ else
     log_error "Failed to clone 'forArch' repository using any method. Please clone it manually into $HOME_DIR/forArch."
 fi
 
-# Shell Zsh
-log_info "Installing Zsh and copying configurations..."
-pacman -S --needed --noconfirm zsh || log_error "Failed to install zsh."
-
-# Copy Zsh configurations backup
-if [ -d "$HOME_DIR/forArch/.config/zsh" ]; then
-    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.zshenv" "$HOME_DIR/" || log_error "Failed to copy .zshenv."
-    sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/zsh/" "$HOME_DIR/.config/" || log_error "Failed to copy zsh config directory."
-    log_success "Zsh configurations copied for $ORIGINAL_USER."
+# Copy bash backup files
+if [ -d "$HOME_DIR/forArch/.bashrc" ]; then
+    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrrc."
+    log_success "Bash configurations copied for $ORIGINAL_USER."
 else
-    log_error "$HOME_DIR/forArch/.config/zsh/ not found. Zsh configs not copied."
+    log_error "$HOME_DIR/forArch/.bashrc not found. Bash configs not copied."
 fi
 
 # Change keyboard layout

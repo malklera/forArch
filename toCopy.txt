@@ -1,10 +1,5 @@
-ZSH
-	$ cp -u ~/.zshenv ~/documents/forArch/
-	$ mkdir ~/documents/forArch/.config/zsh/
-	$ cp -u ~/.config/zsh/aliases ~/documents/forArch/.config/zsh
-	$ cp -u ~/.config/zsh/.dircolors ~/documents/forArch/.config/zsh
-	$ cp -u ~/.config/zsh/.zcompdump ~/documents/forArch/.config/zsh
-	$ cp -u ~/.config/zsh/.zshrc ~/documents/forArch/.config/zsh
+Bash
+	$ cp -u ~/.bashrc ~/documents/forArch/
 Neovim
 	$ cp -ru ~/.config/nvim/ ~/documents/forArch/.config/
 Tmux
@@ -21,10 +16,14 @@ Btop
 	$ cp -ru ~/.config/btop/ ~/documents/forArch/.config/
 Zen
 	Run sync
+	Manually write the workspaces and sites saved and see if i can export configs
+	sync do not do it
 	Export configs of uBlock Origin, DarkReader, enhancer for youtube to
 	~/documents/zenBackup
 Vivaldi
 	Run sync
+	Manually write the workspaces and sites saved and see if i can export configs
+	sync do not do it
 	Export configs of uBlock Origin, DarkReader, enhancer for youtube to
 	~/documents/vivaldiBackup
 Calibre
