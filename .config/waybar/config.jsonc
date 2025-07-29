@@ -13,9 +13,8 @@
     ],
     "modules-right": [
         "wireplumber",
-        "network",
-        "clock",
         "tray",
+        "clock",
         "custom/power"
     ],
     "hyprland/workspaces": {
@@ -32,18 +31,12 @@
     "wireplumber": {
         "format": "{volume}% {icon}",
         "format-muted": "󰖁",
-        "on-click": "flatpak run com.saivert.pwvucontrol",
+        "on-click": "pwvucontrol",
         "format-icons": [
             "",
             "",
             ""
         ]
-    },
-    "network": {
-        "format-ethernet": "󰈁",
-        "format-disconnected": "󰈂",
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "on-click": "nm-applet"
     },
     "tray": {},
     "clock": {
@@ -56,3 +49,9 @@
         "on-click": "wlogout"
     }
 }
+// "network": {
+//     "format-ethernet": "󰈁",
+//     "format-disconnected": "󰈂",
+//     "tooltip-format": "{ifname} via {gwaddr}",
+//     "on-click": "nm-applet"
+// },

@@ -40,6 +40,7 @@ pacman -S --noconfirm hyprland || log_error "Failed to install hyprland."
 # Clipboard manager
 log_info "Installing wl-clip-persist (Wayland clipboard manager)..."
 pacman -S --needed --noconfirm wl-clip-persist || log_error "Failed to install wl-clip-persist."
+pacman -S --needed --noconfirm wl-clipboard || log_error "Failed to install wl-clipboard."
 
 # Qt Wayland support
 log_info "Installing Qt Wayland support..."
@@ -131,10 +132,9 @@ pacman -S --needed --noconfirm udiskie || log_error "Failed to install udiskie."
 log_info "Installing Dunst (notification daemon) and copying configurations..."
 pacman -S --needed --noconfirm dunst || log_error "Failed to install dunst."
 
-# Copy default dunstrc from /etc to user's config
-mkdir $HOME_DIR/.config/dunst/
-sudo -u "$ORIGINAL_USER" cp /etc/dunst/dunstrc "$HOME_DIR/.config/dunst/dunstrc" || log_error "Failed to copy dunstrc to user config."
-log_success "Dunst configurations copied for $ORIGINAL_USER."
+# Copy backup dunst config
+sudo -u "$ORIGINAL_USER" cp -r forArch/.config/dunst "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
+log_success "Dunst configurations copied for $ORIGERAL_USER."
 
 # Wallpaper
 log_info "Installing Hyprpaper (wallpaper utility)..."

@@ -58,12 +58,6 @@ pacman -S --noconfirm ttf-nerd-fonts-symbols || log_error "Failed to install ttf
 log_info "Setting up OpenSSH..."
 pacman -S --needed --noconfirm openssh || log_error "Failed to install openssh."
 
-log_info "Generating SSH key pair. You will be prompted for a passphrase."
-log_warning "Write the passphrase on a piece of paper, not on the PC. Aim for 64 characters, easy to remember."
-# The -C flag adds a comment to the key for identification
-# Run ssh-keygen as the original user
-sudo -u "$ORIGINAL_USER" ssh-keygen -C "$ORIGINAL_USER@$(uname -n)-$(date -I)" || log_error "Failed to generate SSH key pair."
-
 # Git
 log_info "Installing Git and configuring global settings..."
 pacman -S --needed --noconfirm git || log_error "Failed to install git."
@@ -92,17 +86,6 @@ if [ -d "$HOME_DIR/forArch/.config/zsh" ]; then
     sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.zshenv" "$HOME_DIR/" || log_error "Failed to copy .zshenv."
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/zsh/" "$HOME_DIR/.config/" || log_error "Failed to copy zsh config directory."
     log_success "Zsh configurations copied for $ORIGINAL_USER."
-
-    # Automatically set Zsh as the default shell for the original user
-    ZSH_PATH=$(which zsh)
-    if [ -x "$ZSH_PATH" ]; then
-        log_info "Setting Zsh as the default shell for $ORIGINAL_USER..."
-        echo "You may be prompted for $ORIGINAL_USER's password to change the default shell."
-        sudo -u "$ORIGINAL_USER" chsh -s "$ZSH_PATH" || log_error "Failed to set Zsh as default shell for $ORIGINAL_USER. Please run 'chsh -s $ZSH_PATH' manually."
-        log_success "Zsh set as default shell for $ORIGINAL_USER. It will take effect on next login."
-    else
-        log_error "Could not find zsh executable at $ZSH_PATH. Cannot set as default shell automatically."
-    fi
 else
     log_error "$HOME_DIR/forArch/.config/zsh/ not found. Zsh configs not copied."
 fi
