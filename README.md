@@ -27,6 +27,16 @@ Open nvim for the first time to install all plugins
 
     $ nvim
 
+Set up auto login
+
+    $ sudo systemctl edit getty@tty1
+
+On the file put the following
+
+    [Service]
+    ExecStart=
+    ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin malklera %I $TERM
+
 
 Open both browsers and log in for sync
 

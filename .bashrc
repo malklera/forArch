@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Set locale (good practice for Bash on Arch)
+# Set locale
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -13,9 +13,10 @@ export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 
 export EDITOR="nvim"
 
-# History configuration for Bash
-export HISTFILE="$HOME/.bash_history" # Default Bash history file
-shopt -s histappend                   # Append to history file, don't overwrite
+# Default Bash history file
+export HISTFILE="$HOME/.bash_history"
+# Append to history file, don't overwrite
+shopt -s histappend
 
 
 # add mason installed tools to the path, because i may want then for use from
@@ -49,10 +50,14 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias sqlite='sqlite3 -init <(echo ".mode box")'
 
-shopt -s autocd         # Change directories by typing just the name
-shopt -s extglob        # Enables extended globbing features (pattern matching)
-shopt -s nocaseglob     # Optional: makes globbing case-insensitive
-shopt -s dotglob        # Optional: include dotfiles in glob results
+# Change directories by typing just the name
+shopt -s autocd
+# Enables extended globbing features (pattern matching)
+shopt -s extglob
+# Optional: makes globbing case-insensitive
+shopt -s nocaseglob
+# Optional: include dotfiles in glob results
+shopt -s dotglob
 
 
 # Git Info Function for Bash
@@ -68,8 +73,6 @@ git_info() {
   GIT_LOCATION="${GIT_LOCATION##refs/heads/}"
   GIT_LOCATION="${GIT_LOCATION##tags/}"
 
-  # ANSI color codes for Bash
-  # These are correctly defined for Bash in your original function.
   local RED=$'\e[31m'
   local CYAN=$'\e[36m'
   local MAGENTA=$'\e[35m'
@@ -77,17 +80,14 @@ git_info() {
   local GREEN=$'\e[32m'
   local WHITE=$'\e[38;5;15m'
   local RESET=$'\e[0m'
-# 
-# 
-# 󰜷󰜮
-  local AHEAD="${RED}NUM${RESET}"
-  local BEHIND="${CYAN}NUM${RESET}"
-  local MERGING="${MAGENTA}⚡︎${RESET}"
+
+  local AHEAD="${RED}+NUM${RESET}"
+  local BEHIND="${CYAN}-NUM${RESET}"
+  local MERGING="${MAGENTA}!${RESET}"
   local UNTRACKED="${RED}●${RESET}"
   local MODIFIED="${YELLOW}●${RESET}"
   local STAGED="${GREEN}●${RESET}"
 
-  # Initialize arrays for Bash
   local DIVERGENCES=()
   local FLAGS=()
 
@@ -121,7 +121,6 @@ git_info() {
   fi
 
   local GIT_INFO=()
-  # GIT_INFO+=( "${WHITE}git" )
   # Check if GIT_STATUS is set and non-empty (assuming it's an external variable from somewhere else)
   # If GIT_STATUS is intended to be internal to this function, it should be set here.
   # Otherwise, this line is fine to include it if it exists.
