@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 # Define the configuration file path
 CONFIG_FILE="$HOME/.config/tmux/tmux.conf"
 

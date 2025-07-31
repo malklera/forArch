@@ -3,16 +3,16 @@
 	$ sudo pacman -S --needed hunspell-en_us hunspell-es_ar
 	$ sudo pacman -S --needed libreoffice-still
 - Epub
-	$ sudo yay -S calibre-bin
+	$ yay -S calibre-bin
 - Image viewer(check):
 	https://github.com/easymodo/qimgv
-	$ sudo yay -S --needed qimgv-git
+	$ yay -S --needed qimgv-git
 	If i do not like that one, try the next one
 	https://flathub.org/apps/org.nomacs.ImageLounge
 - Video player
-	$ pacman -S --needed mpv
+	$ sudo pacman -S --needed mpv
 - Image editor
-	$ flatpak install --user https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+	$ sudo pacman -S --needed gimp
 - Open source corel
 	$ sudo pacman -S --needed inkscape
 - PDF viewer

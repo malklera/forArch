@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=IDE
+Comment=Launches a custom tmux-based IDE session
+Exec=/home/malklera/.tmux/tmux-start.sh
+Icon=/home/malklera/.tmux/tmux.png
+Terminal=true
+Categories=Development;Utility;
+Keywords=ide;tmux;coding;
+StartupNotify=true

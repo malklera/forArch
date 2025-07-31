@@ -52,14 +52,6 @@ log_info "Installing uwsm and libnewt for Systemd startup..."
 pacman -S --needed --noconfirm uwsm || log_error "Failed to install uwsm."
 pacman -S --needed --noconfirm libnewt || log_error "Failed to install libnewt."
 
-log_info "Copying .zprofile..."
-if [ -f "$HOME_DIR/forArch/.zprofile" ]; then
-    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.zprofile" "$HOME_DIR/" || log_error "Failed to copy .zprofile."
-    log_success ".zprofile copied for $ORIGINAL_USER."
-else
-    log_error "$HOME_DIR/forArch/.zprofile not found. .zprofile not copied."
-fi
-
 # Status bar (waybar)
 log_info "Installing Waybar (status bar)..."
 pacman -S --needed --noconfirm waybar || log_error "Failed to install waybar."

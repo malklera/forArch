@@ -77,15 +77,6 @@ else
     log_error "Failed to clone 'forArch' repository using any method. Please clone it manually into $HOME_DIR/forArch."
 fi
 
-# Copy bash backup files
-if [ -d "$HOME_DIR/forArch/.bashrc" ]; then
-    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrrc."
-    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bash_profile" "$HOME_DIR/" || log_error "Failed to copy .bash_profile."
-    log_success "Bash configurations copied for $ORIGINAL_USER."
-else
-    log_error "$HOME_DIR/forArch/.bashrc not found. Bash configs not copied."
-fi
-
 # Change keyboard layout
 log_info "Copying custom keyboard layout and setting it..."
 if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
@@ -212,6 +203,14 @@ else
     log_error "$HOME_DIR/forArch/.config/tmux not found. tmux configs not copied."
 fi
 
+log_info "Installing tpm plugin manager"
+sudo -u "$ORIGINAL_USER" git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || log_error "Error cloning tpm repository."
+
+log_info "Copy my ide desktop file"
+sudo -u "$ORIGINAL_USER" mkdir "$HOME_DIR/.local/share/applications/" || log_error "Failed to create applications directory."
+sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.local/share/applications/ide.desktop" "$HOME_DIR/.local/share/applications/" || log_error "Error copying desktop file."
+sudo -u "$ORIGINAL_USER" update-desktop-database "$HOME_DIR/.local/share/applications/" || log_error "Error updating desktop database."
+
 # Information about disk
 log_info "Installing dysk (disk information utility)..."
 pacman -S --needed --noconfirm dysk || log_error "Failed to install dysk."
@@ -241,3 +240,19 @@ sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/setHypr.sh" "$HOME_DIR/" || log_e
 chmod +x setHypr.sh
 ./setHypr.sh
 sudo -u "$ORIGINAL_USER" rm setHypr.sh
+
+# Copy bash backup files
+if [ -d "$HOME_DIR/forArch/.bashrc" ]; then
+    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrrc."
+    log_success "Bash configurations copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.bashrc not found. Bash configs not copied."
+fi
+
+log_info "Copying .bash_profile..."
+if [ -f "$HOME_DIR/forArch/.bash_profile" ]; then
+    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bash_profile" "$HOME_DIR/" || log_error "Failed to copy .bash_profile."
+    log_success ".zprofile copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.bash_profile not found. .bash_profile not copied."
+fi

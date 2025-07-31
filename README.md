@@ -1,5 +1,5 @@
 # Arch + Hyprland
-
+TODO: modify setArch.sh to copy my bash configs, i do not have it seems
     $ archinstall
 
 
@@ -20,12 +20,14 @@ Run the script
 Once everything finished, reboot
 
 
-If i have a working system do.
+If i have a working system continue
 
 
 Open nvim for the first time to install all plugins
 
     $ nvim
+
+Open tmux and install plugins with prefix + I (shift+i)
 
 Set up auto login
 
@@ -52,20 +54,37 @@ Add my email to git
 
     $ git config --global user.email "myEmail"
 
-Set up github account
-
-    $ gh auth login
 
 Generate SSH key pair
 Write the passphrase on a piece of paper, not on the PC. Aim for 64 characters,
-easy to remember.
+easy to remember. DO NOT USE SUDO
 
-    sudo ssh-keygen -C "$(whoami)@$(uname -n)-$(date -I)"
+    $ ssh-keygen -C "$(whoami)@$(uname -n)-$(date -I)"
+
+Add the key to ssh agent
+
+    $ ssh-add ~/.ssh/id_ed25519
+
+Go to
+
+    https://github.com/settings/keys
+
+Click on add and copy your public key with
+
+    $ cat ~/.ssh/id_ed25519.pub
+
+Then check that it is ok
+
+    $ ssh -T git@github.com
+
+You can see the github public keys here to compare
+
+    https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
 
 
-Create my custom IDE using tmux+neovim
+Set up github account
 
-Check if my scripts for tmux are executables
+    $ gh auth login
 
 
 Modify the xdg-user-dirs
