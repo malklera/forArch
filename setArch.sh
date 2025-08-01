@@ -169,6 +169,7 @@ pacman -S --needed --noconfirm man || log_error "Failed to install man."
 pacman -S --needed --noconfirm tldr || log_error "Failed to install tldr"
 pacman -S --needed --noconfirm wget || log_error "Failed to install wget"
 pacman -S --needed --noconfirm unzip || log_error "Failed to install unzip"
+pacman -S --needed --noconfirm cronie || log_error "Failed to install cronie"
 
 # Terminal system monitoring
 log_info "Installing btop and copying configurations..."

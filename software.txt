@@ -22,7 +22,7 @@
 - Calculator:
 	$ sudo pacman -S --needed libqalculate
 - Bittorrent client
-	$ sudo pacman -S --needed qBittorrent
+	$ sudo pacman -S --needed qbittorrent
 - Chromium
 	$ sudo pacman -S --needed chromium
 - Antivirus (do not install the daemon)

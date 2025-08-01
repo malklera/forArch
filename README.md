@@ -87,6 +87,16 @@ Set up github account
     $ gh auth login
 
 
+Add my mutual-task cron task
+
+    $ sudo systemctl enable cronie.service
+    $ sudo systemctl start cronie.service
+
+Add a task, copy from study/mutual-task/crontab.txt
+
+    $ crontab -e
+
+
 Modify the xdg-user-dirs
 
     $ nvim .config/user-dirs.dirs
