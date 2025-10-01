@@ -18,15 +18,21 @@
         "custom/power"
     ],
     "hyprland/workspaces": {
-        "format": "<span size='larger'>{icon}</span>",
+        "format": "{name}",
         "on-click": "activate",
-        "format-icons": {
-            "active": "",
-            "default": ""
-        },
-        "icon-size": 10,
         "sort-by-number": true
     },
+
+    // "hyprland/workspaces": {
+    //     "format": "<span size='larger'>{icon}</span>",
+    //     "on-click": "activate",
+    //     "format-icons": {
+    //         "active": "",
+    //         "default": ""
+    //     },
+    //     "icon-size": 10,
+    //     "sort-by-number": true
+    // },
     "hyprland/window": {},
     "wireplumber": {
         "format": "{volume}% {icon}",

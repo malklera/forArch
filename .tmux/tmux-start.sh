@@ -1,4 +1,8 @@
 #!/usr/bin/bash
+
+# Title
+echo -ne "\033]0;IDE\007"
+
 # Define the configuration file path
 CONFIG_FILE="$HOME/.config/tmux/tmux.conf"
 

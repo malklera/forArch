@@ -238,7 +238,8 @@
     max_icon_size = 128
 
     # Paths to default icons (only necessary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    # i do not have this icons
+    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -341,24 +342,45 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#888888"
+    # Tokyo night colors
+    background = "#16161e"
+    foreground = "#c0caf5"
+    frame_color = "#c0caf5"
+
+    # Default colors
+    # background = "#222222"
+    # foreground = "#888888"
+
     timeout = 10
     # Icon for notifications with low urgency
     default_icon = dialog-information
 
 [urgency_normal]
-    background = "#285577"
-    foreground = "#ffffff"
+    # Tokyo night colors
+    background = "#1a1b26"
+    foreground = "#c0caf5"
+    frame_color = "#c0caf5"
+
+    # Default colors
+    # background = "#285577"
+    # foreground = "#ffffff"
+
     timeout = 10
     override_pause_level = 30
     # Icon for notifications with normal urgency
     default_icon = dialog-information
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
-    frame_color = "#ff0000"
+    # Tokyo night colors
+    background = "#292e42"
+    foreground = "#db4b4b"
+    frame_color = "#db4b4b"
+
+    # Default colors
+    # background = "#900000"
+    # foreground = "#ffffff"
+    # frame_color = "#ff0000"
+
     timeout = 0
     override_pause_level = 60
     # Icon for notifications with critical urgency

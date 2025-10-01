@@ -1,6 +1,6 @@
 * {
     font-family: JetBrainsMonoNL Nerd Font Propo;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 window#waybar {
@@ -27,13 +27,19 @@ window#waybar {
 #workspaces button:hover {
 	background-color: #7dcfff;
 	color: #24283b;
-	border-radius: 5px;
+	border-radius: 0px;
 }
 
 #workspaces button.focused {
     color: #24283b;
     background-color: #7aa2f7;
-    border-radius: 5px;
+    border-radius: 0px;
+}
+
+#workspaces button.active {
+    color: #24283b;
+    background-color: #7aa2f7;
+    border-radius: 0px;
 }
 
 #clock, #network, #wireplumber, #custom-power, #window, #tray {

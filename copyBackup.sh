@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cp -u "$HOME_DIR/" "$HOME_DIR/forArch/" || log_error "Failed to copy ."
+log_error() {
+    echo -e "\e[31m[ERROR]\e[0m $1" # Red
+}
 
 # Get the original user who invoked sudo
 ORIGINAL_USER="$(whoami)"
@@ -19,16 +21,16 @@ cp -ru --parents "$HOME_DIR/.config/nvim/" "$HOME_DIR/forArch/.config/" || log_e
 # tmux
 cp -u --parents "$HOME_DIR/.tmux/tmux-close.sh" "$HOME_DIR/forArch/.tmux/" || log_error "Failed to copy tmux-close.sh."
 cp -u "$HOME_DIR/.tmux/tmux-start.sh" "$HOME_DIR/forArch/.tmux/" || log_error "Failed to copy tmux-start.sh."
-cp -u --parents "$HOME_DIR/.config/tmux/tmux.conf" "$HOME_DIR/forArch/.config/tmux/tmux.conf" || log_error "Failed to copy tmux.conf."
+cp -u --parents "$HOME_DIR/.config/tmux/tmux.conf" "$HOME_DIR/forArch/.config/tmux/" || log_error "Failed to copy tmux.conf."
 
 # custom layout
-cp -u --parents "/usr/share/X11/xkb/symbols/custom" "$HOME_DIR/forArch/assets/keyboard/custom" || log_error "Failed to copy keyboard layout."
+cp -u "/usr/share/X11/xkb/symbols/custom" "$HOME_DIR/forArch/assets/keyboard/" || log_error "Failed to copy keyboard layout."
 
 # ghostty
 cp -ru "$HOME_DIR/.config/ghostty" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy ghostty."
 
 # btop
-cp -ru "$HOME_DIR/btop/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy btop."
+cp -ru "$HOME_DIR/.config/btop/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy btop."
 
 # hyprland
 cp -ru "$HOME_DIR/.config/hypr/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy hypr."

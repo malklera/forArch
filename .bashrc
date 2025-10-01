@@ -23,6 +23,11 @@ shopt -s histappend
 # the command line
 # export PATH="/home/malklera/.config/local/share/nvim/mason/bin:$PATH"
 
+# Add ~/.local/bin to PATH if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 # Enable color support for ls and add handy aliases
 # Bash uses 'shopt' for options, not setopt/unsetopt like Zsh
@@ -49,6 +54,7 @@ alias btop="btop -p 1"
 alias mv="mv -i"
 alias cp="cp -i"
 alias sqlite='sqlite3 -init <(echo ".mode box")'
+alias gm="gtrash put"
 
 # Change directories by typing just the name
 shopt -s autocd
