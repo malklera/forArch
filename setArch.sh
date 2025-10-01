@@ -51,8 +51,22 @@ systemctl enable NetworkManager.service || log_error "Failed to enable NetworkMa
 
 # Fonts
 log_info "Installing JetBrains Mono Nerd Font and Nerd Fonts Symbols..."
-pacman -S --noconfirm ttf-jetbrains-mono-nerd || log_error "Failed to install ttf-jetbrains-mono-nerd."
-pacman -S --noconfirm ttf-nerd-fonts-symbols || log_error "Failed to install ttf-nerd-fonts-symbols."
+pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd || log_error "Failed to install ttf-jetbrains-mono-nerd."
+pacman -S --noconfirm --needed ttf-nerd-fonts-symbols || log_error "Failed to install ttf-nerd-fonts-symbols."
+pacman -S --noconfirm --needed otf-comicshanns-nerd || log_error "Failed to install otf-comicshanns-nerd."
+pacman -S --noconfirm --needed ttf-opensans || log_error "Failed to install ttf-opensans."
+pacman -S --noconfirm --needed otf-codenewroman-nerd || log_error "Failed to install otf-codenewroman-nerd."
+pacman -S --noconfirm --needed ttf-liberation || log_error "Failed to install ttf-liberation."
+pacman -S --noconfirm --needed ttf-font-awesome || log_error "Failed to install ttf-font-awesome."
+pacman -S --noconfirm --needed noto-fonts || log_error "Failed to install noto-fonts."
+pacman -S --noconfirm --needed noto-fonts-cjk || log_error "Failed to install noto-fonts-cjk."
+pacman -S --noconfirm --needed noto-fonts-emoji || log_error "Failed to install noto-fonts-emoji."
+
+pacman -S --noconfirm --needed lxde-icon-theme || log_error "Failed to install lxde-icon-theme."
+pacman -S --noconfirm --needed hicolor-icon-theme || log_error "Failed to install hicolor-icon-theme."
+pacman -S --noconfirm --needed cosmic-icon-theme || log_error "Failed to install cosmic-icon-theme."
+pacman -S --noconfirm --needed adwaita-icon-theme || log_error "Failed to install adwaita-icon-theme."
+
 
 # Set up SSH
 log_info "Setting up OpenSSH..."
@@ -80,7 +94,7 @@ fi
 # Change keyboard layout
 log_info "Copying custom keyboard layout and setting it..."
 if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
-    cp "$HOME_DIR/forArch/assets/keyboardLayout/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
+    cp "$HOME_DIR/forArch/assets/keyboardLayout/custom" /usr/share/xkeyboard-config-2/symbols/ || log_error "Failed to copy custom keyboard layout."
     log_success "Custom keyboard layout copied."
 else
     log_error "$HOME_DIR/forArch/assets/keyboardLayout/custom not found. Keyboard layout not changed."
@@ -170,6 +184,8 @@ pacman -S --needed --noconfirm tldr || log_error "Failed to install tldr"
 pacman -S --needed --noconfirm wget || log_error "Failed to install wget"
 pacman -S --needed --noconfirm unzip || log_error "Failed to install unzip"
 pacman -S --needed --noconfirm cronie || log_error "Failed to install cronie"
+pacman -S --needed --noconfirm inetutils || log_error "Failed to install inetutils"
+pacman -S --needed --noconfirm jq || log_error "Failed to install jq."
 
 # Terminal system monitoring
 log_info "Installing btop and copying configurations..."
@@ -185,6 +201,16 @@ fi
 # File manager (GUI - Thunar)
 log_info "Installing Thunar (GUI file manager)..."
 pacman -S --needed --noconfirm thunar || log_error "Failed to install thunar."
+pacman -S --needed --noconfirm thunar-volman || log_error "Failed to install thunar-volman."
+pacman -S --needed --noconfirm thunar-archive-plugin || log_error "Failed to install thunar-archive-plugin."
+pacman -S --needed --noconfirm tumbler || log_error "Failed to install tumbler."
+pacman -S --needed --noconfirm gvfs || log_error "Failed to install gvfs."
+pacman -S --needed --noconfirm gvfs-gphoto2 || log_error "Failed to install gvfs-gphoto2."
+pacman -S --needed --noconfirm gvfs-mtp || log_error "Failed to install gvfs-mtp."
+
+# Theme management for gtk apps
+log_info "Installing nwg-look (theme manager)..."
+pacman -S --needed --noconfirm nwg-look || log_error "Failed to install nwg-look."
 
 # Terminal multiplexer (tmux)
 log_info "Installing tmux and copying configurations..."
@@ -223,6 +249,9 @@ sudo -u "$ORIGINAL_USER" yay -S --noconfirm zen-browser-bin || log_error "Failed
 
 log_info "Installing Vivaldi browser..."
 pacman -S --needed --noconfirm vivaldi || log_error "Failed to install vivaldi."
+
+log_info "Installing trash-cli (trascan utility)..."
+pacman -S --needed --noconfirm trash-cli || log_error "Failed to install trash-cli."
 
 # Check if Wayland is installed
 log_info "Checking for Wayland installation..."

@@ -128,9 +128,21 @@ pacman -S --needed --noconfirm dunst || log_error "Failed to install dunst."
 sudo -u "$ORIGINAL_USER" cp -r forArch/.config/dunst "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
 log_success "Dunst configurations copied for $ORIGERAL_USER."
 
+# Idle daemon
+log_info "Installing Hypridle (idle manager)..."
+pacman -S --noconfirm --needed hypridle || log_error "Failed to install hypridle"
+
 # Wallpaper
 log_info "Installing Hyprpaper (wallpaper utility)..."
-pacman -S --noconfirm hyprpaper || log_error "Failed to install hyprpaper."
+pacman -S --noconfirm --needed hyprpaper || log_error "Failed to install hyprpaper."
+
+# Hyprsunset
+log_info "Installing Hyprsunset (blue light filter utility)..."
+pacman -S --noconfirm --needed hyprsunset || log_error "Failed to install hyprsunset."
+
+# grim (screenshot utility)
+log_info "Installing grim (screenshot utility)..."
+pacman -S --noconfirm --needed grim || log_error "Failed to install grim."
 
 log_info "Copying wallpaper image..."
 if [ -f "$HOME_DIR/forArch/assets/wallpaper.png" ]; then

@@ -50,6 +50,9 @@ See if thunar populate the default files, otherwise check to do manually
 https://wiki.archlinux.org/title/Xdg-utils
 
 
+Open nwg-look and on Color scheme put it to prefer dark
+
+
 Add my email to git
 
     $ git config --global user.email "myEmail"
@@ -114,12 +117,5 @@ Point all others to
 
 Install software after i have a functional system
 
----
-Check out udiskie how and if i should do something besides installing
 
----
-Windows
-- tmux always fullscreen
-- Do i set up default places for each application? or remember when it was closed?
-- custom ide on workspace 1
-- zen browser on workspace 2
+Config udisk for automount and notifications when conecting phone and usb drive
