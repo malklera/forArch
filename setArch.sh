@@ -108,13 +108,8 @@ pacman -S --needed --noconfirm go || log_error "Failed to install Go."
 log_info "Setting up Yay (AUR helper)..."
 pacman -S --needed --noconfirm base-devel || log_error "Failed to install base-devel (required for yay)."
 
-if [ -d "$HOME_DIR/yay" ]; then
-    log_warning "Yay directory already exists in $HOME_DIR. Removing it to perform a clean install."
-    sudo rm -rf "$HOME_DIR/yay"
-fi
-
-sudo -u "$ORIGINAL_USER" git clone https://aur.archlinux.org/yay.git "$HOME_DIR/yay" || log_error "Failed to clone yay repository."
-cd "$HOME_DIR/yay" || log_error "Failed to change directory to $HOME_DIR/yay."
+sudo -u "$ORIGINAL_USER" git clone https://aur.archlinux.org/yay-bin.git "$HOME_DIR/yay-bin" || log_error "Failed to clone yay-bin repository."
+cd "$HOME_DIR/yay-bin" || log_error "Failed to change directory to $HOME_DIR/yay-bin."
 sudo -u "$ORIGINAL_USER" makepkg -si --noconfirm || log_error "Failed to install yay."
 cd - || log_error "Failed to change back from yay directory."
 
@@ -161,6 +156,22 @@ pacman -S --needed --noconfirm luarocks || log_error "Failed to install luarocks
 pacman -S --needed --noconfirm neovim || log_error "Failed to install neovim."
 pacman -S --needed --noconfirm tree-sitter-cli || log_error "Failed to install tree-sitter-cli."
 
+# LSP
+pacman -S --needed --noconfirm gopls || log_error "Failed to install gopls."
+pacman -S --needed --noconfirm staticcheck || log_error "Failed to install staticcheck."
+pacman -S --needed --noconfirm lua-language-server || log_error "Failed to install lua-language-server."
+pacman -S --needed --noconfirm pyright || log_error "Failed to install pyright."
+pacman -S --needed --noconfirm bash-language-server || log_error "Failed to install bash-language-server."
+sudo -u "$ORIGINAL_USER" yay -S --noconfirm superhtml || log_error "Failed to install superhtml."
+sudo -u "$ORIGINAL_USER" yay -S --noconfirm vscode-langservers-extracted || log_error "Failed to install vscode-langservers-extracted."
+pacman -S --needed --noconfirm typescript-language-server || log_error "Failed to install typescript-language-server."
+pacman -S --needed --noconfirm tailwindcss-language-server || log_error "Failed to install tailwindcss-language-server."
+
+# Formatters
+pacman -S --needed --noconfirm stylua || log_error "Failed to install stylua."
+pacman -S --needed --noconfirm prettier || log_error "Failed to install prettier."
+pacman -S --needed --noconfirm python-black || log_error "Failed to install python-black."
+
 if [ -d "$HOME_DIR/forArch/.config/nvim" ]; then
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/nvim/" "$HOME_DIR/.config/" || log_error "Failed to copy nvim config directory."
     log_success "Neovim configurations copied for $ORIGINAL_USER."
@@ -203,6 +214,7 @@ log_info "Installing Thunar (GUI file manager)..."
 pacman -S --needed --noconfirm thunar || log_error "Failed to install thunar."
 pacman -S --needed --noconfirm thunar-volman || log_error "Failed to install thunar-volman."
 pacman -S --needed --noconfirm thunar-archive-plugin || log_error "Failed to install thunar-archive-plugin."
+pacman -S --needed --noconfirm xarchiver || log_error "Failed to install xarchiver."
 pacman -S --needed --noconfirm tumbler || log_error "Failed to install tumbler."
 pacman -S --needed --noconfirm gvfs || log_error "Failed to install gvfs."
 pacman -S --needed --noconfirm gvfs-gphoto2 || log_error "Failed to install gvfs-gphoto2."
@@ -282,7 +294,16 @@ fi
 log_info "Copying .bash_profile..."
 if [ -f "$HOME_DIR/forArch/.bash_profile" ]; then
     sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.bash_profile" "$HOME_DIR/" || log_error "Failed to copy .bash_profile."
-    log_success ".zprofile copied for $ORIGINAL_USER."
+    log_success ".bash_profile copied for $ORIGINAL_USER."
 else
     log_error "$HOME_DIR/forArch/.bash_profile not found. .bash_profile not copied."
+fi
+
+# Copy Thunar backup file
+log_info "Copying .uca.xml..."
+if [ -f "$HOME_DIR/forArch/.config/Thunar/uca.xml" ]; then
+    sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.config/Thunar/uca.xml" "$HOME_DIR/.config/Thunar/" || log_error "Failed to copy .bash_profile."
+    log_success "uca.xml copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.config/Thunar not found. uca.xml not copied."
 fi

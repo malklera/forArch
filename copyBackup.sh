@@ -53,3 +53,6 @@ cp -u "$HOME_DIR/.config/mimeapps.list" "$HOME_DIR/forArch/.config/" || log_erro
 # user-dirs
 cp -u "$HOME_DIR/.config/user-dirs.dirs" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy user-dirs.dirs."
 cp -u "$HOME_DIR/.config/user-dirs.locale" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy user-dirs.locale."
+
+# thunar
+cp -u "$HOME_DIR/.config/Thunar/uca.xml" "$HOME_DIR/forArch/.config/Thunar/" || log_error "Failed to copy uca.xml."
