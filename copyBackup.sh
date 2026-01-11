@@ -16,12 +16,12 @@ cp -u "$HOME_DIR/.bashrc" "$HOME_DIR/forArch/" || log_error "Failed to copy .bas
 cp -u "$HOME_DIR/.bash_profile" "$HOME_DIR/forArch/" || log_error "Failed to copy .bash_profile."
 
 # neovim
-cp -ru --parents "$HOME_DIR/.config/nvim/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy nvim."
+cp -ru "$HOME_DIR/.config/nvim/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy nvim."
 
 # tmux
-cp -u --parents "$HOME_DIR/.tmux/tmux-close.sh" "$HOME_DIR/forArch/.tmux/" || log_error "Failed to copy tmux-close.sh."
+cp -u "$HOME_DIR/.tmux/tmux-close.sh" "$HOME_DIR/forArch/.tmux/" || log_error "Failed to copy tmux-close.sh."
 cp -u "$HOME_DIR/.tmux/tmux-start.sh" "$HOME_DIR/forArch/.tmux/" || log_error "Failed to copy tmux-start.sh."
-cp -u --parents "$HOME_DIR/.config/tmux/tmux.conf" "$HOME_DIR/forArch/.config/tmux/" || log_error "Failed to copy tmux.conf."
+cp -u "$HOME_DIR/.config/tmux/tmux.conf" "$HOME_DIR/forArch/.config/tmux/" || log_error "Failed to copy tmux.conf."
 
 # custom layout
 cp -u "/usr/share/X11/xkb/symbols/custom" "$HOME_DIR/forArch/assets/keyboard/" || log_error "Failed to copy keyboard layout."
