@@ -41,9 +41,6 @@ cp -ru "$HOME_DIR/.config/dunst/" "$HOME_DIR/forArch/.config/" || log_error "Fai
 # waybar
 cp -ru "$HOME_DIR/.config/waybar/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy waybar."
 
-# rofi
-cp -ru "$HOME_DIR/.config/rofi/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy rofi."
-
 # wlogout
 cp -ru "$HOME_DIR/.config/wlogout/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy wlogout."
 
