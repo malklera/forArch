@@ -7,7 +7,7 @@ return {
         {
             "<leader>f",
             function()
-                require("conform").format({ async = true, lsp_format = "fallback" })
+                require("conform").format({ async = true, lsp_format = "prefer" })
             end,
             mode = "n",
             desc = "[f]ormat buffer",
@@ -16,26 +16,23 @@ return {
     opts = {
         notify_on_error = true,
         formatters_by_ft = {
-            lua = { "stylua" },
             python = { "black" },
             json = { "jq" },
-            go = { "gofmt" },
-            html = { "prettier" },
             css = { "prettier" },
             javascript = { "prettier" },
             typescript = { "prettier" },
         },
-        formatters = {
-            stylua = {
-                command = "stylua",
-                args = {
-                    "--indent-type",
-                    "Spaces",
-                    "--indent-width",
-                    "4",
-                    "-",
-                },
-            },
-        },
+        -- formatters = {
+        --     stylua = {
+        --         command = "stylua",
+        --         args = {
+        --             "--indent-type",
+        --             "Spaces",
+        --             "--indent-width",
+        --             "4",
+        --             "-",
+        --         },
+        --     },
+        -- },
     },
 }
