@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Neovim (Ghostty)
+Exec=/usr/bin/ghostty -e /usr/bin/nvim %F
+Icon=nvim
+Categories=Utility;TextEditor;
+MimeType=text/plain;text/english;application/x-shellscript;
+StartupNotify=false
+Terminal=false
