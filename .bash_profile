@@ -1,8 +1,9 @@
 #
 # ~/.bash_profile
 #
-if uwsm check may-start; then
-  exec uwsm start hyprland-uwsm.desktop
+# Hyprland v0.53+ recommended startup method
+if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+  exec start-hyprland
 fi
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc

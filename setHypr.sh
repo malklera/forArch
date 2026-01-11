@@ -47,11 +47,6 @@ log_info "Installing Qt Wayland support..."
 pacman -S --needed --noconfirm qt5-wayland || log_error "Failed to install qt5-wayland."
 pacman -S --needed --noconfirm qt6-wayland || log_error "Failed to install qt6-wayland."
 
-# Systemd startup (uwsm, libnewt)
-log_info "Installing uwsm and libnewt for Systemd startup..."
-pacman -S --needed --noconfirm uwsm || log_error "Failed to install uwsm."
-pacman -S --needed --noconfirm libnewt || log_error "Failed to install libnewt."
-
 # Status bar (waybar)
 log_info "Installing Waybar (status bar)..."
 pacman -S --needed --noconfirm waybar || log_error "Failed to install waybar."
