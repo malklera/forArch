@@ -39,8 +39,8 @@ pacman -S --noconfirm hyprland || log_error "Failed to install hyprland."
 
 # Clipboard manager
 log_info "Installing wl-clip-persist (Wayland clipboard manager)..."
-pacman -S --needed --noconfirm wl-clip-persist || log_error "Failed to install wl-clip-persist."
 pacman -S --needed --noconfirm wl-clipboard || log_error "Failed to install wl-clipboard."
+pacman -S --needed --noconfirm wl-clip-persist || log_error "Failed to install wl-clip-persist."
 
 # Qt Wayland support
 log_info "Installing Qt Wayland support..."
