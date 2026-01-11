@@ -53,3 +53,6 @@ cp -u "$HOME_DIR/.config/user-dirs.locale" "$HOME_DIR/forArch/.config/" || log_e
 
 # thunar
 cp -u "$HOME_DIR/.config/Thunar/uca.xml" "$HOME_DIR/forArch/.config/Thunar/" || log_error "Failed to copy uca.xml."
+
+# desktop files
+cp -u "$HOME_DIR/.local/share/applications/"*.desktop "$HOME_DIR/forArch/.local/share/applications/" || log_error "Failed to copy applications files."
