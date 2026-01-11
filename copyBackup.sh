@@ -56,3 +56,6 @@ cp -u "$HOME_DIR/.config/Thunar/uca.xml" "$HOME_DIR/forArch/.config/Thunar/" || 
 
 # desktop files
 cp -u "$HOME_DIR/.local/share/applications/"*.desktop "$HOME_DIR/forArch/.local/share/applications/" || log_error "Failed to copy applications files."
+
+# rofi
+cp -ru "$HOME_DIR/.config/rofi/" "$HOME_DIR/forArch/.config/" || log_error "Failed to copy rofi."

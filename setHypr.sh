@@ -83,9 +83,32 @@ sudo -u "$ORIGINAL_USER" yay -S --noconfirm pwvucontrol || log_error "Failed to 
 log_info "Installing hyprpolkitagent (authentication daemon)..."
 pacman -S --noconfirm hyprpolkitagent || log_error "Failed to install hyprpolkitagent."
 
-# App launcher
-log_info "Installing hyprlauncher (app launcher)..."
-pacman -S --needed --noconfirm hyprlauncher || log_error "Failed to install hyprlauncher."
+# App launcher (rofi)
+log_info "Installing Rofi (app launcher)..."
+pacman -S --needed --noconfirm rofi || log_error "Failed to install rofi."
+
+log_info "Copying Rofi configurations and themes..."
+if [ -d "$HOME_DIR/forArch/.config/rofi" ]; then
+    sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/rofi/" "$HOME_DIR/.config/" || log_error "Failed to copy rofi config directory."
+    log_success "Rofi configurations copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.config/rofi not found. Rofi configs not copied."
+fi
+
+# Copy Rofi themes to system-wide location (requires root)
+if [ -f "$HOME_DIR/forArch/assets/rofi/themes/t4-s4.rasi" ]; then
+    cp "$HOME_DIR/forArch/assets/rofi/themes/t4-s4.rasi" /usr/share/rofi/themes/ || log_error "Failed to copy t4-s4.rasi theme."
+    log_success "Rofi theme t4-s4.rasi copied."
+else
+    log_error "$HOME_DIR/forArch/assets/rofi/themes/t4-s4.rasi not found. Theme not copied."
+fi
+
+if [ -f "$HOME_DIR/forArch/assets/rofi/themes/tokyoNight.rasi" ]; then
+    cp "$HOME_DIR/forArch/assets/rofi/themes/tokyoNight.rasi" /usr/share/rofi/themes/ || log_error "Failed to copy tokyoNight.rasi theme."
+    log_success "Rofi theme tokyoNight.rasi copied."
+else
+    log_error "$HOME_DIR/forArch/assets/rofi/themes/tokyoNight.rasi not found. Theme not copied."
+fi
 
 # Auto mounting for usb and external devices
 log_info "Installing udisks2 and udiskie for auto-mounting..."
