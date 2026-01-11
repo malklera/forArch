@@ -150,11 +150,10 @@ pacman -S --needed --noconfirm fzf || log_error "Failed to install fzf."
 log_info "Installing Vim and Neovim dependencies..."
 pacman -S --needed --noconfirm vim || log_error "Failed to install vim."
 
-log_info "Installing Neovim and its dependencies (npm, luarocks, tree-sitter-cli)..."
-pacman -S --needed --noconfirm npm || log_error "Failed to install npm."
+log_info "Installing Neovim and its dependencies (luarocks, tree-sitter-cli)..."
 pacman -S --needed --noconfirm luarocks || log_error "Failed to install luarocks."
-pacman -S --needed --noconfirm neovim || log_error "Failed to install neovim."
 pacman -S --needed --noconfirm tree-sitter-cli || log_error "Failed to install tree-sitter-cli."
+pacman -S --needed --noconfirm neovim || log_error "Failed to install neovim."
 
 # LSP
 pacman -S --needed --noconfirm gopls || log_error "Failed to install gopls."
@@ -178,7 +177,7 @@ if [ -d "$HOME_DIR/forArch/.config/nvim" ]; then
 else
     log_error "$HOME_DIR/forArch/.config/nvim not found. Neovim configs not copied."
 fi
-log_info "Wait to open neovim till i am inside of hyprland."
+log_info "Wait to open neovim till I am inside of hyprland."
 
 # Default applications
 log_info "Installing perl-file-mimeinfo for default applications..."
@@ -187,16 +186,6 @@ pacman -S --needed --noconfirm perl-file-mimeinfo || log_error "Failed to instal
 # Manage user directories
 log_info "Installing xdg-user-dirs for managing user directories..."
 pacman -S --needed --noconfirm xdg-user-dirs || log_error "Failed to install xdg-user-dirs."
-
-# Basics
-log_info "Installing basic utilities (man, curl, wget, unzip, tldr)..."
-pacman -S --needed --noconfirm man || log_error "Failed to install man."
-pacman -S --needed --noconfirm tldr || log_error "Failed to install tldr"
-pacman -S --needed --noconfirm wget || log_error "Failed to install wget"
-pacman -S --needed --noconfirm unzip || log_error "Failed to install unzip"
-pacman -S --needed --noconfirm cronie || log_error "Failed to install cronie"
-pacman -S --needed --noconfirm inetutils || log_error "Failed to install inetutils"
-pacman -S --needed --noconfirm jq || log_error "Failed to install jq."
 
 # Terminal system monitoring
 log_info "Installing btop and copying configurations..."
@@ -247,23 +236,38 @@ sudo -u "$ORIGINAL_USER" git clone https://github.com/tmux-plugins/tpm ~/.tmux/p
 
 log_info "Copy my ide desktop file"
 sudo -u "$ORIGINAL_USER" mkdir "$HOME_DIR/.local/share/applications/" || log_error "Failed to create applications directory."
-sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.local/share/applications/ide.desktop" "$HOME_DIR/.local/share/applications/" || log_error "Error copying desktop file."
+sudo -u "$ORIGINAL_USER" cp "$HOME_DIR/forArch/.local/share/applications/"*.desktop "$HOME_DIR/.local/share/applications/" || log_error "Error copying desktop file."
 sudo -u "$ORIGINAL_USER" update-desktop-database "$HOME_DIR/.local/share/applications/" || log_error "Error updating desktop database."
 
-# Information about disk
-log_info "Installing dysk (disk information utility)..."
-pacman -S --needed --noconfirm dysk || log_error "Failed to install dysk."
-
 # Browsers
-log_info "Installing Zen Browser..."
-# Download from aur
 sudo -u "$ORIGINAL_USER" yay -S --noconfirm zen-browser-bin || log_error "Failed to install zen via Yay."
-
-log_info "Installing Vivaldi browser..."
 pacman -S --needed --noconfirm vivaldi || log_error "Failed to install vivaldi."
+pacman -S --needed --noconfirm chromium || log_error "Failed to install chromium."
 
-log_info "Installing trash-cli (trascan utility)..."
-pacman -S --needed --noconfirm trash-cli || log_error "Failed to install trash-cli."
+# Basics
+log_info "Installing basic utilities..."
+pacman -S --needed --noconfirm dysk || log_error "Failed to install dysk."
+pacman -S --needed --noconfirm man || log_error "Failed to install man."
+pacman -S --needed --noconfirm tldr || log_error "Failed to install tldr"
+pacman -S --needed --noconfirm wget || log_error "Failed to install wget"
+pacman -S --needed --noconfirm unzip || log_error "Failed to install unzip"
+pacman -S --needed --noconfirm unrar-free || log_error "Failed to install unrar-free."
+pacman -S --needed --noconfirm cronie || log_error "Failed to install cronie"
+pacman -S --needed --noconfirm inetutils || log_error "Failed to install inetutils"
+pacman -S --needed --noconfirm jq || log_error "Failed to install jq."
+pacman -S --needed --noconfirm calibre-bin || log_error "Failed to install calibre-bin"
+pacman -S --needed --noconfirm clamav || log_error "Failed to install clamav."
+pacman -S --needed --noconfirm flatpak || log_error "Failed to install flatpak."
+pacman -S --needed --noconfirm gimp || log_error "Failed to install gimp."
+pacman -S --needed --noconfirm gimp-plugin-gmic || log_error "Failed to install gimp-plugin-gmic."
+pacman -S --needed --noconfirm gtrash-bin || log_error "Failed to install gtrash-bin."
+pacman -S --needed --noconfirm inkscape || log_error "Failed to install inkscape."
+pacman -S --needed --noconfirm keepassxc || log_error "Failed to install keepassxc."
+pacman -S --needed --noconfirm qalculate-qt || log_error "Failed to install qalculate-qt."
+pacman -S --needed --noconfirm qbittorrent || log_error "Failed to install qbittorrent."
+pacman -S --needed --noconfirm qemu-full || log_error "Failed to install qemu-full."
+pacman -S --needed --noconfirm zathura || log_error "Failed to install zathura."
+pacman -S --needed --noconfirm zathura-pdf-poppler || log_error "Failed to install zathura-pdf-poppler."
 
 # Check if Wayland is installed
 log_info "Checking for Wayland installation..."
