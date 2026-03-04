@@ -11,4 +11,4 @@ vscode-langservers-extracted
 zen-browser-bin
 vivaldi
 chromium
-
+wlogout

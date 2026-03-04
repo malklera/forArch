@@ -45,14 +45,6 @@ systemctl enable NetworkManager.service || log_error "Failed to enable NetworkMa
 sudo -u "$ORIGINAL_USER" git config --global user.name "$GIT_USERNAME"
 sudo -u "$ORIGINAL_USER" git config --global init.defaultBranch main
 
-# Get backup configs (forArch repository)
-log_info "Attempting to clone 'forArch' repository..."
-if sudo -u "$ORIGINAL_USER" git clone https://github.com/malklera/forArch.git "$HOME_DIR/forArch"; then
-    log_success "Successfully cloned 'forArch' repository using basic HTTPS."
-else
-    log_error "Failed to clone 'forArch' repository using any method. Please clone it manually into $HOME_DIR/forArch."
-fi
-
 # Change keyboard layout
 log_info "Copying custom keyboard layout and setting it..."
 if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
@@ -62,7 +54,7 @@ else
     log_error "$HOME_DIR/forArch/assets/keyboardLayout/custom not found. Keyboard layout not changed."
 fi
 
-sudo -u "$ORIGINAL_USER" git clone https://aur.archlinux.org/yay-bin.git "$HOME_DIR/yay-bin" || log_error "Failed to clone yay-bin repository."
+# check where i do actually clone the repo
 cd "$HOME_DIR/yay-bin" || log_error "Failed to change directory to $HOME_DIR/yay-bin."
 sudo -u "$ORIGINAL_USER" makepkg -si --noconfirm || log_error "Failed to install yay."
 cd - || log_error "Failed to change back from yay directory."
@@ -113,9 +105,6 @@ if [ -d "$HOME_DIR/forArch/.config/tmux" ]; then
 else
     log_error "$HOME_DIR/forArch/.config/tmux not found. tmux configs not copied."
 fi
-
-log_info "Installing tpm plugin manager"
-sudo -u "$ORIGINAL_USER" git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || log_error "Error cloning tpm repository."
 
 log_info "Copy my ide desktop file"
 sudo -u "$ORIGINAL_USER" mkdir "$HOME_DIR/.local/share/applications/" || log_error "Failed to create applications directory."
