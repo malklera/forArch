@@ -33,24 +33,6 @@ HOME_DIR=$(eval echo "~$ORIGINAL_USER")
 
 log_info "Starting Hyprland setup script for user: $ORIGINAL_USER..."
 
-# Install Hyprland
-log_info "Installing Hyprland..."
-pacman -S --noconfirm hyprland || log_error "Failed to install hyprland."
-
-# Clipboard manager
-log_info "Installing wl-clip-persist (Wayland clipboard manager)..."
-pacman -S --needed --noconfirm wl-clipboard || log_error "Failed to install wl-clipboard."
-pacman -S --needed --noconfirm wl-clip-persist || log_error "Failed to install wl-clip-persist."
-
-# Qt Wayland support
-log_info "Installing Qt Wayland support..."
-pacman -S --needed --noconfirm qt5-wayland || log_error "Failed to install qt5-wayland."
-pacman -S --needed --noconfirm qt6-wayland || log_error "Failed to install qt6-wayland."
-
-# Status bar (waybar)
-log_info "Installing Waybar (status bar)..."
-pacman -S --needed --noconfirm waybar || log_error "Failed to install waybar."
-
 log_info "Copying Waybar configurations..."
 if [ -d "$HOME_DIR/forArch/.config/waybar" ]; then
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/waybar" "$HOME_DIR/.config/" || log_error "Failed to copy waybar config directory."
@@ -59,10 +41,6 @@ else
     log_error "$HOME_DIR/forArch/.config/waybar not found. Waybar configs not copied."
 fi
 
-# Logout menu (wlogout)
-log_info "Installing wlogout (logout menu) via Yay..."
-sudo -u "$ORIGINAL_USER" yay -S --noconfirm wlogout || log_error "Failed to install wlogout via Yay."
-
 log_info "Copying wlogout configurations..."
 if [ -d "$HOME_DIR/forArch/.config/wlogout" ]; then
     sudo -u "$ORIGINAL_USER" cp -r "$HOME_DIR/forArch/.config/wlogout/" "$HOME_DIR/.config/" || log_error "Failed to copy wlogout config directory."
@@ -70,22 +48,6 @@ if [ -d "$HOME_DIR/forArch/.config/wlogout" ]; then
 else
     log_error "$HOME_DIR/forArch/.config/wlogout not found. Wlogout configs not copied."
 fi
-
-# XDG Desktop Portal
-log_info "Installing xdg-desktop-portal-hyprland..."
-pacman -S --needed --noconfirm xdg-desktop-portal-hyprland || log_error "Failed to install xdg-desktop-portal-hyprland."
-
-# Audio server (pwvucontrol via yay)
-log_info "Installing pwvucontrol (audio server control) via yay..."
-sudo -u "$ORIGINAL_USER" yay -S --noconfirm pwvucontrol || log_error "Failed to install pwvucontrol via Yay."
-
-# Authentication daemon
-log_info "Installing hyprpolkitagent (authentication daemon)..."
-pacman -S --noconfirm hyprpolkitagent || log_error "Failed to install hyprpolkitagent."
-
-# App launcher (rofi)
-log_info "Installing Rofi (app launcher)..."
-pacman -S --needed --noconfirm rofi || log_error "Failed to install rofi."
 
 log_info "Copying Rofi configurations and themes..."
 if [ -d "$HOME_DIR/forArch/.config/rofi" ]; then
@@ -110,34 +72,9 @@ else
     log_error "$HOME_DIR/forArch/assets/rofi/themes/tokyoNight.rasi not found. Theme not copied."
 fi
 
-# Auto mounting for usb and external devices
-log_info "Installing udisks2 and udiskie for auto-mounting..."
-pacman -S --needed --noconfirm udisks2 || log_error "Failed to install udisks2."
-pacman -S --needed --noconfirm udiskie || log_error "Failed to install udiskie."
-
-# Notification daemon
-log_info "Installing Dunst (notification daemon) and copying configurations..."
-pacman -S --needed --noconfirm dunst || log_error "Failed to install dunst."
-
 # Copy backup dunst config
 sudo -u "$ORIGINAL_USER" cp -r forArch/.config/dunst "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
 log_success "Dunst configurations copied for $ORIGERAL_USER."
-
-# Idle daemon
-log_info "Installing Hypridle (idle manager)..."
-pacman -S --noconfirm --needed hypridle || log_error "Failed to install hypridle"
-
-# Wallpaper
-log_info "Installing Hyprpaper (wallpaper utility)..."
-pacman -S --noconfirm --needed hyprpaper || log_error "Failed to install hyprpaper."
-
-# Hyprsunset
-log_info "Installing Hyprsunset (blue light filter utility)..."
-pacman -S --noconfirm --needed hyprsunset || log_error "Failed to install hyprsunset."
-
-# grim (screenshot utility)
-log_info "Installing grim (screenshot utility)..."
-pacman -S --noconfirm --needed grim || log_error "Failed to install grim."
 
 log_info "Copying wallpaper image..."
 if [ -f "$HOME_DIR/forArch/assets/wallpaper.png" ]; then
