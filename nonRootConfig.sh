@@ -28,6 +28,7 @@ fi
 # Current user and home directory
 ORIGINAL_USER="$USER"
 HOME_DIR="$HOME"
+GIT_USERNAME="malklera"
 
 install_yay() {
     local file_path="$1"
@@ -188,7 +189,7 @@ cp "$HOME_DIR/forArch/.local/share/applications/"*.desktop "$HOME_DIR/.local/sha
 update-desktop-database "$HOME_DIR/.local/share/applications/" || log_error "Error updating desktop database."
 
 # Copy bash backup files
-if [ -d "$HOME_DIR/forArch/.bashrc" ]; then
+if [ -f "$HOME_DIR/forArch/.bashrc" ]; then
     cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrrc."
     log_success "Bash configurations copied for $ORIGINAL_USER."
 else
@@ -203,6 +204,14 @@ else
     log_error "$HOME_DIR/forArch/.bash_profile not found. .bash_profile not copied."
 fi
 
+log_info "Copying .XCompose..."
+if [ -f "$HOME_DIR/forArch/.XCompose" ]; then
+    cp "$HOME_DIR/forArch/.XCompose" "$HOME_DIR/" || log_error "Failed to copy .XCompose."
+    log_success ".XCompose copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.XCompose not found. .XCompose not copied."
+fi
+
 # Copy Thunar backup file
 log_info "Copying .uca.xml..."
 if [ -f "$HOME_DIR/forArch/.config/Thunar/uca.xml" ]; then
@@ -210,6 +219,36 @@ if [ -f "$HOME_DIR/forArch/.config/Thunar/uca.xml" ]; then
     log_success "uca.xml copied for $ORIGINAL_USER."
 else
     log_error "$HOME_DIR/forArch/.config/Thunar not found. uca.xml not copied."
+fi
+
+log_info "Copying user-dirs..."
+if [ -f "$HOME_DIR/forArch/.config/user-dirs.dirs" ]; then
+	cp "$HOME_DIR/forArch/.config/user-dirs.dirs" "$HOME_DIR/.config/user-dirs.dirs" || log_error "Failed to copy user-dirs.dirs"
+else
+	log_error "$HOME_DIR/forArch/.config/user-dirs.dirs not found. user-dirs.dirs not copied." 
+fi
+
+log_info "Copying user-dirs..."
+if [ -f "$HOME_DIR/forArch/.config/user-dirs.locale" ]; then
+	cp "$HOME_DIR/forArch/.config/user-dirs.locale" "$HOME_DIR/.config/user-dirs.locale" || log_error "Failed to copy user-dirs.locale"
+else
+	log_error "$HOME_DIR/forArch/.config/user-dirs.locale not found. user-dirs.locale not copied." 
+fi
+
+log_info "Copying mimeapps.list..."
+if [ -f "$HOME_DIR/forArch/.config/mimeapps.list" ]; then
+    cp "$HOME_DIR/forArch/.config/mimeapps.list" "$HOME_DIR/.config/" || log_error "Failed to copy mimeapps.list."
+    log_success "mimeapps.list copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.config/mimeapps.list not found. mimeapps.list not copied."
+fi
+
+log_info "Copying custom keyboard layout..."
+if [ -f "$HOME_DIR/forArch/assets/keyboard/custom" ]; then
+    sudo cp "$HOME_DIR/forArch/assets/keyboard/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
+    log_success "Custom keyboard layout copied."
+else
+    log_error "$HOME_DIR/forArch/assets/keyboard/custom not found. Keyboard layout not copied."
 fi
 
 log_info "Starting Hyprland setup script for user: $ORIGINAL_USER..."
@@ -239,8 +278,13 @@ else
 fi
 
 # Copy backup dunst config
-cp -r forArch/.config/dunst "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
-log_success "Dunst configurations copied for $ORIGERAL_USER."
+log_info "Copying Dunst configurations..."
+if [ -d "$HOME_DIR/forArch/.config/dunst" ]; then
+    cp -r "$HOME_DIR/forArch/.config/dunst" "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
+    log_success "Dunst configurations copied for $ORIGINAL_USER."
+else
+    log_error "$HOME_DIR/forArch/.config/dunst not found. Dunst configs not copied."
+fi
 
 log_info "Copying wallpaper image..."
 if [ -f "$HOME_DIR/forArch/assets/wallpaper.png" ]; then
