@@ -82,11 +82,11 @@ systemctl daemon-reload || log_error "Failed to reload systemd daemon after auto
 
 # Change keyboard layout
 log_info "Copying custom keyboard layout and setting it..."
-if [ -f "$HOME_DIR/forArch/assets/keyboardLayout/custom" ]; then
-    cp "$HOME_DIR/forArch/assets/keyboardLayout/custom" /usr/share/xkeyboard-config-2/symbols/ || log_error "Failed to copy custom keyboard layout."
+if [ -f "$HOME_DIR/forArch/assets/keyboard/custom" ]; then
+    cp "$HOME_DIR/forArch/assets/keyboard/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
     log_success "Custom keyboard layout copied."
 else
-    log_error "$HOME_DIR/forArch/assets/keyboardLayout/custom not found. Keyboard layout not changed."
+    log_error "$HOME_DIR/forArch/assets/keyboard/custom not found. Keyboard layout not changed."
 fi
 
 log_success "Arch Linux setup script completed!"

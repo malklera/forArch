@@ -146,47 +146,68 @@ fi
 
 install_flatpak "flatpak.md"
 
-if [ -d "$HOME_DIR/forArch/.config/ghostty" ]; then
-    cp -r "$HOME_DIR/forArch/.config/ghostty/" "$HOME_DIR/.config/" || log_error "Failed to copy ghostty config directory."
-    log_success "Ghostty configurations copied for $ORIGINAL_USER."
-else
-    log_error "$HOME_DIR/forArch/.config/ghostty not found. Ghostty configs not copied."
-fi
-log_info "Note: Ghostty cannot be used directly on TTY."
+log_info "Restoring configuration files..."
+mkdir -p "$HOME_DIR/.config"
 
-if [ -d "$HOME_DIR/forArch/.config/nvim" ]; then
-    cp -r "$HOME_DIR/forArch/.config/nvim/" "$HOME_DIR/.config/" || log_error "Failed to copy nvim config directory."
-    log_success "Neovim configurations copied for $ORIGINAL_USER."
+if command -v ghostty >/dev/null 2>&1; then
+    if [ -d "$HOME_DIR/forArch/.config/ghostty" ]; then
+        cp -r "$HOME_DIR/forArch/.config/ghostty/" "$HOME_DIR/.config/" || log_error "Failed to copy ghostty config directory."
+        log_success "Ghostty configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/ghostty not found. Ghostty configs not copied."
+    fi
+    log_info "Note: Ghostty cannot be used directly on TTY."
 else
-    log_error "$HOME_DIR/forArch/.config/nvim not found. Neovim configs not copied."
-fi
-log_info "Wait to open neovim till I am inside of hyprland."
-
-if [ -d "$HOME_DIR/forArch/.config/btop" ]; then
-    cp -r "$HOME_DIR/forArch/.config/btop/" "$HOME_DIR/.config/" || log_error "Failed to copy btop config directory."
-    log_success "Btop configurations copied for $ORIGINAL_USER."
-else
-    log_error "$HOME_DIR/forArch/.config/btop not found. Btop configs not copied."
+    log_warning "Ghostty is not installed. Skipping its configuration."
 fi
 
-if [ -d "$HOME_DIR/forArch/.tmux" ]; then
-    cp -r "$HOME_DIR/forArch/.tmux/" "$HOME_DIR/" || log_error "Failed to copy .tmux directory."
-    log_success ".tmux directory copied for $ORIGINAL_USER."
+if command -v nvim >/dev/null 2>&1; then
+    if [ -d "$HOME_DIR/forArch/.config/nvim" ]; then
+        cp -r "$HOME_DIR/forArch/.config/nvim/" "$HOME_DIR/.config/" || log_error "Failed to copy nvim config directory."
+        log_success "Neovim configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/nvim not found. Neovim configs not copied."
+    fi
+    log_info "Wait to open neovim till I am inside of hyprland."
 else
-    log_error "$HOME_DIR/forArch/.tmux not found. .tmux configs not copied."
+    log_warning "Neovim is not installed. Skipping its configuration."
 fi
 
-if [ -d "$HOME_DIR/forArch/.config/tmux" ]; then
-    cp -r "$HOME_DIR/forArch/.config/tmux/" "$HOME_DIR/.config/" || log_error "Failed to copy tmux config directory."
-    log_success "tmux configurations copied for $ORIGINAL_USER."
+if command -v btop >/dev/null 2>&1; then
+    if [ -d "$HOME_DIR/forArch/.config/btop" ]; then
+        cp -r "$HOME_DIR/forArch/.config/btop/" "$HOME_DIR/.config/" || log_error "Failed to copy btop config directory."
+        log_success "Btop configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/btop not found. Btop configs not copied."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/tmux not found. tmux configs not copied."
+    log_warning "Btop is not installed. Skipping its configuration."
 fi
 
-log_info "Copy my ide desktop file"
-mkdir "$HOME_DIR/.local/share/applications/" || log_error "Failed to create applications directory."
+if command -v tmux >/dev/null 2>&1; then
+    if [ -d "$HOME_DIR/forArch/.tmux" ]; then
+        cp -r "$HOME_DIR/forArch/.tmux/" "$HOME_DIR/" || log_error "Failed to copy .tmux directory."
+        log_success ".tmux directory copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.tmux not found. .tmux configs not copied."
+    fi
+
+    if [ -d "$HOME_DIR/forArch/.config/tmux" ]; then
+        cp -r "$HOME_DIR/forArch/.config/tmux/" "$HOME_DIR/.config/" || log_error "Failed to copy tmux config directory."
+        log_success "tmux configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/tmux not found. tmux configs not copied."
+    fi
+else
+    log_warning "Tmux is not installed. Skipping its configuration."
+fi
+
+log_info "Copying desktop files..."
+mkdir -p "$HOME_DIR/.local/share/applications/" || log_error "Failed to create applications directory."
 cp "$HOME_DIR/forArch/.local/share/applications/"*.desktop "$HOME_DIR/.local/share/applications/" || log_error "Error copying desktop file."
-update-desktop-database "$HOME_DIR/.local/share/applications/" || log_error "Error updating desktop database."
+if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database "$HOME_DIR/.local/share/applications/" || log_error "Error updating desktop database."
+fi
 
 # Copy bash backup files
 if [ -f "$HOME_DIR/forArch/.bashrc" ]; then
@@ -213,26 +234,34 @@ else
 fi
 
 # Copy Thunar backup file
-log_info "Copying .uca.xml..."
-if [ -f "$HOME_DIR/forArch/.config/Thunar/uca.xml" ]; then
-    cp "$HOME_DIR/forArch/.config/Thunar/uca.xml" "$HOME_DIR/.config/Thunar/" || log_error "Failed to copy .bash_profile."
-    log_success "uca.xml copied for $ORIGINAL_USER."
+if command -v thunar >/dev/null 2>&1; then
+    log_info "Copying Thunar configuration..."
+    if [ -f "$HOME_DIR/forArch/.config/Thunar/uca.xml" ]; then
+        mkdir -p "$HOME_DIR/.config/Thunar/"
+        cp "$HOME_DIR/forArch/.config/Thunar/uca.xml" "$HOME_DIR/.config/Thunar/" || log_error "Failed to copy uca.xml."
+        log_success "uca.xml copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/Thunar/uca.xml not found."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/Thunar not found. uca.xml not copied."
+    log_warning "Thunar is not installed. Skipping its configuration."
 fi
 
-log_info "Copying user-dirs..."
-if [ -f "$HOME_DIR/forArch/.config/user-dirs.dirs" ]; then
-	cp "$HOME_DIR/forArch/.config/user-dirs.dirs" "$HOME_DIR/.config/user-dirs.dirs" || log_error "Failed to copy user-dirs.dirs"
-else
-	log_error "$HOME_DIR/forArch/.config/user-dirs.dirs not found. user-dirs.dirs not copied." 
-fi
+if command -v xdg-user-dirs-update >/dev/null 2>&1; then
+    log_info "Copying user-dirs configurations..."
+    if [ -f "$HOME_DIR/forArch/.config/user-dirs.dirs" ]; then
+        cp "$HOME_DIR/forArch/.config/user-dirs.dirs" "$HOME_DIR/.config/user-dirs.dirs" || log_error "Failed to copy user-dirs.dirs"
+    else
+        log_error "$HOME_DIR/forArch/.config/user-dirs.dirs not found." 
+    fi
 
-log_info "Copying user-dirs..."
-if [ -f "$HOME_DIR/forArch/.config/user-dirs.locale" ]; then
-	cp "$HOME_DIR/forArch/.config/user-dirs.locale" "$HOME_DIR/.config/user-dirs.locale" || log_error "Failed to copy user-dirs.locale"
+    if [ -f "$HOME_DIR/forArch/.config/user-dirs.locale" ]; then
+        cp "$HOME_DIR/forArch/.config/user-dirs.locale" "$HOME_DIR/.config/user-dirs.locale" || log_error "Failed to copy user-dirs.locale"
+    else
+        log_error "$HOME_DIR/forArch/.config/user-dirs.locale not found." 
+    fi
 else
-	log_error "$HOME_DIR/forArch/.config/user-dirs.locale not found. user-dirs.locale not copied." 
+    log_warning "xdg-user-dirs is not installed. Skipping its configuration."
 fi
 
 log_info "Copying mimeapps.list..."
@@ -253,37 +282,53 @@ fi
 
 log_info "Starting Hyprland setup script for user: $ORIGINAL_USER..."
 
-log_info "Copying Waybar configurations..."
-if [ -d "$HOME_DIR/forArch/.config/waybar" ]; then
-    cp -r "$HOME_DIR/forArch/.config/waybar" "$HOME_DIR/.config/" || log_error "Failed to copy waybar config directory."
-    log_success "Waybar configurations copied for $ORIGINAL_USER."
+if command -v waybar >/dev/null 2>&1; then
+    log_info "Copying Waybar configurations..."
+    if [ -d "$HOME_DIR/forArch/.config/waybar" ]; then
+        cp -r "$HOME_DIR/forArch/.config/waybar" "$HOME_DIR/.config/" || log_error "Failed to copy waybar config directory."
+        log_success "Waybar configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/waybar not found."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/waybar not found. Waybar configs not copied."
+    log_warning "Waybar is not installed. Skipping its configuration."
 fi
 
-log_info "Copying wlogout configurations..."
-if [ -d "$HOME_DIR/forArch/.config/wlogout" ]; then
-    cp -r "$HOME_DIR/forArch/.config/wlogout/" "$HOME_DIR/.config/" || log_error "Failed to copy wlogout config directory."
-    log_success "Wlogout configurations copied for $ORIGINAL_USER."
+if command -v wlogout >/dev/null 2>&1; then
+    log_info "Copying wlogout configurations..."
+    if [ -d "$HOME_DIR/forArch/.config/wlogout" ]; then
+        cp -r "$HOME_DIR/forArch/.config/wlogout/" "$HOME_DIR/.config/" || log_error "Failed to copy wlogout config directory."
+        log_success "Wlogout configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/wlogout not found."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/wlogout not found. Wlogout configs not copied."
+    log_warning "wlogout is not installed. Skipping its configuration."
 fi
 
-log_info "Copying Rofi configurations and themes..."
-if [ -d "$HOME_DIR/forArch/.config/rofi" ]; then
-    cp -r "$HOME_DIR/forArch/.config/rofi/" "$HOME_DIR/.config/" || log_error "Failed to copy rofi config directory."
-    log_success "Rofi configurations copied for $ORIGINAL_USER."
+if command -v rofi >/dev/null 2>&1; then
+    log_info "Copying Rofi configurations and themes..."
+    if [ -d "$HOME_DIR/forArch/.config/rofi" ]; then
+        cp -r "$HOME_DIR/forArch/.config/rofi/" "$HOME_DIR/.config/" || log_error "Failed to copy rofi config directory."
+        log_success "Rofi configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/rofi not found."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/rofi not found. Rofi configs not copied."
+    log_warning "Rofi is not installed. Skipping its configuration."
 fi
 
 # Copy backup dunst config
-log_info "Copying Dunst configurations..."
-if [ -d "$HOME_DIR/forArch/.config/dunst" ]; then
-    cp -r "$HOME_DIR/forArch/.config/dunst" "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
-    log_success "Dunst configurations copied for $ORIGINAL_USER."
+if command -v dunst >/dev/null 2>&1; then
+    log_info "Copying Dunst configurations..."
+    if [ -d "$HOME_DIR/forArch/.config/dunst" ]; then
+        cp -r "$HOME_DIR/forArch/.config/dunst" "$HOME_DIR/.config/" || log_error "Failed to copy dunstrc to user config."
+        log_success "Dunst configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/dunst not found."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/dunst not found. Dunst configs not copied."
+    log_warning "Dunst is not installed. Skipping its configuration."
 fi
 
 log_info "Copying wallpaper image..."
@@ -295,12 +340,16 @@ else
 fi
 
 # --- Copy Hyprland Configs ---
-log_info "Copying Hyprland configurations..."
-if [ -d "$HOME_DIR/forArch/.config/hypr" ]; then
-    cp -r "$HOME_DIR/forArch/.config/hypr/" "$HOME_DIR/.config/" || log_error "Failed to copy hyprland config directory."
-    log_success "Hyprland configurations copied for $ORIGINAL_USER."
+if command -v hyprland >/dev/null 2>&1; then
+    log_info "Copying Hyprland configurations..."
+    if [ -d "$HOME_DIR/forArch/.config/hypr" ]; then
+        cp -r "$HOME_DIR/forArch/.config/hypr/" "$HOME_DIR/.config/" || log_error "Failed to copy hyprland config directory."
+        log_success "Hyprland configurations copied for $ORIGINAL_USER."
+    else
+        log_error "$HOME_DIR/forArch/.config/hypr not found."
+    fi
 else
-    log_error "$HOME_DIR/forArch/.config/hypr not found. Hyprland configs not copied."
+    log_warning "Hyprland is not installed. Skipping its configuration."
 fi
 
 log_success "Hyprland setup script completed!"
