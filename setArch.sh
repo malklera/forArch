@@ -2,9 +2,6 @@
 
 # This script assumes you are running it from your home directory.
 
-#  Configuration Variables 
-GIT_USERNAME="malklera"
-
 # Helper Functions for Logging
 log_info() {
     echo -e "\e[34m[INFO]\e[0m $1" # Blue
@@ -66,6 +63,20 @@ install_pacman "install.md"
 install_pacman "hyprland.md"
 
 systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
+systemctl enable cronie.service
+systemctl start cronie.service
+
+log_info "Configuring auto-login for $ORIGINAL_USER on tty1..."
+AUTOLOGIN_DIR="/etc/systemd/system/getty@tty1.service.d"
+mkdir -p "$AUTOLOGIN_DIR" || log_error "Failed to create autologin override directory."
+
+cat > "$AUTOLOGIN_DIR/autologin.conf" << EOF
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $ORIGINAL_USER %I \$TERM
+EOF
+
+systemctl daemon-reload || log_error "Failed to reload systemd daemon after autologin config."
 
 # TODO: Do i really need this on root?
 
@@ -81,4 +92,4 @@ fi
 log_success "Arch Linux setup script completed!"
 
 chmod +x "$HOME_DIR/forArch/nonRootConfig.sh"
-./forArch/nonRootConfig.sh
+sudo -u "$ORIGINAL_USER" bash "$HOME_DIR/forArch/nonRootConfig.sh"

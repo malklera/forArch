@@ -29,18 +29,10 @@ Open nvim for the first time to install all plugins
 
 Open tmux and install plugins with prefix + I (shift+i)
 
-Set up auto login
 
-`sudo systemctl edit getty@tty1`
+Set up KeepassXC
 
-On the file put the following
-
-    [Service]
-    ExecStart=
-    ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin malklera %I $TERM
-
-
-Open both browsers and log in for sync
+Open browsers and log in for sync
 
 
 See if thunar populate the default files, otherwise check to do manually
@@ -90,15 +82,7 @@ Set up github account
 `gh auth login`
 
 
-Add my mutual-task cron task
-WARN: Not working, wait till i fix it
-
-```sh
-sudo systemctl enable cronie.service
-sudo systemctl start cronie.service
-```
-
-Add a task, copy from study/mutual-task/crontab.txt
+Add a task, copy from ~/study/mutual-task/crontab.txt
 
 `crontab -e`
 
