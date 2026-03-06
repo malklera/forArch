@@ -50,6 +50,8 @@ zathura
 zathura-pdf-poppler
 zram-generator
 zsync
+pacman-contrib
+plocate
 
 # Fonts
 adobe-source-code-pro-fonts
