@@ -29,6 +29,7 @@ fi
 ORIGINAL_USER="${SUDO_USER:-$(whoami)}"
 # Get the home directory of the original user
 HOME_DIR=$(eval echo "~$ORIGINAL_USER")
+GIT_USERNAME="malklera"
 
 install_pacman() {
     local file_path="$1"
@@ -58,9 +59,20 @@ log_info "Starting Arch Linux setup script for user: $ORIGINAL_USER..."
 # Update System Before Starting
 log_info "Updating system packages..."
 pacman -Syu --noconfirm || log_error "Failed to update system."
+pacman -S --noconfirm --needed git || log_error "Failed to install git."
 
-install_pacman "install.md"
-install_pacman "hyprland.md"
+# Configure Git for the original user
+sudo -u "$ORIGINAL_USER" git config --global user.name "$GIT_USERNAME"
+sudo -u "$ORIGINAL_USER" git config --global init.defaultBranch main
+
+if [ ! -d "$HOME_DIR/forArch" ]; then
+    sudo -u "$ORIGINAL_USER" git clone https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
+else
+    log_info "forArch repository already exists at $HOME_DIR/forArch."
+fi
+
+install_pacman "$HOME_DIR/forArch/install.md"
+install_pacman "$HOME_DIR/forArch/hyprland.md"
 
 systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
 systemctl enable cronie.service
@@ -77,8 +89,6 @@ ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $ORIGINAL_USER %
 EOF
 
 systemctl daemon-reload || log_error "Failed to reload systemd daemon after autologin config."
-
-# TODO: Do i really need this on root?
 
 # Change keyboard layout
 log_info "Copying custom keyboard layout and setting it..."

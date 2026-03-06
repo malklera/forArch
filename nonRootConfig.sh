@@ -28,7 +28,9 @@ fi
 # Current user and home directory
 ORIGINAL_USER="$USER"
 HOME_DIR="$HOME"
-GIT_USERNAME="malklera"
+
+# Change to the directory where the script (and its configuration files) are located
+cd "$(dirname "$0")" || exit 1
 
 install_yay() {
     local file_path="$1"
@@ -108,12 +110,6 @@ clone_repos() {
     done < "$file_path"
 }
 
-# Configure Git for the original user
-git config --global user.name "$GIT_USERNAME"
-git config --global init.defaultBranch main
-
-clone_repos "repository.md"
-
 # check where i do actually clone the repo
 yay_installed=false
 if cd "$HOME_DIR/yay-bin" 2>/dev/null; then
@@ -123,8 +119,7 @@ if cd "$HOME_DIR/yay-bin" 2>/dev/null; then
         log_info "Running yay post-installation commands as $ORIGINAL_USER..."
         if yay -Y --gendb \
             && yay -Syu --devel --noconfirm \
-            && yay -Y --devel --save \
-            && sudo rm -r "$HOME_DIR/yay-bin"; then
+            && yay -Y --devel --save; then
             log_success "Yay installed and configured."
             yay_installed=true
         else
@@ -139,12 +134,13 @@ else
 fi
 
 if $yay_installed; then
-    install_yay "aur.md"
+    install_yay "$HOME_DIR/forArch/aur.md"
 else
     log_warning "Skipping install_yay: yay was not successfully installed."
 fi
 
-install_flatpak "flatpak.md"
+install_flatpak "$HOME_DIR/forArch/flatpak.md"
+clone_repos "$HOME_DIR/forArch/repository.md"
 
 log_info "Restoring configuration files..."
 mkdir -p "$HOME_DIR/.config"
@@ -270,14 +266,6 @@ if [ -f "$HOME_DIR/forArch/.config/mimeapps.list" ]; then
     log_success "mimeapps.list copied for $ORIGINAL_USER."
 else
     log_error "$HOME_DIR/forArch/.config/mimeapps.list not found. mimeapps.list not copied."
-fi
-
-log_info "Copying custom keyboard layout..."
-if [ -f "$HOME_DIR/forArch/assets/keyboard/custom" ]; then
-    sudo cp "$HOME_DIR/forArch/assets/keyboard/custom" /usr/share/X11/xkb/symbols/ || log_error "Failed to copy custom keyboard layout."
-    log_success "Custom keyboard layout copied."
-else
-    log_error "$HOME_DIR/forArch/assets/keyboard/custom not found. Keyboard layout not copied."
 fi
 
 log_info "Starting Hyprland setup script for user: $ORIGINAL_USER..."

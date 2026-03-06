@@ -11,7 +11,6 @@ fzf
 ghostty
 gimp
 gimp-plugin-gmic
-git
 gvfs
 gvfs-gphoto2
 gvfs-mtp
