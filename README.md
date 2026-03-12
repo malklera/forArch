@@ -85,24 +85,3 @@ Set up github account
 Add a task, copy from ~/study/mutual-task/crontab.txt
 
 `crontab -e`
-
-
-Modify the xdg-user-dirs
-
-`nvim .config/user-dirs.dirs`
-
-Leave
-- Documents
-- Downloads
-- Pictures
-- Videos
-
-Point all others to
-
-"$HOME/"
-
-
-Install software after I have a functional system
-
-
-Config udisk for automount and notifications when conecting phone and usb drive

@@ -75,8 +75,9 @@ install_pacman "$HOME_DIR/forArch/install.md"
 install_pacman "$HOME_DIR/forArch/hyprland.md"
 
 systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
-systemctl enable cronie.service
-systemctl start cronie.service
+systemctl enable cronie.service || log_error "Failed to enable cronie.service."
+systemctl start cronie.service || log_error "Failed to start cronie.service."
+
 
 log_info "Configuring auto-login for $ORIGINAL_USER on tty1..."
 AUTOLOGIN_DIR="/etc/systemd/system/getty@tty1.service.d"

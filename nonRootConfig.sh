@@ -110,7 +110,6 @@ clone_repos() {
     done < "$file_path"
 }
 
-# check where i do actually clone the repo
 yay_installed=false
 if cd "$HOME_DIR/yay-bin" 2>/dev/null; then
     if makepkg -si --noconfirm; then
@@ -181,6 +180,7 @@ else
 fi
 
 if command -v tmux >/dev/null 2>&1; then
+    log_info "Configuring Tmux..."
     if [ -d "$HOME_DIR/forArch/.tmux" ]; then
         cp -r "$HOME_DIR/forArch/.tmux/" "$HOME_DIR/" || log_error "Failed to copy .tmux directory."
         log_success ".tmux directory copied for $ORIGINAL_USER."
@@ -207,7 +207,7 @@ fi
 
 # Copy bash backup files
 if [ -f "$HOME_DIR/forArch/.bashrc" ]; then
-    cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrrc."
+    cp "$HOME_DIR/forArch/.bashrc" "$HOME_DIR/" || log_error "Failed to copy .bashrc."
     log_success "Bash configurations copied for $ORIGINAL_USER."
 else
     log_error "$HOME_DIR/forArch/.bashrc not found. Bash configs not copied."
@@ -340,4 +340,3 @@ else
     log_warning "Hyprland is not installed. Skipping its configuration."
 fi
 
-log_success "Hyprland setup script completed!"

@@ -52,6 +52,7 @@ zram-generator
 zsync
 pacman-contrib
 plocate
+zellij
 
 # Fonts
 adobe-source-code-pro-fonts

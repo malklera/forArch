@@ -114,6 +114,12 @@ backup_file "$HOME_DIR/.config/user-dirs.locale" "$REPO/.config/" "user-dirs.loc
 # thunar
 backup_file "$HOME_DIR/.config/Thunar/uca.xml" "$REPO/.config/Thunar/" "uca.xml"
 
+# udiskie
+backup_dir "$HOME_DIR/.config/udiskie/" "$REPO/.config/" "udiskie"
+
+# zellij
+backup_dir "$HOME_DIR/.config/zellij/" "$REPO/.config/" "zellij"
+
 # desktop files
 log_info "Backing up desktop files..."
 # Use a loop to handle potential absence of .desktop files without erroring
