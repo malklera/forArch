@@ -83,9 +83,6 @@ backup_file "$HOME_DIR/.config/tmux/tmux.conf" "$REPO/.config/tmux/" "tmux.conf"
 # custom layout
 backup_file "/usr/share/X11/xkb/symbols/custom" "$REPO/assets/keyboard/" "keyboard layout"
 
-# custom compose
-backup_file "$HOME_DIR/.XCompose" "$REPO/" "compose file"
-
 # ghostty
 backup_dir "$HOME_DIR/.config/ghostty" "$REPO/.config/" "ghostty"
 
@@ -119,6 +116,9 @@ backup_dir "$HOME_DIR/.config/udiskie/" "$REPO/.config/" "udiskie"
 
 # zellij
 backup_dir "$HOME_DIR/.config/zellij/" "$REPO/.config/" "zellij"
+
+# xdg-portal
+backup_dir "$HOME_DIR/.config/xdg-desktop-portal/" "$REPO/.config/" "xdg-desktop-portal"
 
 # desktop files
 log_info "Backing up desktop files..."

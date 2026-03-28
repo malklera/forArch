@@ -32,8 +32,10 @@ spice-gtk
 thunar
 thunar-archive-plugin
 thunar-volman
-tldr
 tumbler
+thunar-media-tags-plugin
+ffmpegthumbnailer
+tldr
 udiskie
 udiskie
 udisks2
@@ -46,13 +48,14 @@ wev
 wget
 xarchiver
 xdg-user-dirs
-zathura
-zathura-pdf-poppler
 zram-generator
 zsync
 pacman-contrib
 plocate
 zellij
+xdg-desktop-portal-gtk
+slurp
+grim
 
 # Fonts
 adobe-source-code-pro-fonts

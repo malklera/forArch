@@ -221,14 +221,6 @@ else
     log_error "$HOME_DIR/forArch/.bash_profile not found. .bash_profile not copied."
 fi
 
-log_info "Copying .XCompose..."
-if [ -f "$HOME_DIR/forArch/.XCompose" ]; then
-    cp "$HOME_DIR/forArch/.XCompose" "$HOME_DIR/" || log_error "Failed to copy .XCompose."
-    log_success ".XCompose copied for $ORIGINAL_USER."
-else
-    log_error "$HOME_DIR/forArch/.XCompose not found. .XCompose not copied."
-fi
-
 # Copy Thunar backup file
 if command -v thunar >/dev/null 2>&1; then
     log_info "Copying Thunar configuration..."
@@ -258,6 +250,13 @@ if command -v xdg-user-dirs-update >/dev/null 2>&1; then
     fi
 else
     log_warning "xdg-user-dirs is not installed. Skipping its configuration."
+fi
+
+log_info "Copyin xdg-dekstop-portal..."
+if [ -d "$HOME_DIR/forArch/.config/xdg-desktop-portal/" ]; then
+	cp -r "$HOME_DIR/forArch/.config/xdg-desktop-portal/" "$HOME_DIR/.config/" || log_error "Failed to copy xdg-desktop-portal"
+else
+	log_errror "$HOME_DIR/forArch/.config/xdg-desktop-portal/ not found." 
 fi
 
 log_info "Copying mimeapps.list..."
