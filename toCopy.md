@@ -19,5 +19,5 @@ Calibre
 Files backup
 
 ```
-$ tar czf ~/backup.tar.gz ~/Documents ~/Pictures ~/study
+$ tar czf ~/backup.tar.gz ~/Documents ~/Pictures ~/study ~/Videos
 ```

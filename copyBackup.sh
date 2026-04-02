@@ -68,54 +68,11 @@ backup_dir() {
     fi
 }
 
-# bash
-backup_file "$HOME_DIR/.bashrc" "$REPO/" ".bashrc"
-backup_file "$HOME_DIR/.bash_profile" "$REPO/" ".bash_profile"
-
-# neovim
-backup_dir "$HOME_DIR/.config/nvim/" "$REPO/.config/" "neovim"
-
-# tmux
-backup_file "$HOME_DIR/.tmux/tmux-close.sh" "$REPO/.tmux/" "tmux-close"
-backup_file "$HOME_DIR/.tmux/tmux-start.sh" "$REPO/.tmux/" "tmux-start"
-backup_file "$HOME_DIR/.config/tmux/tmux.conf" "$REPO/.config/tmux/" "tmux.conf"
-
 # custom layout
 backup_file "/usr/share/X11/xkb/symbols/custom" "$REPO/assets/keyboard/" "keyboard layout"
 
-# ghostty
-backup_dir "$HOME_DIR/.config/ghostty" "$REPO/.config/" "ghostty"
-
-# btop
-backup_dir "$HOME_DIR/.config/btop/" "$REPO/.config/" "btop"
-
-# hyprland
-backup_dir "$HOME_DIR/.config/hypr/" "$REPO/.config/" "hyprland"
-
-# dunst
-backup_dir "$HOME_DIR/.config/dunst/" "$REPO/.config/" "dunst"
-
-# waybar
-backup_dir "$HOME_DIR/.config/waybar/" "$REPO/.config/" "waybar"
-
-# wlogout
-backup_dir "$HOME_DIR/.config/wlogout/" "$REPO/.config/" "wlogout"
-
-# mimeapps
-backup_file "$HOME_DIR/.config/mimeapps.list" "$REPO/.config/" "mimeapps"
-
-# user-dirs
-backup_file "$HOME_DIR/.config/user-dirs.dirs" "$REPO/.config/" "user-dirs.dirs"
-backup_file "$HOME_DIR/.config/user-dirs.locale" "$REPO/.config/" "user-dirs.locale"
-
-# thunar
-backup_file "$HOME_DIR/.config/Thunar/uca.xml" "$REPO/.config/Thunar/" "uca.xml"
-
 # udiskie
 backup_dir "$HOME_DIR/.config/udiskie/" "$REPO/.config/" "udiskie"
-
-# zellij
-backup_dir "$HOME_DIR/.config/zellij/" "$REPO/.config/" "zellij"
 
 # xdg-portal
 backup_dir "$HOME_DIR/.config/xdg-desktop-portal/" "$REPO/.config/" "xdg-desktop-portal"
@@ -135,8 +92,5 @@ else
     log_warning "No .desktop files found in $HOME_DIR/.local/share/applications/"
 fi
 shopt -u nullglob
-
-# rofi
-backup_dir "$HOME_DIR/.config/rofi/" "$REPO/.config/" "rofi"
 
 log_success "Backup process completed!"
