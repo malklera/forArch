@@ -68,9 +68,6 @@ backup_dir() {
     fi
 }
 
-# custom layout
-backup_file "/usr/share/X11/xkb/symbols/custom" "$REPO/assets/keyboard/" "keyboard layout"
-
 # udiskie
 backup_dir "$HOME_DIR/.config/udiskie/" "$REPO/.config/" "udiskie"
 
