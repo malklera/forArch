@@ -3,7 +3,6 @@
 log_info "Installing base dependencies..."
 sudo pacman -S --noconfirm --needed git base-devel chezmoi || log_error "Failed to install base tools."
 
-# TODO: probably will use the dotfiles repo instead of this
 if [ ! -d "$HOME_DIR/forArch" ]; then
     git clone https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
 fi
@@ -26,7 +25,18 @@ log_info "Installing aconfmgr..."
 yay -S --needed --noconfirm aconfmgr-git
 
 # TODO: check the path from chezmoi
-aconfmgr --config-dir="$HOME_DIR/forArch/aconfmgr" apply
+aconfmgr --config-dir="$HOME_DIR/forArch/.config/aconfmgr" apply
+
+mkdir -p ~/.config/chezmoi
+cat > ~/.config/chezmoi/chezmoi.toml << EOF
+sourceDir = "~/forArch/chezmoi"
+[edit]
+    command = "nvim"
+
+[diff]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
+EOF
 
 log_info "Applying dotfiles..."
 chezmoi init --apply malklera
