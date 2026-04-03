@@ -14,7 +14,7 @@ Make the file executable
 
 Run the script
 
-`sudo ./setArch.sh`
+`./setArch.sh`
 
 
 Once everything finished, reboot
@@ -26,9 +26,6 @@ If i have a working system continue
 Open nvim for the first time to install all plugins
 
 `nvim`
-
-Open tmux and install plugins with prefix + I (shift+i)
-
 
 Set up KeepassXC
 
@@ -80,8 +77,3 @@ You can see the github public keys here to compare
 Set up github account
 
 `gh auth login`
-
-
-Add a task, copy from ~/study/mutual-task/crontab.txt
-
-`crontab -e`

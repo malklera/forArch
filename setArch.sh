@@ -33,7 +33,3 @@ chezmoi init --apply malklera
 
 
 systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
-systemctl enable cronie.service || log_error "Failed to enable cronie.service."
-systemctl start cronie.service || log_error "Failed to start cronie.service."
-
-systemctl daemon-reload || log_error "Failed to reload systemd daemon after autologin config."
