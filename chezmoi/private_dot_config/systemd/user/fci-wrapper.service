@@ -1,0 +1,10 @@
+[Unit]
+Description=Run fci wrapper script on boot
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/malklera/Documents/fci/wrapper.sh
+
+[Install]
+WantedBy=default.target

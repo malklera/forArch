@@ -1,0 +1,21 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * Modified by @malklera
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+configuration {
+	modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "{w} · {c} · {t}";
+}
+@theme "/usr/share/rofi/themes/tokyoNight.rasi"
+/* @theme "/usr/share/rofi/themes/t4-s4.rasi" */

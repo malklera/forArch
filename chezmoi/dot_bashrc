@@ -1,0 +1,162 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Add ~/.local/bin to PATH if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Add ~/go/bin to PATH if it exists
+if [ -d "$HOME/go/bin" ] ; then
+    PATH="$PATH:$HOME/go/bin"
+fi
+
+# Set locale
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Environment Variables
+export XDG_CONFIG_HOME="$HOME/.config"
+
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+export EDITOR="nvim"
+export TERMINAL="ghostty"
+
+# Default Bash history file
+export HISTFILE="$HOME/.bash_history"
+# Append to history file, don't overwrite
+shopt -s histappend
+
+# Set LS_COLORS using system defaults
+if [[ -x /usr/bin/dircolors ]]; then
+    eval "$(dircolors -b)"
+    
+    # Apply colors to aliases
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias diff='diff --color=auto'
+    alias ip='ip -color=auto'
+fi
+
+# General aliases
+alias python="python3"
+alias btop="btop -p 1"
+alias mv="mv -i"
+alias cp="cp -i"
+alias sqlite='sqlite3 -init <(echo ".mode box")'
+alias gm="gtrash put"
+alias rg="rg -S"
+alias unrar="unrar-free"
+alias less="less -R"
+alias ghostty="env GTK_IM_MODULE=simple XMODIFIERS=@im=none ghostty"
+
+# Change directories by typing just the name
+shopt -s autocd
+# Enables extended globbing features (pattern matching)
+shopt -s extglob
+# Optional: makes globbing case-insensitive
+shopt -s nocaseglob
+# Optional: include dotfiles in glob results
+shopt -s dotglob
+
+# Open files from the terminal using default xdg-open
+open() {
+  if ! command -v xdg-open >/dev/null 2>&1; then
+    echo "xdg-open not found" >&2
+    return 1
+  fi
+  setsid xdg-open "$@" >/dev/null 2>&1 </dev/null
+}
+
+# Git Info Function for Bash
+git_info() {
+  # Exit if not inside a Git repository
+  ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 && return
+
+  # Git branch/tag, or name-rev if on detached head
+  # Bash equivalent for removing prefixes
+  local GIT_LOCATION=$(git symbolic-ref -q HEAD 2>/dev/null || git name-rev --name-only --no-undefined --always HEAD 2>/dev/null)
+  # Remove "refs/heads/" or "tags/" prefix using Bash's extended pattern matching
+  # This pattern matches either "refs/heads/" OR "tags/" at the beginning of the string.
+  GIT_LOCATION="${GIT_LOCATION##refs/heads/}"
+  GIT_LOCATION="${GIT_LOCATION##tags/}"
+
+  local RED=$'\e[31m'
+  local CYAN=$'\e[36m'
+  local MAGENTA=$'\e[35m'
+  local YELLOW=$'\e[33m'
+  local GREEN=$'\e[32m'
+  local WHITE=$'\e[38;5;15m'
+  local RESET=$'\e[0m'
+
+  local AHEAD="${RED}+NUM${RESET}"
+  local BEHIND="${CYAN}-NUM${RESET}"
+  local MERGING="${MAGENTA}!${RESET}"
+  local UNTRACKED="${RED}●${RESET}"
+  local MODIFIED="${YELLOW}●${RESET}"
+  local STAGED="${GREEN}●${RESET}"
+
+  local DIVERGENCES=()
+  local FLAGS=()
+
+  # Note: 2> /dev/null is often better for suppressing stderr from commands like git log
+  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+  if [ "$NUM_AHEAD" -gt 0 ]; then
+    DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
+  fi
+
+  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+  if [ "$NUM_BEHIND" -gt 0 ]; then
+    DIVERGENCES+=( "${BEHIND//NUM/$NUM_BEHIND}" )
+  fi
+
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+  # Use double brackets [[ for string comparisons in Bash for robustness
+  if [[ -n "$GIT_DIR" ]] && test -r "$GIT_DIR/MERGE_HEAD"; then
+    FLAGS+=( "$MERGING" )
+  fi
+
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    FLAGS+=( "$UNTRACKED" )
+  fi
+
+  if ! git diff --quiet 2> /dev/null; then
+    FLAGS+=( "$MODIFIED" )
+  fi
+
+  if ! git diff --cached --quiet 2> /dev/null; then
+    FLAGS+=( "$STAGED" )
+  fi
+
+  local GIT_INFO=()
+  # Check if GIT_STATUS is set and non-empty (assuming it's an external variable from somewhere else)
+  # If GIT_STATUS is intended to be internal to this function, it should be set here.
+  # Otherwise, this line is fine to include it if it exists.
+  [ -n "$GIT_STATUS" ] && GIT_INFO+=( "$GIT_STATUS" )
+
+  # Append array elements (Bash joins with space by default)
+  [[ ${#DIVERGENCES[@]} -ne 0 ]] && GIT_INFO+=( "${DIVERGENCES[@]}" )
+  [[ ${#FLAGS[@]} -ne 0 ]] && GIT_INFO+=( "${FLAGS[@]}" )
+
+  GIT_INFO+=( "$GIT_LOCATION${RESET}" )
+
+  # Use printf to avoid trailing newline and better control spacing if needed,
+  # but echo "${GIT_INFO[@]}" is fine if spaces are desired separators.
+  # For joining with single spaces, echo "${GIT_INFO[*]}" or echo "${GIT_INFO[@]}" works.
+  echo "${GIT_INFO[@]}"
+}
+
+# Prompt for Bash (PS1)
+# Bash uses '\[...\]' to enclose non-printing characters (like color codes)
+# so that the shell can correctly calculate the prompt length.
+PROMPT_COLOR_MAGENTA='\[\e[35m\]'
+PROMPT_COLOR_BLUE='\[\e[34m\]'
+PROMPT_COLOR_WHITE='\[\e[38;5;15m\]'
+PROMPT_COLOR_RESET='\[\e[0m\]'
+
+PS1="${PROMPT_COLOR_MAGENTA}\w/${PROMPT_COLOR_RESET} \$(git_info)\n${PROMPT_COLOR_BLUE}\$ ${PROMPT_COLOR_RESET}"
+
+source /usr/share/fzf/key-bindings.bash

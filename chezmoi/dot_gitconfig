@@ -1,0 +1,13 @@
+[user]
+	name = malklera
+	email = malklerulo@gmail.com
+[init]
+	defaultBranch = main
+[http]
+	cookiefile = /home/malklera/.gitcookies
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c \"wincmd J\"
+[merge]
+	tool = nvim
+[push]
+	autoSetupRemote = true

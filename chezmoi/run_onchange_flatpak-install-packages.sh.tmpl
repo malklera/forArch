@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This script will run whenever the list in .chezmoidata/flatpaks.yaml changes.
+# List hash: {{ .flatpaks | toJson | sha256sum }}
+
+# 1. Ensure the Flathub remote is enabled for the user
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+echo "Synchronizing Flatpak packages..."
+
+# 2. Install the packages defined in .chezmoidata/flatpaks.yaml
+{{ range .flatpaks -}}
+flatpak install --user -y flathub {{ . | quote }}
+{{ end -}}
