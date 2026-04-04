@@ -17,5 +17,4 @@ configuration {
 	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
 	window-format:              "{w} · {c} · {t}";
 }
-@theme "/usr/share/rofi/themes/tokyoNight.rasi"
-/* @theme "/usr/share/rofi/themes/t4-s4.rasi" */
+@theme "~/.config/rofi/themes/tokyoNight.rasi"
