@@ -68,6 +68,7 @@ IgnorePath '/etc/systemd/system/dbus-org.freedesktop.*'
 
 # Ignore systemd "wants" symlinks (managed by AddService)
 IgnorePath '/etc/systemd/system/*.wants/*'
+IgnorePath '/etc/systemd/system/autovt@.service' # appear after the first apply
 IgnorePath '/etc/systemd/user/*.wants/*'
 
 IgnorePath '/etc/.updated' # It tells the system the last time the /etc or /usr directories were updated
@@ -138,4 +139,4 @@ IgnorePath '/etc/subgid-' # backup of subgid
 IgnorePath '/etc/pacman.d/mirrorlist' # managed by reflector
 IgnorePath '/etc/resolv.conf' # managed by my network manager
 IgnorePath '/etc/systemd/user/pipewire-session-manager.service' # managed by pipewire
-
+IgnorePath '/usr/share/zsh/*' # completion for zsh by pacman-contrib
