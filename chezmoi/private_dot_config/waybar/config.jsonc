@@ -23,19 +23,9 @@
         "sort-by-number": true
     },
 
-    // "hyprland/workspaces": {
-    //     "format": "<span size='larger'>{icon}</span>",
-    //     "on-click": "activate",
-    //     "format-icons": {
-    //         "active": "",
-    //         "default": ""
-    //     },
-    //     "icon-size": 10,
-    //     "sort-by-number": true
-    // },
     "hyprland/window": {},
     "wireplumber": {
-        "format": "{volume}% {icon}",
+        "format": "{volume} % {icon}",
         "format-muted": "󰖁",
         "on-click": "pwvucontrol",
         "format-icons": [
@@ -45,11 +35,29 @@
         ]
     },
     "tray": {},
-    "clock": {
-        "timezone": "America/Argentina/Buenos_Aires",
-        "format": "{:%A, %d-%m | %H:%M}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+"clock": {
+    "timezone": "America/Argentina/Buenos_Aires",
+    "format": "{:%A, %d-%m | %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+        "mode": "month",
+        "mode-mon-col": 3,
+        "on-scroll": 1,
+        "format": {
+            "months": "<span color='#c0caf5'><b>{}</b></span>",
+            "days": "<span color='#9aa5ce'><b>{}</b></span>",
+            "weekdays": "<span color='#ff9e64'><b>{}</b></span>",
+            // "today": "<span color='#7aa2f7'><b><u>{}</u></b></span>"
+"today": "<span color='#1a1b26' bgcolor='#7aa2f7'><b>{}</b></span>"
+        }
     },
+    "actions": {
+        "on-click-right": "mode", // Toggles between month/year view
+        "on-scroll-up": "shift_up",
+        "on-scroll-down": "shift_down"
+    },
+        "on-click": "exec xdg-open 'https://calendar.google.com/calendar/u/0/r/month?pli=1'"
+},
     "custom/power": {
         "format": "⏻",
         "tooltip": false,

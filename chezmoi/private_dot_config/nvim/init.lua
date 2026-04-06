@@ -44,6 +44,10 @@ vim.o.undofile = true -- enable persistent undotree
 -- vim.o.wrap = false -- see how i like wraping, if i do not like, uncoment this
 vim.o.signcolumn = 'yes:1'
 vim.o.statusline = '[%n] %<%F %h%w%m%r%=%-(%l/%L - %c%V%) '
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 -- vim.o.autocomplete = true -- think about this
 -- vim.o.completeopt = { "menuone", "popup", "noinsert" } -- Options for completion menu
 -- think if i need this
@@ -105,7 +109,8 @@ end, { desc = 'Print the git blame for the current line' })
 -- 	'https://github.com/neovim/nvim-lspconfig',
 -- 	'https://github.com/nvim-treesitter/nvim-treesitter',
 -- 	'https://github.com/lewis6991/gitsigns.nvim',
--- 	'https://github.com/mason-org/mason.nvim'
+-- 	'https://github.com/mason-org/mason.nvim',
+-- 	'https://github.com/rmagatti/auto-session'
 -- })
 --
 --vim.cmd.packadd('nvim.undotree')
