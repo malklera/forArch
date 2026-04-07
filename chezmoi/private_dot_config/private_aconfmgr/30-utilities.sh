@@ -1,3 +1,4 @@
+AddPackage alacritty # A cross-platform, GPU-accelerated terminal emulator
 AddPackage btop # A monitor of system resources, bpytop ported to C++
 AddPackage chezmoi # Manage your dotfiles across multiple machines
 AddPackage fd # Simple, fast and user-friendly alternative to find
@@ -21,4 +22,4 @@ AddPackage unzip # For extracting and viewing files in .zip archives
 
 AddPackage --foreign gtrash-bin # A Trash CLI manager written in Go
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
-
+AddPackage --foreign tlrc # Official tldr client written in Rust
