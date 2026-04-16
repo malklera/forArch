@@ -27,8 +27,9 @@ export TERMINAL="ghostty"
 
 # Default Bash history file
 export HISTFILE="$HOME/.bash_history"
-# Append to history file, don't overwrite
-shopt -s histappend
+
+# ssh config
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Set LS_COLORS using system defaults
 if [[ -x /usr/bin/dircolors ]]; then
@@ -61,6 +62,8 @@ shopt -s extglob
 shopt -s nocaseglob
 # Optional: include dotfiles in glob results
 shopt -s dotglob
+# Append to history file, don't overwrite
+shopt -s histappend
 
 # Open files from the terminal using default xdg-open
 open() {

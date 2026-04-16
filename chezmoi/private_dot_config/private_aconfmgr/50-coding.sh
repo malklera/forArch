@@ -2,22 +2,6 @@
 AddPackage go # Core compiler tools for the Go programming language
 AddPackage rustup # The Rust toolchain installer
 
-# LSP
-AddPackage bash-language-server # Bash language server implementation based on Tree Sitter and its grammar for Bash
-AddPackage gopls # Language server for Go programming language
-AddPackage lua-language-server # Lua Language Server coded by Lua
-AddPackage pyright # Type checker for the Python language
-AddPackage tailwindcss-language-server # Tailwind CSS Language Server
-AddPackage typescript-language-server # Language Server Protocol (LSP) implementation for TypeScript using tsserver
-
-AddPackage --foreign superhtml # HTML Language Server & Templating Language Library
-AddPackage --foreign vscode-langservers-extracted # Language servers extracted from VSCode.
-
-# Formatter
-AddPackage prettier # An opinionated code formatter
-AddPackage python-black # Uncompromising Python code formatter
-AddPackage stylua # Deterministic code formatter for Lua
-
 # Tools
 AddPackage github-cli # The GitHub CLI
 AddPackage gitleaks # Audit Git repos for secrets and keys

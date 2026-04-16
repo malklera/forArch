@@ -45,7 +45,13 @@ vim.lsp.config("lua_ls", {
 })
 
 -- [[ go ]]
-vim.lsp.config("gopls", {})
+vim.lsp.config("gopls", {
+settings = {
+    gopls = {
+      staticcheck = true,
+    },
+  },
+})
 
 -- [[ rust ]]
 vim.lsp.config("rust_analyzer", {})

@@ -4,7 +4,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/malklera/Documents/fci/wrapper.sh
+ExecStart=/home/malklera/Documents/bank/fci/wrapper.sh
 
 [Install]
 WantedBy=default.target
