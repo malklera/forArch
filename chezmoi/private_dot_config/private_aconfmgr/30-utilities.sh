@@ -13,7 +13,6 @@ AddPackage perl-file-mimeinfo # Determine file type, includes mimeopen and mimet
 AddPackage perl-rename # Renames multiple files using Perl regular expressions
 AddPackage ripgrep # A search tool that combines the usability of ag with the raw speed of grep
 AddPackage rsync # A fast and versatile file copying tool for remote and local files
-AddPackage tldr # Command line client for tldr, a collection of simplified man pages.
 AddPackage unrar-free # Free utility to extract files from RAR archives
 AddPackage wget # Network utility to retrieve files from the web
 AddPackage zsync # A file transfer program that's able to connect to rsync servers

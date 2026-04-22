@@ -21,9 +21,16 @@ AddPackage usbutils # A collection of USB tools to query connected USB devices
 AddPackage vim # Vi Improved, a highly configurable, improved version of the vi text editor
 AddPackage wayland # A computer display server protocol
 AddPackage zram-generator # Systemd unit generator for zram devices
+AddPackage dmidecode # Desktop Management Interface table related utilities
+AddPackage dosfstools # DOS filesystem utilities
+AddPackage grub-btrfs # Include btrfs snapshots in GRUB boot options
+AddPackage inotify-tools # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
+AddPackage linux-lts # The LTS Linux kernel and modules
+AddPackage snap-pac # Pacman hooks that use snapper to create pre/post btrfs snapshots like openSUSE's YaST
+AddPackage snapper # A tool for managing BTRFS and LVM snapshots
+
 AddPackage --foreign yay-bin # Yet another yogurt. Pacman wrapper and AUR helper written in go. Pre-compiled.
 AddPackage --foreign yay-bin-debug # Detached debugging symbols for yay-bin
-
 
 CopyFile /etc/default/grub # grub config, edit and use grub-mkconfig to apply
 CopyFile /etc/group
@@ -32,20 +39,21 @@ CopyFile /etc/locale.gen # uncoment spanish Argentina and english US
 CreateLink /etc/localtime /usr/share/zoneinfo/America/Argentina/Buenos_Aires # set timezone
 CopyFile /etc/systemd/system/getty@tty1.service.d/override.conf # Set auto-login for malklera
 CopyFile /etc/systemd/zram-generator.conf # Configuration for zRAM
+CopyFile /etc/systemd/system/reflector.timer.d/override.conf # timer to run reflector
 CopyFile /etc/vconsole.conf # keyboard config for tty
 CopyFile /etc/X11/xorg.conf.d/00-keyboard.conf # keyboard configs
 CopyFile /usr/share/xkeyboard-config-2/symbols/custom # custom keymap
 CopyFile /usr/local/share/kbd/keymaps/es.map.gz # more custom keymap? which is the root?
 CopyFile /etc/mkinitcpio.d/linux.preset # i think i uncommented one field
+CopyFile /etc/mkinitcpio.d/linux-lts.preset
 CopyFile /etc/mkinitcpio.conf # i think this are config for the init boot
 CopyFile /etc/pacman.conf # pacman configs
+CopyFile /etc/pacman.d/mirrorlist.pacnew
 CopyFile /etc/shells # list of valid shells
 CopyFile /etc/subuid # This is used for rootless containers
 
-CopyFile /etc/systemd/network/20-ethernet.network # network config, may be custom, maybe check another day
-CopyFile /etc/systemd/network/20-wlan.network
-CopyFile /etc/systemd/network/20-wwan.network
-
 CopyFile /etc/xdg/reflector/reflector.conf # custom command to update mirrorlist
-CopyFile /etc/systemd/system/reflector.timer.d/override.conf # timer to run reflector
 
+CopyFile /etc/conf.d/snapper
+CopyFile /etc/snapper/configs/root 640
+CopyFile /etc/sudoers

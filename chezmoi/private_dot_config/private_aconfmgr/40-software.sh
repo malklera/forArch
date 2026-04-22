@@ -17,7 +17,6 @@ AddPackage vivaldi # An advanced browser made with the power user in mind.
 AddPackage xarchiver # GTK frontend to various command line archivers
 AddPackage xreader # Document viewer for files like PDF and Postscript
 AddPackage yt-dlp # A youtube-dl fork with additional features and fixes
-AddPackage zellij # A terminal multiplexer
 AddPackage qrtool # An utility for encoding or decoding QR code
 AddPackage mpv # a free, open source, and cross-platform media player
 

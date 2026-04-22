@@ -15,10 +15,10 @@ IgnorePath '/sys/*'
 IgnorePath '/tmp/*'
 IgnorePath '/mnt/*'
 
-# linux kernel
-IgnorePath '/boot/vmlinuz-linux'
-# RAM image at boot
-IgnorePath '/boot/initramfs-linux.img'
+IgnorePath '/boot/vmlinuz-linux' # linux kernel
+IgnorePath '/boot/vmlinuz-linux-lts' # linux kernel lts
+IgnorePath '/boot/initramfs-linux.img' # RAM image at boot
+IgnorePath '/boot/initramfs-linux-lts.img' # RAM image for lts
 IgnorePath '/boot/initramfs-linux-fallback.img'
 
 IgnorePath '/boot/EFI/BOOT/BOOTX64.EFI' # Generated, used by the os for instructions on booting
@@ -140,3 +140,6 @@ IgnorePath '/etc/pacman.d/mirrorlist' # managed by reflector
 IgnorePath '/etc/resolv.conf' # managed by my network manager
 IgnorePath '/etc/systemd/user/pipewire-session-manager.service' # managed by pipewire
 IgnorePath '/usr/share/zsh/*' # completion for zsh by pacman-contrib
+IgnorePath '/.snapshots/*' # snapshots are only for backup recovery
+
+

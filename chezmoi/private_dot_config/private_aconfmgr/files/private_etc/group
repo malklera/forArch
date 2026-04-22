@@ -67,3 +67,5 @@ empower:x:960:
 named:x:40:
 locate:x:21:
 nixbld:x:959:nixbld01,nixbld02,nixbld03,nixbld04,nixbld05,nixbld06,nixbld07,nixbld08,nixbld09,nixbld10
+fwupd:x:948:
+passim:x:947:
