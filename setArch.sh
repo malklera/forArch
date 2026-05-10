@@ -25,10 +25,6 @@ HOME_DIR=$(eval echo "~$ORIGINAL_USER")
 log_info "Installing base dependencies..."
 sudo pacman -S --noconfirm --needed git base-devel chezmoi || log_error "Failed to install base tools."
 
-if [ ! -d "$HOME_DIR/forArch" ]; then
-    git clone --branch btrfUse --single-branch https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
-fi
-
 if ! command -v yay &>/dev/null; then
     log_info "Bootstrapping yay..."
     git clone https://aur.archlinux.org/yay-bin.git "$HOME_DIR/yay-bin"
@@ -46,7 +42,33 @@ fi
 log_info "Installing aconfmgr..."
 yay -S --needed --noconfirm aconfmgr-git
 
-aconfmgr --config-dir="$HOME_DIR/chezmoi/private_dot_config/private_aconfmgr/" apply
+# if [ ! -d "$HOME_DIR/forArch" ]; then
+#     git clone --branch btrfsUse --single-branch https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
+# fi
+#
+# aconfmgr --config-dir="$HOME_DIR/forArch/chezmoi/private_dot_config/private_aconfmgr/" apply
+#
+# log_info "Applying dotfiles..."
+# chezmoi init --apply malklera
+
+if [ ! -d "$HOME_DIR/forArch" ]; then
+    if ! git clone --branch btrfsUse --single-branch \
+        https://github.com/malklera/forArch.git "$HOME_DIR/forArch"; then
+        log_error "Failed to clone forArch"
+        exit 1
+    fi
+fi
+
+if ! aconfmgr --config-dir="$HOME_DIR/forArch/chezmoi/private_dot_config/private_aconfmgr/" apply; then
+    log_error "Failed to apply aconfmgr"
+    exit 1
+fi
+
+log_info "Applying dotfiles..."
+if ! chezmoi init --apply malklera; then
+    log_error "Failed to apply chezmoi"
+    exit 1
+fi
 
 # NOTE: i am trying to use chezmoi templating, if it works, delete this
 # mkdir -p ~/.config/chezmoi
@@ -60,8 +82,6 @@ aconfmgr --config-dir="$HOME_DIR/chezmoi/private_dot_config/private_aconfmgr/" a
 #     args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
 # EOF
 
-log_info "Applying dotfiles..."
-chezmoi init --apply malklera
 
 # I think aconfmgr track enabled services, if not, add this and one for openssh
 # systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
