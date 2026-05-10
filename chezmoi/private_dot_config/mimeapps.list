@@ -1,7 +1,6 @@
 [Default Applications]
-image/png=qimgv.desktop
-text/plain=nvim.desktop
 application/epub+zip=calibre-ebook-viewer.desktop
+image/png=qimgv.desktop
 image/jpeg=qimgv.desktop
 application/x-mozilla-bookmarks=vivaldi-stable.desktop
 application/pdf=xreader.desktop
@@ -9,12 +8,14 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoff
 application/gzip=libreoffice-writer.desktop
 audio/x-mod=nvim.desktop
 application/vnd.sqlite3=nvim.desktop
+text/plain=nvim.desktop
 text/html=vivaldi-stable.desktop
 x-scheme-handler/http=vivaldi-stable.desktop
 x-scheme-handler/https=vivaldi-stable.desktop
 x-scheme-handler/about=vivaldi-stable.desktop
 x-scheme-handler/unknown=vivaldi-stable.desktop
 x-scheme-handler/webcal=helium.desktop
+video/mp4=mpv.desktop
 
 [Added Associations]
 image/png=qimgv.desktop;

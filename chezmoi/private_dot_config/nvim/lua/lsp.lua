@@ -16,8 +16,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- vim.diagnostic.config({
+-- 	virtual_text = true,
+-- })
+
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = true, -- Keep or remove if using virtual_lines
+	float = {
+		border = "rounded", -- Optional: nice border
+		wrap = true, -- Enable text wrapping inside the float
+		header = "", -- Optional: hide redundant header
+	},
+})
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, { scope = "cursor", focus = false })
+	end,
 })
 
 -- [[ lua ]]
@@ -46,12 +60,17 @@ vim.lsp.config("lua_ls", {
 
 -- [[ go ]]
 vim.lsp.config("gopls", {
-settings = {
-    gopls = {
-      staticcheck = true,
-    },
-  },
+	settings = {
+		gopls = {
+			staticcheck = true,
+			analyses = {
+				SA4017 = true,
+			},
+		},
+	},
 })
+
+vim.lsp.config("golangci_lint_ls", {})
 
 -- [[ rust ]]
 vim.lsp.config("rust_analyzer", {})
@@ -63,6 +82,7 @@ vim.lsp.config("superhtml", {})
 -- Enable all configured servers
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
+vim.lsp.enable("golangci_lint_ls")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("bashls")
 vim.lsp.enable("jsonls")
@@ -73,9 +93,9 @@ require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		go = { "gofmt" },
-		python = { "black" },
+    sh = { "shellharden", "shfmt" },
+		-- python = { "" },
 		json = { "prettier" },
-		markdown = { "prettier" }, -- think if i want this
 		javascript = { "prettier" },
 		typescript = { "prettier" },
 		javascriptreact = { "prettier" },

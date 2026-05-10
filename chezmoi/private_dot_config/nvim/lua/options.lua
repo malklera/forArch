@@ -90,11 +90,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "text", "markdown", "gitcommit" },
 	callback = function()
 		vim.opt_local.wrap = true
+		-- Check if current window is floating (relative ~= "" means floating)
+		local win_config = vim.api.nvim_win_get_config(0)
+		if win_config.relative ~= "" then
+			vim.opt_local.spell = false -- Disable spellcheck in floating windows
+			return
+		end
 		vim.opt_local.spell = true
 	end,
 })
