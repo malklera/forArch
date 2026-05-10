@@ -5,7 +5,7 @@ Installation
     Locale encoding: UTF-8
     Mirrors: Brazil
     Drive: 
-    Filesystem: btrfs, no subvolumes, use compression, no encryption
+    Filesystem: btrfs, default subvolumes, use compression, no encryption
     Bootloader: Grub
     Swap: zram
     Hostname: arch
@@ -13,7 +13,9 @@ Installation
     Administrator account:
         User: malklera
         Password:
-    Audio Server: Pipewire
+    Profile: Do not select anything
+    Applications: nothing
     Kernel: linux
     Network: copy iso config
+    Additional applications: nothing
     Timezone: GMT-03:00

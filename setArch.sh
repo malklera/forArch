@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# Helper Functions for Logging
+log_info() {
+    echo -e "\e[34m[INFO]\e[0m $1" # Blue
+}
+
+log_success() {
+    echo -e "\e[32m[SUCCESS]\e[0m $1" # Green
+}
+
+log_error() {
+    echo -e "\e[31m[ERROR]\e[0m $1" # Red
+}
+
+log_warning() {
+    echo -e "\e[33m[WARNING]\e[0m $1" # Yellow
+}
+
+# Get the original user who invoked sudo
+ORIGINAL_USER="${SUDO_USER:-$(whoami)}"
+# Get the home directory of the original user
+HOME_DIR=$(eval echo "~$ORIGINAL_USER")
+
 log_info "Installing base dependencies..."
 sudo pacman -S --noconfirm --needed git base-devel chezmoi || log_error "Failed to install base tools."
 
