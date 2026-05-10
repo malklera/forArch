@@ -4,42 +4,42 @@ log_info "Installing base dependencies..."
 sudo pacman -S --noconfirm --needed git base-devel chezmoi || log_error "Failed to install base tools."
 
 if [ ! -d "$HOME_DIR/forArch" ]; then
-    git clone https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
+    git clone --branch btrfUse --single-branch https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
 fi
 
-if ! command -v yay &> /dev/null; then
+if ! command -v yay &>/dev/null; then
     log_info "Bootstrapping yay..."
     git clone https://aur.archlinux.org/yay-bin.git "$HOME_DIR/yay-bin"
     cd "$HOME_DIR/yay-bin" || exit 1
     makepkg -si --noconfirm
-    cd "$HOME_DIR"
+    cd "$HOME_DIR" || exit 1
+
+    log_info "Configuring yay..."
+    yay -Y --gendb --noconfirm
+    yay -Syu --devel --noconfirm
 else
     log_info "Yay is already installed."
 fi
 
-log_info "Configuring yay..."
-yay -Y --gendb --noconfirm
-yay -Syu --devel --noconfirm
-
 log_info "Installing aconfmgr..."
 yay -S --needed --noconfirm aconfmgr-git
 
-# TODO: check the path from chezmoi
-aconfmgr --config-dir="$HOME_DIR/forArch/.config/aconfmgr" apply
+aconfmgr --config-dir="$HOME_DIR/chezmoi/private_dot_config/private_aconfmgr/" apply
 
-mkdir -p ~/.config/chezmoi
-cat > ~/.config/chezmoi/chezmoi.toml << EOF
-sourceDir = "~/forArch/chezmoi"
-[edit]
-    command = "nvim"
-
-[diff]
-    command = "nvim"
-    args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
-EOF
+# NOTE: i am trying to use chezmoi templating, if it works, delete this
+# mkdir -p ~/.config/chezmoi
+# cat >~/.config/chezmoi/chezmoi.toml <<EOF
+# sourceDir = "~/forArch/chezmoi"
+# [edit]
+#     command = "nvim"
+#
+# [diff]
+#     command = "nvim"
+#     args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
+# EOF
 
 log_info "Applying dotfiles..."
 chezmoi init --apply malklera
 
-
-systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
+# I think aconfmgr track enabled services, if not, add this and one for openssh
+# systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
