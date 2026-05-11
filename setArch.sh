@@ -59,16 +59,17 @@ if [ ! -d "$HOME_DIR/forArch" ]; then
     fi
 fi
 
-if ! aconfmgr --config "$HOME_DIR/forArch/chezmoi/private_dot_config/private_aconfmgr" apply; then
-    log_error "Failed to apply aconfmgr"
-    exit 1
-fi
-
 log_info "Applying dotfiles..."
 if ! chezmoi init --apply malklera; then
     log_error "Failed to apply chezmoi"
     exit 1
 fi
+
+if ! aconfmgr apply; then
+    log_error "Failed to apply aconfmgr"
+    exit 1
+fi
+
 
 # NOTE: i am trying to use chezmoi templating, if it works, delete this
 # mkdir -p ~/.config/chezmoi
