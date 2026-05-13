@@ -59,11 +59,14 @@ if [ ! -d "$HOME_DIR/forArch" ]; then
     fi
 fi
 
+
 log_info "Applying dotfiles..."
-if ! chezmoi init --apply malklera; then
+if ! chezmoi init; then
     log_error "Failed to apply chezmoi"
     exit 1
 fi
+
+cp -r "$HOME_DIR/forArch/chezmoi/" "$HOME_DIR/.local/share/chezmoi/"
 
 if ! aconfmgr apply; then
     log_error "Failed to apply aconfmgr"
