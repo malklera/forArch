@@ -39,9 +39,6 @@ else
     log_info "Yay is already installed."
 fi
 
-log_info "Installing aconfmgr..."
-yay -S --needed --noconfirm aconfmgr-git
-
 # if [ ! -d "$HOME_DIR/forArch" ]; then
 #     git clone --branch btrfsUse --single-branch https://github.com/malklera/forArch.git "$HOME_DIR/forArch" || log_error "Failed to clone forArch"
 # fi
@@ -59,7 +56,6 @@ if [ ! -d "$HOME_DIR/forArch" ]; then
     fi
 fi
 
-
 log_info "Applying dotfiles..."
 if ! chezmoi init; then
     log_error "Failed to apply chezmoi"
@@ -68,11 +64,13 @@ fi
 
 cp -r "$HOME_DIR/forArch/chezmoi/" "$HOME_DIR/.local/share/chezmoi/"
 
+chezmoi init
+chezmoi apply
+
 if ! aconfmgr apply; then
     log_error "Failed to apply aconfmgr"
     exit 1
 fi
-
 
 # NOTE: i am trying to use chezmoi templating, if it works, delete this
 # mkdir -p ~/.config/chezmoi
@@ -85,7 +83,6 @@ fi
 #     command = "nvim"
 #     args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
 # EOF
-
 
 # I think aconfmgr track enabled services, if not, add this and one for openssh
 # systemctl enable NetworkManager.service || log_error "Failed to enable NetworkManager.service."
