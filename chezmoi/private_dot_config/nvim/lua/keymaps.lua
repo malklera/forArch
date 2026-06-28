@@ -13,10 +13,7 @@ vim.keymap.set({ "n" }, "<A-j>", "<C-w>j")
 vim.keymap.set({ "n" }, "<A-k>", "<C-w>k")
 vim.keymap.set({ "n" }, "<A-l>", "<C-w>l")
 
--- Already has config to auto clear it
--- vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Clear srach highlights" })
-
-vim.keymap.set("n", "<leader>bl", ":ls<CR>", { desc = "List buffers" })
+-- Buffer
 vim.keymap.set("n", "<leader>bb", "<C-^>", { desc = "Back to last buffer" })
 vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
 -- Map <leader>b1 through <leader>b9
@@ -31,6 +28,18 @@ vim.keymap.set("n", "<leader>tw", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 	print("Wrap: " .. (vim.opt.wrap:get() and "On" or "Off"))
 end, { desc = "Toggle line wrap" })
+
+vim.keymap.set("n", "<leader>ts", function()
+	vim.opt_local.spell = not vim.opt_local.spell:get()
+	print("Spell: " .. (vim.opt_local.spell:get() and "On" or "Off"))
+end, { desc = "Toggle spellcheck" })
+
+vim.keymap.set("n", "<leader>tl", function()
+	local current = vim.opt_local.spelllang:get()
+	local is_spanish = vim.tbl_contains(current, "es_es")
+	vim.opt_local.spelllang = is_spanish and "en_us" or "es_es"
+	print("Spell language: " .. (is_spanish and "en_us" or "es_es"))
+end, { desc = "Toggle spell language (EN/ES)" })
 
 vim.keymap.set(
 	"v",
@@ -47,19 +56,4 @@ vim.keymap.set("i", "[", "[]<left>")
 vim.keymap.set("i", "{", "{}<left>")
 vim.keymap.set("i", "<", "<><left>")
 
--- LSP
-vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "Go to definition" })
-vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-vim.keymap.set("n", "K", function()
-	local clients = vim.lsp.get_clients({ bufnr = 0 })
-	for _, client in ipairs(clients) do
-		if client:supports_method("textDocument/hover") then
-			vim.lsp.buf.hover({ border = "rounded" })
-			return
-		end
-	end
-	-- Fallback to default K behavior (help) if no LSP hover support
-	vim.cmd.normal("K")
-end, { desc = "LSP hover (floating) or keyword help" })
--- vim.keymap.set("n", "gri", vim.lsp.buf.implementation, { desc = "Go to implementation"})
 vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Undotree" })

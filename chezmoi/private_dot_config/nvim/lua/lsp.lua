@@ -1,25 +1,3 @@
-require("mason").setup()
-
-require("mason-lspconfig").setup({
-	automatic_installation = false, -- you install manually via :Mason
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		vim.o.signcolumn = "yes:1"
-		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-		if client:supports_method("textDocument/completion") then
-			vim.o.complete = "o,.,w,b,u"
-			vim.o.completeopt = "menu,menuone,popup,noinsert"
-			vim.lsp.completion.enable(true, client.id, args.buf)
-		end
-	end,
-})
-
--- vim.diagnostic.config({
--- 	virtual_text = true,
--- })
-
 vim.diagnostic.config({
 	virtual_text = true, -- Keep or remove if using virtual_lines
 	float = {
@@ -28,8 +6,14 @@ vim.diagnostic.config({
 		header = "", -- Optional: hide redundant header
 	},
 })
+
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
+		for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if vim.api.nvim_win_get_config(win).relative ~= "" then
+				return
+			end
+		end
 		vim.diagnostic.open_float(nil, { scope = "cursor", focus = false })
 	end,
 })
@@ -88,29 +72,17 @@ vim.lsp.enable("bashls")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("superhtml")
 
--- [[ Formating ]]
-require("conform").setup({
-	formatters_by_ft = {
-		lua = { "stylua" },
-		go = { "gofmt" },
-    sh = { "shellharden", "shfmt" },
-		-- python = { "" },
-		json = { "prettier" },
-		javascript = { "prettier" },
-		typescript = { "prettier" },
-		javascriptreact = { "prettier" },
-		typescriptreact = { "prettier" },
-		css = { "prettier" },
-		html = { "superhtml" },
-	},
-})
-
-vim.keymap.set({ "n" }, "<leader>cf", function()
-	require("conform").format({ async = true }, function(err, did_edit)
-		if not err and did_edit then
-			vim.notify("Code formatted", vim.log.levels.INFO, { title = "Conform" })
+-- [[ Keymaps ]]
+vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+vim.keymap.set("n", "K", function()
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	for _, client in ipairs(clients) do
+		if client:supports_method("textDocument/hover") then
+			vim.lsp.buf.hover({ border = "rounded" })
+			return
 		end
-	end)
-end, { desc = "Format buffer" })
-
-vim.keymap.set({ "n", "v" }, "<leader>cn", "<cmd>ConformInfo<cr>", { desc = "Conform Info" })
+	end
+	-- Fallback to default K behavior (help) if no LSP hover support
+	vim.cmd.normal("K")
+end, { desc = "LSP hover (floating) or keyword help" })

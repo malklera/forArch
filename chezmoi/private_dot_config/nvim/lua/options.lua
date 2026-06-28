@@ -15,21 +15,15 @@ vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
 vim.opt.confirm = true
 
 vim.opt.colorcolumn = "80,120" -- Highlight column 80 and 120
-vim.opt.list = false -- show tabs and end of line whitespace
 vim.opt.swapfile = false -- will use undo-tree for this
 vim.opt.undofile = true -- enable persistent undotree
 vim.opt.backup = false -- Don't create backup files
 vim.opt.writebackup = false -- Don't create backup before writing
 vim.opt.signcolumn = "yes:1"
-vim.opt.statusline = "[%n] %<%F %h%w%m%r%=%-(%l/%L - %c%V%) "
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
--- vim.opt.autocomplete = true -- think about this
--- vim.opt.completeopt = { "menuone", "popup", "noinsert" } -- Options for completion menu
--- think if i need this
--- vim.cmd.filetype("plugin indent on") -- Enable filetype detection, plugins, and indentation
 vim.opt.tabstop = 4 -- Render TAB as 4 spaces
 vim.opt.softtabstop = 4 -- Number of spaces a <Tab> counts for while editing
 vim.opt.shiftwidth = 4 -- Number of spaces for auto-indent
