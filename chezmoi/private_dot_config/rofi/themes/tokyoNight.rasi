@@ -2,7 +2,7 @@
 /* User: w8ste */
 /* Modified by malklera */
 * {
-  font:   "JetBrainsMono Nerd Font Propo 12";
+  font:   "FiraCode Nerd Font Propo";
 
   bg0     : #1a1b26;
   bg1     : #1f2335;
