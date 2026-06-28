@@ -17,8 +17,9 @@ AddPackage unrar-free # Free utility to extract files from RAR archives
 AddPackage wget # Network utility to retrieve files from the web
 AddPackage zsync # A file transfer program that's able to connect to rsync servers
 AddPackage unzip # For extracting and viewing files in .zip archives
+AddPackage zoxide # A smarter cd command for your terminal
 
 
-AddPackage --foreign gtrash-bin # A Trash CLI manager written in Go
+AddPackage --foreign gomi # Rm alternative written in Go
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign tlrc # Official tldr client written in Rust

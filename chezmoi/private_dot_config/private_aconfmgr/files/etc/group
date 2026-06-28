@@ -68,3 +68,5 @@ named:x:40:
 locate:x:21:
 fwupd:x:948:
 passim:x:947:
+rdma:x:959:
+postgres:x:958:
