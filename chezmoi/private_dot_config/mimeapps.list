@@ -1,13 +1,14 @@
 [Default Applications]
 application/epub+zip=calibre-ebook-viewer.desktop
-image/png=qimgv.desktop
-image/jpeg=qimgv.desktop
 application/x-mozilla-bookmarks=vivaldi-stable.desktop
 application/pdf=xreader.desktop
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
 application/gzip=libreoffice-writer.desktop
 audio/x-mod=nvim.desktop
 application/vnd.sqlite3=nvim.desktop
+image/png=qimgv.desktop
+image/jpeg=qimgv.desktop
+image/svg+xml=qimgv.desktop
 text/plain=nvim.desktop
 text/html=vivaldi-stable.desktop
 x-scheme-handler/http=vivaldi-stable.desktop
@@ -16,16 +17,18 @@ x-scheme-handler/about=vivaldi-stable.desktop
 x-scheme-handler/unknown=vivaldi-stable.desktop
 x-scheme-handler/webcal=helium.desktop
 video/mp4=mpv.desktop
+x-scheme-handler/antigravity=antigravity.desktop
 
 [Added Associations]
-image/png=qimgv.desktop;
-text/plain=nvim.desktop;
 application/epub+zip=calibre-ebook-viewer.desktop;
-image/jpeg=qimgv.desktop;
 application/x-mozilla-bookmarks=vivaldi-stable.desktop;
 application/pdf=libreoffice-draw.desktop;vivaldi-stable.desktop;xreader.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 application/gzip=libreoffice-draw.desktop;libreoffice-writer.desktop;
 audio/x-mod=nvim.desktop;
 application/vnd.sqlite3=nvim.desktop;
+image/png=qimgv.desktop;
+image/jpeg=qimgv.desktop;
 image/svg+xml=chromium.desktop;
+text/plain=nvim.desktop;
+audio/x-opus+ogg=mpv.desktop;
