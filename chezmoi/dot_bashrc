@@ -12,7 +12,6 @@ if [ -d "$HOME/go/bin" ] ; then
 fi
 
 # Set locale
-export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Environment Variables
@@ -37,7 +36,8 @@ export HISTCONTROL=ignoreboth
 export HISTIGNORE='ls:cd:pwd:exit:clear'
 
 # ssh config
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/ssh-agent.socket"
 
 # Set LS_COLORS using system defaults
 if [[ -x /usr/bin/dircolors ]]; then
@@ -62,12 +62,10 @@ alias unrar="unrar-free"
 alias less="less -R"
 alias ghostty="env GTK_IM_MODULE=simple XMODIFIERS=@im=none ghostty"
 
-# Enables extended globbing features (pattern matching)
-shopt -s extglob
-# Optional: makes globbing case-insensitive
-shopt -s nocaseglob
-# Optional: include dotfiles in glob results
-shopt -s dotglob
+shopt -s autocd # Change directories by typing just the name
+shopt -s extglob # Enables extended globbing features (pattern matching)
+shopt -s nocaseglob # Optional: makes globbing case-insensitive
+shopt -s dotglob # Optional: include dotfiles in glob results
 
 # Open files from the terminal using default xdg-open
 open() {
@@ -158,5 +156,5 @@ PROMPT_COLOR_RESET='\[\e[0m\]'
 
 PS1="${PROMPT_COLOR_MAGENTA}\w/${PROMPT_COLOR_RESET} \$(git_info)\n${PROMPT_COLOR_BLUE}\$ ${PROMPT_COLOR_RESET}"
 
-source /usr/share/fzf/key-bindings.bash
-eval "$(zoxide init bash)"
+[[ -f /usr/share/fzf/key-bindings.bash ]] && source /usr/share/fzf/key-bindings.bash
+command -v zoxide &>/dev/null && eval "$(zoxide init bash)"
