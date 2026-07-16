@@ -6,7 +6,6 @@ IgnorePackage 'gomi-debug'
 IgnorePackage 'libliftoff'
 IgnorePackage 'libwireplumber'
 IgnorePackage 'meson'
-IgnorePackage 'pwvucontrol-debug'
 IgnorePackage 'python-sphinx'
 IgnorePackage 'tlrc-debug'
 

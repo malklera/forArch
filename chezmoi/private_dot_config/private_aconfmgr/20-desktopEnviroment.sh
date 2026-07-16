@@ -35,5 +35,4 @@ AddPackage xdg-desktop-portal-gtk      # A backend implementation for xdg-deskto
 AddPackage xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
 AddPackage xdg-user-dirs               # Manage user directories like ~/Desktop and ~/Music
 
-AddPackage --foreign pwvucontrol # Pipewire volume control for GNOME
 AddPackage --foreign wlogout     # Logout menu for wayland
