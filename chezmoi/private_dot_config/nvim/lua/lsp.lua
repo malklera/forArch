@@ -54,7 +54,8 @@ vim.lsp.config("gopls", {
 	},
 })
 
-vim.lsp.config("golangci_lint_ls", {})
+-- Got tired of it not updating if i do not save the file
+-- vim.lsp.config("golangci_lint_ls", {})
 
 -- [[ rust ]]
 vim.lsp.config("rust_analyzer", {})
@@ -66,7 +67,7 @@ vim.lsp.config("superhtml", {})
 -- Enable all configured servers
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
-vim.lsp.enable("golangci_lint_ls")
+-- vim.lsp.enable("golangci_lint_ls")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("bashls")
 vim.lsp.enable("jsonls")

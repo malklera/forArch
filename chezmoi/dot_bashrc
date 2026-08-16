@@ -62,6 +62,7 @@ alias unrar="unrar-free"
 alias less="less -R"
 alias ghostty="env GTK_IM_MODULE=simple XMODIFIERS=@im=none ghostty"
 alias pwvucontrol="com.saivert.pwvucontrol"
+alias nomacs="org.nomacs.ImageLounge"
 
 shopt -s autocd # Change directories by typing just the name
 shopt -s extglob # Enables extended globbing features (pattern matching)

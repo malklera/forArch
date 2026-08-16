@@ -10,57 +10,33 @@ vim.keymap.set("n", "<leader>fc", builtin.spell_suggest, { desc = "Spell check s
 -- LSP
 vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "References" })
 vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Document symbols" })
+vim.keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })
 vim.keymap.set("n", "<leader>fd", function()
 	builtin.diagnostics({ bufnr = 0 })
 end, { desc = "Buffer Diagnostics" })
-vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "References" })
 
 -- Files
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files (cwd)" }) -- Search for files by name (respects .gitignore)
-vim.keymap.set("n", "<leader>fa", function()
-	builtin.find_files({ prompt_title = "CWD (All)", hidden = true, no_ignore = true })
-end, { desc = "CWD (All)" })
+vim.keymap.set("n", "<leader>fF", function()
+	builtin.find_files({ prompt_title = "Files (All)", hidden = true, no_ignore = true })
+end, { desc = "Files (All)" })
 
 vim.keymap.set("n", "<leader>fmn", function()
 	builtin.find_files({ cwd = home, prompt_title = "Home (Normal)" })
 end, { desc = "Find files in Home" })
-vim.keymap.set("n", "<leader>fma", function()
+vim.keymap.set("n", "<leader>fmN", function()
 	builtin.find_files({ cwd = home, prompt_title = "Home (All)", hidden = true, no_ignore = true })
 end, { desc = "Find all files in Home" })
 
--- Do not actually use
--- vim.keymap.set("n", "<leader>frn", function()
--- 	builtin.find_files({ cwd = "/", prompt_title = "Root (Normal)" })
--- end, { desc = "Find files in root" })
--- vim.keymap.set("n", "<leader>fra", function()
--- 	builtin.find_files({ cwd = "/", prompt_title = "Root (All)", hidden = true, no_ignore = true })
--- end, { desc = "Find all files in root" })
-
-vim.keymap.set("n", "<leader>fgn", builtin.live_grep, { desc = "Grep: Normal" })
-vim.keymap.set("n", "<leader>fga", function()
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep" })
+vim.keymap.set("n", "<leader>fG", function()
 	builtin.live_grep({
 		prompt_title = "Grep (All)",
 		additional_args = function()
 			return { "--hidden", "--no-ignore" }
 		end,
 	})
-end, { desc = "Grep: All Files" })
-
--- Do not actually use.
--- Root Grep: Normal
--- vim.keymap.set("n", "<leader>frgn", function()
--- 	builtin.live_grep({ cwd = "/", file_ignore_patterns = { "^proc/", "^dev/", "^sys/", "^tmp/" }, prompt_title = "Root Grep (Normal)" })
--- end, { desc = "Root Grep: Normal" })
--- vim.keymap.set("n", "<leader>frga", function()
--- 	builtin.live_grep({
--- 		cwd = "/",
--- 		prompt_title = "Root Grep (All)",
--- 		file_ignore_patterns = { "^proc/", "^dev/", "^sys/", "^tmp/" }, -- Relative to CWD
--- 		additional_args = function()
--- 			return { "--hidden", "--no-ignore" }
--- 		end,
--- 	})
--- end, { desc = "Root Grep: All Files" })
+end, { desc = "Grep (All)" })
 
 vim.keymap.set("n", "<leader>fn", function()
 	builtin.find_files({

@@ -1,4 +1,5 @@
 -- [[ Formating ]]
+-- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -9,6 +10,7 @@ require("conform").setup({
 		html = { "superhtml" },
 		rust = { "rustfmt" },
 		yaml = { "yamlfmt" },
+		-- sql = { "sqlfluff" }, do not actually work
 
 		-- python = { "" },
 		-- javascript = { "prettier" },
@@ -17,6 +19,12 @@ require("conform").setup({
 		-- typescriptreact = { "prettier" },
 		-- css = { "prettier" },
 	},
+	-- formatters = {
+	-- 	sqlfluff = {
+	-- 		args = { "fix", "-", "--dialect", "sqlite" },
+	-- 		require_cwd = false,
+	-- 	},
+	-- },
 })
 
 vim.keymap.set({ "n" }, "<leader>cf", function()

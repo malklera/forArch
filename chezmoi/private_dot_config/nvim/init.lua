@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 require("options")
 require("pack")
 require("keymaps")
+require("statusline")
 require("ui")
 require("treesitter")
 require("lsp")
