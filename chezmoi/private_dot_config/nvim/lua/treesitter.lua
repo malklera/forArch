@@ -47,11 +47,28 @@ local SKIP_FT = {
 	trouble = true,
 }
 
+-- Treesitter has no synmaxcol equivalent and parses the whole buffer, which
+-- makes it blow up RAM on big files (e.g. SVGs with megabyte-long lines)
+local MAX_TS_SIZE_BYTES = 1024 * 1024 -- 1 MiB
+
+local function ts_too_big(bufnr)
+	local name = vim.api.nvim_buf_get_name(bufnr)
+	if name == "" then
+		return false
+	end
+	local size = vim.fn.getfsize(name)
+	return size > MAX_TS_SIZE_BYTES
+end
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*" },
-	callback = function()
+	callback = function(args)
 		local ft = vim.bo.filetype
 		if SKIP_FT[ft] then
+			return
+		end
+
+		if ts_too_big(args.buf) then
 			return
 		end
 
@@ -69,6 +86,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		local ft = args.match
 		if SKIP_FT[ft] then
+			return
+		end
+
+		if ts_too_big(args.buf) then
 			return
 		end
 

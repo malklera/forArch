@@ -18,6 +18,7 @@ x-scheme-handler/unknown=vivaldi-stable.desktop
 x-scheme-handler/webcal=helium.desktop
 video/mp4=mpv.desktop
 x-scheme-handler/antigravity=antigravity.desktop
+audio/mp4=mpv.desktop
 
 [Added Associations]
 application/epub+zip=calibre-ebook-viewer.desktop;
@@ -29,6 +30,7 @@ audio/x-mod=nvim.desktop;
 application/vnd.sqlite3=nvim.desktop;
 image/png=org.nomacs.ImageLounge.desktop;gimp.desktop;qimgv.desktop;
 image/jpeg=qimgv.desktop;
-image/svg+xml=chromium.desktop;
+image/svg+xml=zen.desktop;vivaldi-stable.desktop;gimp.desktop;org.nomacs.ImageLounge.desktop;chromium.desktop;
 text/plain=nvim.desktop;
 audio/x-opus+ogg=mpv.desktop;
+audio/mp4=mpv.desktop;

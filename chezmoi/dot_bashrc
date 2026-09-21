@@ -51,6 +51,13 @@ if [[ -x /usr/bin/dircolors ]]; then
 fi
 
 # General aliases
+opencode() {
+  if [ "$1" = "service" ]; then
+    command opencode "$@"
+  else
+    command opencode --standalone "$@"
+  fi
+}
 alias python="python3"
 alias btop="btop -p 1"
 alias mv="mv -i"
