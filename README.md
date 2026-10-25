@@ -8,7 +8,7 @@ Follow `installOptions.md`
 
 Download setArch.sh script
 
-`curl -o setArch.sh https://raw.githubusercontent.com/malklera/forArch/refs/heads/btrfsUse/setArch.sh`
+`curl -o setArch.sh https://raw.githubusercontent.com/malklera/forArch/refs/heads/main/setArch.sh`
 
 
 Make the file executable
