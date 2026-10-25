@@ -7,9 +7,17 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Add ~/go/bin to PATH if it exists
-if [ -d "$HOME/go/bin" ] ; then
-    PATH="$PATH:$HOME/go/bin"
+if [ -d "$HOME/Other/go/bin" ] ; then
+    PATH="$PATH:$HOME/Other/go/bin"
 fi
+
+# Cargo binaries (after move)
+if [ -d "$CARGO_HOME/bin" ] ; then
+    PATH="$CARGO_HOME/bin:$PATH"
+fi
+
+
+# -- Export --
 
 # Set locale
 export LC_ALL=en_US.UTF-8
@@ -21,6 +29,15 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+# Relocated home dirs -> ~/Other (only apps with supported config)
+export ANDROID_USER_HOME="$HOME/Other/.android"
+export GRADLE_USER_HOME="$HOME/Other/.gradle"
+export CARGO_HOME="$HOME/Other/.cargo"
+export RUSTUP_HOME="$HOME/Other/.rustup"
+# GEMINI_CLI_HOME is the parent: CLI creates $GEMINI_CLI_HOME/.gemini
+export GEMINI_CLI_HOME="$HOME/Other"
+export PATH="$HOME/Other/.npm-global/bin:$PATH"
+
 export EDITOR="nvim"
 export TERMINAL="ghostty"
 
@@ -28,16 +45,14 @@ export HISTFILE="$HOME/.bash_history"
 export HISTSIZE=5000
 export HISTFILESIZE=10000
 
-shopt -s histappend
-shopt -s cmdhist
-shopt -s lithist
-
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='ls:cd:pwd:exit:clear'
 
 # ssh config
 # export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/ssh-agent.socket"
+
+
 
 # Set LS_COLORS using system defaults
 if [[ -x /usr/bin/dircolors ]]; then
@@ -58,6 +73,7 @@ opencode() {
     command opencode --standalone "$@"
   fi
 }
+
 alias python="python3"
 alias btop="btop -p 1"
 alias mv="mv -i"
@@ -75,6 +91,10 @@ shopt -s autocd # Change directories by typing just the name
 shopt -s extglob # Enables extended globbing features (pattern matching)
 shopt -s nocaseglob # Optional: makes globbing case-insensitive
 shopt -s dotglob # Optional: include dotfiles in glob results
+shopt -s histappend
+shopt -s cmdhist
+shopt -s lithist
+
 
 # Open files from the terminal using default xdg-open
 open() {
@@ -92,7 +112,8 @@ git_info() {
 
   # Git branch/tag, or name-rev if on detached head
   # Bash equivalent for removing prefixes
-  local GIT_LOCATION=$(git symbolic-ref -q HEAD 2>/dev/null || git name-rev --name-only --no-undefined --always HEAD 2>/dev/null)
+  local GIT_LOCATION=""
+  GIT_LOCATION=$(git symbolic-ref -q HEAD 2>/dev/null || git name-rev --name-only --no-undefined --always HEAD 2>/dev/null)
   # Remove "refs/heads/" or "tags/" prefix using Bash's extended pattern matching
   # This pattern matches either "refs/heads/" OR "tags/" at the beginning of the string.
   GIT_LOCATION="${GIT_LOCATION##refs/heads/}"
@@ -115,17 +136,20 @@ git_info() {
   local DIVERGENCES=()
   local FLAGS=()
 
-  local NUM_AHEAD=$(git rev-list --count @{u}..HEAD 2>/dev/null)
+  local NUM_AHEAD=""
+  NUM_AHEAD="$(git rev-list --count '@{u}..HEAD' 2>/dev/null)"
   if [[ "$NUM_AHEAD" -gt 0 ]]; then
     DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
   fi
 
-  local NUM_BEHIND=$(git rev-list --count HEAD..@{u} 2>/dev/null)
+  local NUM_BEHIND=""
+  NUM_BEHIND="$(git rev-list --count 'HEAD..@{u}' 2>/dev/null)"
   if [[ "$NUM_BEHIND" -gt 0 ]]; then
     DIVERGENCES+=( "${BEHIND//NUM/$NUM_BEHIND}" )
   fi
 
-  local GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
+  local GIT_DIR=""
+  GIT_DIR="$(git rev-parse --git-dir 2>/dev/null)"
   if [[ -n "$GIT_DIR" ]] && [[ -r "$GIT_DIR/MERGE_HEAD" ]]; then
     FLAGS+=( "$MERGING" )
   fi

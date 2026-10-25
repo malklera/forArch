@@ -43,7 +43,23 @@ vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "F
 vim.keymap.set("n", "<leader>fl", builtin.resume, { desc = "Open last picker" })
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
-vim.keymap.set("n", "<leader>fc", builtin.spell_suggest, { desc = "Spell check suggestions" })
+vim.keymap.set("n", "<leader>fc", function()
+	-- Show the misspelled word in the picker chrome so you can
+	-- compare it against the suggestions side-by-side.
+	local word = vim.fn.expand("<cword>")
+	if word == "" then
+		vim.notify("No word under cursor", vim.log.levels.WARN)
+		return
+	end
+	builtin.spell_suggest({
+		-- Telescope centers plain-string titles. Passing { pos, text }
+		-- tables pins them left instead: "SW" = bottom-left (the prompt
+		-- title sits on the bottom border with prompt_position = "bottom"),
+		-- "NW" = top-left for the results window.
+		prompt_title = { { pos = "NW", text = word } },
+		results_title = { { pos = "NW", text = "Spelling Suggestions" } },
+	})
+end, { desc = "Spell check suggestions" })
 -- Custom entry format for document/workspace symbols:
 -- line number (left), symbol name (center, uses all free space),
 -- symbol type (right, right-aligned). The type never clips the name:

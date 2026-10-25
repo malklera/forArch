@@ -7,11 +7,11 @@
 
 [misc]
 # Disable specific steps - same options as the command line flag
-disable = ["chezmoi", "pip3", "pip_review", "pip_review_local", "pipupgrade", "conda",
-    "composer", "sheldon", "brew_cask", "brew_formula", "mise", "yarn", "go", "vite_plus", "flutter",
-    "antigravity",
-    "vagrant", "distrobox", "containers", "lensfun", "julia", "zigup", "vscode",
-    "pixi", "skills"]
+disable = ["chezmoi", "pip3", "pip_review", "pip_review_local", "pipupgrade",
+    "conda", "composer", "sheldon", "brew_cask", "brew_formula", "mise",
+    "yarn", "go", "vite_plus", "flutter", "antigravity", "vagrant",
+    "distrobox", "containers", "lensfun", "julia", "zigup", "vscode",
+    "pixi", "skills", "rustup", "android_studio"]
 
 # Run these steps before all others
 # first = ["chezmoi"]
